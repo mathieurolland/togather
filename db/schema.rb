@@ -10,10 +10,77 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822155944) do
+ActiveRecord::Schema.define(version: 20160822164508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "connections", force: :cascade do |t|
+    t.string   "status"
+    t.integer  "guest_id"
+    t.integer  "host_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_connections_on_guest_id", using: :btree
+    t.index ["host_id"], name: "index_connections_on_host_id", using: :btree
+  end
+
+  create_table "meetings", force: :cascade do |t|
+    t.text     "guest_review"
+    t.text     "host_review"
+    t.datetime "date"
+    t.integer  "connection_id"
+    t.integer  "place_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["connection_id"], name: "index_meetings_on_connection_id", using: :btree
+    t.index ["place_id"], name: "index_meetings_on_place_id", using: :btree
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "meeting_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_messages_on_meeting_id", using: :btree
+  end
+
+  create_table "places", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.text     "description"
+    t.string   "phone_number"
+    t.string   "type"
+    t.integer  "pax"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["user_id"], name: "index_places_on_user_id", using: :btree
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_skills_on_category_id", using: :btree
+  end
+
+  create_table "user_skills", force: :cascade do |t|
+    t.integer  "skill_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_user_skills_on_skill_id", using: :btree
+    t.index ["user_id"], name: "index_user_skills_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -28,8 +95,22 @@ ActiveRecord::Schema.define(version: 20160822155944) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.boolean  "status"
+    t.string   "gender"
+    t.string   "work_place"
+    t.date     "birthday"
+    t.text     "bio"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "meetings", "connections"
+  add_foreign_key "meetings", "places"
+  add_foreign_key "messages", "meetings"
+  add_foreign_key "places", "users"
+  add_foreign_key "skills", "categories"
+  add_foreign_key "user_skills", "skills"
+  add_foreign_key "user_skills", "users"
 end
