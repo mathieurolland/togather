@@ -7,5 +7,5 @@ class Place < ApplicationRecord
   validates :description, presence: true
   validates :phone_number, presence: true
   validates :phone_number, uniqueness: true
-  validates :type, presence: true
+  validates :type_partner, presence: true
 end

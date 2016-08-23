@@ -46,9 +46,11 @@ ActiveRecord::Schema.define(version: 20160822164508) do
   create_table "messages", force: :cascade do |t|
     t.text     "content"
     t.integer  "meeting_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["meeting_id"], name: "index_messages_on_meeting_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "places", force: :cascade do |t|
@@ -56,7 +58,7 @@ ActiveRecord::Schema.define(version: 20160822164508) do
     t.string   "address"
     t.text     "description"
     t.string   "phone_number"
-    t.string   "type"
+    t.string   "type_partner"
     t.integer  "pax"
     t.integer  "user_id"
     t.datetime "created_at",   null: false
@@ -109,6 +111,7 @@ ActiveRecord::Schema.define(version: 20160822164508) do
   add_foreign_key "meetings", "connections"
   add_foreign_key "meetings", "places"
   add_foreign_key "messages", "meetings"
+  add_foreign_key "messages", "users"
   add_foreign_key "places", "users"
   add_foreign_key "skills", "categories"
   add_foreign_key "user_skills", "skills"
