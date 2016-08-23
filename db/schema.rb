@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822164508) do
+ActiveRecord::Schema.define(version: 20160823155213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,14 @@ ActiveRecord::Schema.define(version: 20160822164508) do
     t.index ["user_id"], name: "index_places_on_user_id", using: :btree
   end
 
+  create_table "recommended_users", force: :cascade do |t|
+    t.string   "email"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_recommended_users_on_user_id", using: :btree
+  end
+
   create_table "skills", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -113,6 +121,7 @@ ActiveRecord::Schema.define(version: 20160822164508) do
   add_foreign_key "messages", "meetings"
   add_foreign_key "messages", "users"
   add_foreign_key "places", "users"
+  add_foreign_key "recommended_users", "users"
   add_foreign_key "skills", "categories"
   add_foreign_key "user_skills", "skills"
   add_foreign_key "user_skills", "users"
