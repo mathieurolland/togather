@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: "pages#dashboard", constraints: lambda { |r| r.env["warden"].authenticate? }
+  get "/dashboard/", to: "pages#dashboard"
+  resources :categories, only: [:index]
+  resources :skills, only: [:index]
+  resources :user_skills, only: [:create, :destroy]
+  resources :connections, only: [:index, :create, :update, :show] do
+    resources :meetings, only: [:create, :show, :update] do
+      resources :messages, only: [:create]
+    end
+  end
 end
