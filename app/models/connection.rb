@@ -3,4 +3,5 @@ class Connection < ApplicationRecord
   belongs_to :host, class_name: "User"
   has_many :meetings
   has_many :messages, through: :meetings
+  validates :status, presence: true
 end
