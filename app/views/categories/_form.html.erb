@@ -1,0 +1,9 @@
+
+
+<%= simple_form_for @listing, url: _path, method: :get do |f| %>
+  <% @categories.each do |category| %>
+  <%= category.name %>
+  <%= f.input_field category.selected, as: :boolean %>
+  <% end %>
+  <%= f.submit %>
+<% end %>
