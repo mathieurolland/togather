@@ -7,14 +7,14 @@ User.destroy_all
 
 # Categories and skills
 cat_skills = [
-  { name: "Business intelligence",skills: ["un", "deux", "trois"] },
-  { name: "Database",skills: ["un", "deux", "trois"] },
-  { name: "Digital",skills: ["un", "deux", "trois"] },
-  { name: "Graphism",skills: ["un", "deux", "trois"] },
-  { name: "Management",skills: ["un", "deux", "trois"] },
-  { name: "Programmation",skills: ["un", "deux", "trois"] },
-  { name: "Systems",skills: ["un", "deux", "trois"] },
-  { name: "Network",skills: ["un", "deux", "trois"] }
+  { name: "Business intelligence",skills: ["skill_1", "skill_2", "skill_3"] },
+  { name: "Database",skills: ["skill_1", "skill_2", "skill_3"] },
+  { name: "Digital",skills: ["skill_1", "skill_2", "skill_3"] },
+  { name: "Graphism",skills: ["skill_1", "skill_2", "skill_3"] },
+  { name: "Management",skills: ["skill_1", "skill_2", "skill_3"] },
+  { name: "Programmation",skills: ["skill_1", "skill_2", "skill_3"] },
+  { name: "Systems",skills: ["skill_1", "skill_2", "skill_3"] },
+  { name: "Network",skills: ["skill_1", "skill_2", "skill_3"] }
 ]
 
 cat_skills.each do |category_data|
@@ -49,77 +49,72 @@ end
 
 #connection_status
 connection_types = [
-  "ami",
-  "parrain",
-  "parrainé",
-  "connecté",
-  "suggeré"
+  "friend",
+  "godfather",
+  "recommended",
+  "connected",
+  "suggested"
 ]
 
 # connections uniques entre deux users
 30.times do |i|
   users = User.all.shuffle[0..1]
-  print "#{i+1}....."
   begin
-    Connection.create!(status: connection_types.sample, guest: users.first, host: users.last)
-    puts "worked"
-  rescue
-    puts "didn't work"
+  Connection.create!(status: connection_types.sample, guest: users.first, host: users.last)
+rescue
   end
+end
+
+#recommended_users
+10.times do
+  RecommendedUser.create(
+    email: Faker::Internet.email,
+    user:User.all.sample
+  )
 end
 
 # places
 places = []
 10.times do
   partner = User.create(
-        email: Faker::Internet.email,
-        password: Faker::Internet.password(8),
-        first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        status: false,
-        gender: ["male", "female"].sample,
-        work_place: "#{Faker::Address.street_address}, #{Faker::GameOfThrones.city}",
-        birthday: Faker::Date.between(300.days.ago, Date.today),
-        bio: Faker::Lorem.paragraph
-      )
-
-  p = Place.create(
-    name: Faker::Company.name,
-    address: "#{Faker::Address.street_address}, #{Faker::GameOfThrones.city}",
-    description: Faker::ChuckNorris.fact,
-    phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: ["restau", "café", "after work"].sample,
-    pax: Faker::Number.number(2), # balance 2 digits
-    user: partner
+    email: Faker::Internet.email,
+    password: Faker::Internet.password(8),
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    status: false,
+    gender: ["male", "female"].sample,
+    work_place: "#{Faker::Address.street_address}, #{Faker::GameOfThrones.city}",
+    birthday: Faker::Date.between(300.days.ago, Date.today),
+    bio: Faker::Lorem.paragraph
     )
-  places << p
+    Place.create(
+      name: Faker::Company.name,
+      address: "#{Faker::Address.street_address}, #{Faker::GameOfThrones.city}",
+      description: Faker::ChuckNorris.fact,
+      phone_number: Faker::PhoneNumber.phone_number,
+      type_partner: ["restau", "café", "after work"].sample,
+      pax: Faker::Number.number(2), # balance 2 digits
+      user: partner
+      )
 end
 
 # meetings
 10.times do
-connection = Connection.all.shuffle[0]
-place = Place.all.shuffle[0]
-begin
-meeting = Meeting.create(
-           guest_review: Faker::Lorem.paragraph,
-           host_review: Faker::Lorem.paragraph,
-           date: Faker::Date.between(300.days.ago, Date.today),
-           connection: connection,
-           place: place
-          )
-    puts "worked"
-  rescue
-    puts "didn't work"
-  end
+  Meeting.create(
+    guest_review: Faker::Superhero.power,
+    host_review: Faker::Superhero.power,
+    date: Faker::Date.between(300.days.ago, Date.today),
+    connection: Connection.all.sample,
+    place: Place.all.sample
+    )
 end
-
 
 # Message
 10.times do
-  meeting = Meeting.all.shuffle[0]
-  Message.create(
-    content: Faker::StarWars.quote,
-    meeting: meeting,
-    user: [meeting.connection.guest, meeting.connection.host].sample
-    )
+  meeting = Meeting.all.sample
+    Message.create(
+      content: Faker::StarWars.quote,
+      meeting: Meeting.all.sample,
+      user: [meeting.connection.guest, meeting.connection.host].sample
+      )
 end
