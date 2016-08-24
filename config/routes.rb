@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
   root to: "pages#dashboard", constraints: lambda { |r| r.env["warden"].authenticate? }
   root to: 'pages#home'
 
