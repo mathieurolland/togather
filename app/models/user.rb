@@ -4,8 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:linkedin]
-  has_many :hosted_guys, class_name: 'connection', foreign_key: 'host_id'
-  has_many :invited_guys, class_name: 'connection', foreign_key: 'guest_id'
+  has_many :hosted_connections, foreign_key: :host_id, class_name: "Connection"
+  has_many :invited_connections, foreign_key: :guest_id, class_name: "Connection"
+  has_many :hosting_guys, through: :hosted_connections, class_name: "User", source: :host
+  has_many :invited_guys, through: :invited_connections, class_name: "User", source: :guest
+
   has_many :meetings, through: :connections
   has_many :messages
   has_many :user_skills

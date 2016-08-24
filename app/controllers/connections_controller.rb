@@ -5,7 +5,7 @@ class ConnectionsController < ApplicationController
   end
 
   def create
-    @connection = Connection.new(status: connections_params[:status], guest: current_user, host: @user)
+    @connection = Connection.new(status: connections_params[:status], guest_id: current_user.id, host_id: @user.id)
     @Connection.save
     redirect_to connection_path(@connection.id)
   end

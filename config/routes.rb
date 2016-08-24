@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  mount Attachinary::Engine => "/attachinary"
+
   devise_for :users,
      controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   root to: "pages#dashboard", constraints: lambda { |r| r.env["warden"].authenticate? }
@@ -20,4 +20,5 @@ Rails.application.routes.draw do
       resources :messages, only: [:create]
     end
   end
+   mount Attachinary::Engine => "/attachinary"
 end

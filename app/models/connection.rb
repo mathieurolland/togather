@@ -7,8 +7,6 @@ class Connection < ApplicationRecord
   validates :guest, uniqueness: { scope: :host }
 
   def self.suggestions(user)
-    user.connections
-    raise
-
+    user.hosted_connections
   end
 end
