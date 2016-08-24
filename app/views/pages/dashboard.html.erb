@@ -1,6 +1,41 @@
-<h1>Pages#dashboard</h1>
-<p>Find me in app/views/pages/dashboard.html.erb</p>
+<h1 style="text-align: center"> <%= current_user.first_name %>'s Dashboard !</h1>
 
 <%= link_to "     Profil Settings", edit_user_registration_path, class:"fa fa-cogs btn btn-primary" %>
 
-<%= current_user.first_name %>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3">
+
+        <ul>
+          <li> Suggestion 1 = <% a = User.all.sample %> <%= link_to "#{a.first_name} #{a.last_name}", user_summary_path(a.id), class:"fa fa-anchor btn btn-primary" %>
+          </li>
+          <li> Suggestion 2 = <% b= User.all.sample %> <%= link_to "#{b.first_name} #{b.last_name} ", user_summary_path(b.id), class:"fa fa-anchor btn btn-primary" %> </li>
+          <li> Suggestion 3 = <% c= User.all.sample %> <%= link_to "#{c.first_name} #{c.last_name} ", user_summary_path(c.id), class:"fa fa-anchor btn btn-primary" %>
+           </li>
+        </ul>
+        </div>
+
+
+       <div class= wrapper-grey>
+          <div class="col-xs-6">
+          <%= link_to "Profil Settings", edit_user_registration_path, class:"fa fa-cogs btn btn-primary" %>
+            <%= current_user.first_name %><%= current_user.last_name %>
+            <hr>
+            <%= current_user.bio %>
+          </div>
+       </div>
+
+        <div class="col-xs-3">
+        <h2> Vos contacts </h2>
+          <ul>
+          <% User.all.each do |j| %>
+          <li class><%= link_to "#{j.first_name} #{j.last_name} ", user_summary_path(j.id), class:"fa fa-anchor btn btn-primary" %>
+         </li>
+          <%end %>
+          </ul>
+        </div>
+
+    </div>
+</div>
