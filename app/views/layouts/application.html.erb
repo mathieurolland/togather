@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TODO</title>
+    <title>Connect Linkedin</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +11,11 @@
   <body>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
-    <%= yield %>
+    <div class="container">
+      <%= yield(:after_js) %>
+
+    </div>
     <%= javascript_include_tag 'application' %>
-    <%= yield(:after_js) %>
+    <%= cloudinary_js_config %>
   </body>
 </html>

@@ -17,6 +17,12 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 gem 'faker'
+gem 'cloudinary', '1.1.0'
+gem "attachinary", github: "assembler/attachinary"
+gem "jquery-fileupload-rails"
+gem "coffee-rails"
+gem 'omniauth'
+gem 'omniauth-linkedin'
 
 group :development, :test do
   gem 'binding_of_caller'
