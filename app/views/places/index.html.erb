@@ -1,0 +1,13 @@
+<div class="text-center">
+  <h1> Places </h1>
+</div>
+
+<div class="container">
+  <% @places.each do |place| %>
+    <p><%= link_to place.name, place_path(place) %></p>
+    <p><strong>Type: </strong> <%= place.type_partner %></p>
+    <p>une photo?</p>
+    <p><strong>Address: </strong><%= place.address %> <strong>Phone number: </strong><%= place.phone_number %></p>
+    </br>
+  <% end %>
+</div>
