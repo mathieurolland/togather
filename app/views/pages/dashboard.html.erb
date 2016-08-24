@@ -9,13 +9,14 @@
         <div class="col-xs-3">
 
         <ul>
-          <li> Suggestion 1 = <% a = User.all.sample %> <%= link_to "#{a.first_name} #{a.last_name}", user_summary_path(a.id), class:"fa fa-anchor btn btn-primary" %>
-          </li>
-          <li> Suggestion 2 = <% b= User.all.sample %> <%= link_to "#{b.first_name} #{b.last_name} ", user_summary_path(b.id), class:"fa fa-anchor btn btn-primary" %> </li>
-          <li> Suggestion 3 = <% c= User.all.sample %> <%= link_to "#{c.first_name} #{c.last_name} ", user_summary_path(c.id), class:"fa fa-anchor btn btn-primary" %>
-           </li>
-        </ul>
+            <% @suggestions.each_with_index do |suggestion, index| %>
+             <li> Suggestion <%= index + 1 %> <%= link_to "#{suggestion.first_name} #{suggestion.last_name} ", user_summary_path(suggestion.id), class:"fa fa-anchor btn btn-primary" %>
+             </li>
+             <% end %>
+          </ul>
         </div>
+
+
 
 
        <div class= wrapper-grey>
