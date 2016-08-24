@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :meetings, through: :connections
   has_many :messages
   has_many :user_skills
+  has_many :skills, through: :user_skills
   has_many :places
   has_many :recommended_users
 

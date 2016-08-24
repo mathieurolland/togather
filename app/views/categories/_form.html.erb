@@ -1,6 +1,4 @@
-
-
 <%= simple_form_for :id_categories, url: skills_path, method: :get do |f| %>
-  <%=  f.input :categories, collection: Category.all, as: :check_boxes, input_html: { multiple: true } %>
+  <%=  f.input :categories, collection: @categories, as: :check_boxes, input_html: { multiple: true } %>
   <%= f.button :submit, value: "submit" %>
 <% end %>

@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   get "/dashboard/", to: "pages#dashboard"
-  resource :recommended_users, only: [:destroy, :create, :update]
+  get "/dashboard/skills", to: "pages#update_skills"
+  resources :recommended_users, only: [:create, :update, :destroy]
   resources :categories, only: [:index]
   resources :skills, only: [:index]
   resources :user_skills, only: [:create, :destroy]
