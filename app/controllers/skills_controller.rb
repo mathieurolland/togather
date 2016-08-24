@@ -2,7 +2,12 @@ class SkillsController < ApplicationController
 
   def index
     ids = categories_params[:categories]
-    Skill.where(category: ids)
+    @categories = Category.where(id: ids)
+    skills = Skill.where(category: ids)
+    @listing_skills = {}
+    @categories.each do |category|
+      @listing_skills[category.name] = skills.select { |skill|  skill.category_id == category.id  }
+    end
   end
 
   private
@@ -11,5 +16,3 @@ class SkillsController < ApplicationController
     params.require(:id_categories).permit!
   end
 end
-
- #<ActionController::Parameters {"utf8"=>"✓", "id_categories"=><ActionController::Parameters {"categories"=>["", "1", "2"]} permitted: false>, "commit"=>"submit", "controller"=>"skills", "action"=>"index"} permitted: false>
