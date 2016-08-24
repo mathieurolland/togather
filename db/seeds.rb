@@ -69,6 +69,7 @@ connection_types = [
 end
 
 # places
+places = []
 10.times do
   partner = User.create(
         email: Faker::Internet.email,
@@ -77,55 +78,48 @@ end
         last_name: Faker::Name.last_name,
         status: false,
         gender: ["male", "female"].sample,
-        work_place: "#{Faker::Address.street_address}, #{Faker::Address.city}",
+        work_place: "#{Faker::Address.street_address}, #{Faker::GameOfThrones.city}",
         birthday: Faker::Date.between(300.days.ago, Date.today),
         bio: Faker::Lorem.paragraph
       )
 
-  Place.create(
+  p = Place.create(
     name: Faker::Company.name,
-    address: "#{Faker::Address.street_address}, #{Faker::Address.city}",
-    description: Faker::Beer.name,
+    address: "#{Faker::Address.street_address}, #{Faker::GameOfThrones.city}",
+    description: Faker::ChuckNorris.fact,
     phone_number: Faker::PhoneNumber.phone_number,
     type_partner: ["restau", "café", "after work"].sample,
     pax: Faker::Number.number(2), # balance 2 digits
     user: partner
     )
+  places << p
 end
 
-# connection uniques entre 1 partner et 1 place
-# 30.times do |i|
-#   placess = Place.all.shuffle[0..1]
-#   print "#{i+1}....."
-#   begin
-#     Connection.create!(status: connection_types.sample, guest: users.first, host: users.last)
-#     puts "worked"
-#   rescue
-#     puts "didn't work"
-#   end
-# end
+# meetings
+10.times do
+connection = Connection.all.shuffle[0]
+place = Place.all.shuffle[0]
+begin
+meeting = Meeting.create(
+           guest_review: Faker::Lorem.paragraph,
+           host_review: Faker::Lorem.paragraph,
+           date: Faker::Date.between(300.days.ago, Date.today),
+           connection: connection,
+           place: place
+          )
+    puts "worked"
+  rescue
+    puts "didn't work"
+  end
+end
 
 
-
-
-
-# # 5 meetings
-#     # definir connection_id: 1, place: p
-# i = 1
-# c = 1
-# 10.times do
-#    meeting = Meeting.create(
-#     guest_review: Faker::Lorem.paragraph,
-#     host_review: Faker::Lorem.paragraph,
-#     date: Faker::Date.between(300.days.ago, Date.today),
-#     connection_id: c,
-#     place_id: i
-#   )
-#   i += 1
-#   c += 1
-# end
-
-
-# Message.new(content: "trop top", meeting_id: 1, user_id: Connection.guest_id)
-
-
+# Message
+10.times do
+  meeting = Meeting.all.shuffle[0]
+  Message.create(
+    content: Faker::StarWars.quote,
+    meeting: meeting,
+    user: [meeting.connection.guest, meeting.connection.host].sample
+    )
+end
