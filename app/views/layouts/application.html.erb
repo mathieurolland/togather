@@ -12,7 +12,8 @@
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <div class="container">
-      <%= yield %>
+      <%= yield(:after_js) %>
+
     </div>
     <%= javascript_include_tag 'application' %>
     <%= cloudinary_js_config %>

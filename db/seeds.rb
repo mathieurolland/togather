@@ -57,7 +57,7 @@ connection_types = [
 ]
 
 # connections uniques entre deux users
-30.times do |i|
+50.times do |i|
   users = User.all.shuffle[0..1]
   begin
   Connection.create!(status: connection_types.sample, guest: users.first, host: users.last)

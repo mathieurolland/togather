@@ -1,6 +1,45 @@
-<h1>Pages#dashboard</h1>
-<p>Find me in app/views/pages/dashboard.html.erb</p>
+<h1 style="text-align: center"> <%= current_user.first_name %>'s Dashboard !</h1>
 
 <%= link_to "     Profil Settings", edit_user_registration_path, class:"fa fa-cogs btn btn-primary" %>
 
-<%= current_user.first_name %>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3">
+
+        <ul>
+            <% @suggestions.each_with_index do |suggestion, index| %>
+             <li> Suggestion <%= index + 1 %> <%= link_to "#{suggestion.first_name} #{suggestion.last_name} ", user_summary_path(suggestion.id), class:"fa fa-anchor btn btn-primary" %>
+             </li>
+             <% end %>
+          </ul>
+        </div>
+
+
+
+
+       <div class= wrapper-grey>
+          <div class="col-xs-6">
+          <%= link_to "Profil Settings", edit_user_registration_path, class:"fa fa-cogs btn btn-primary" %>
+            <%= current_user.first_name %><%= current_user.last_name %>
+            <hr>
+            <%= current_user.bio %>
+          </div>
+       </div>
+
+        <div class="col-xs-3">
+        <h2> Vos contacts </h2>
+          <ul>
+          <% User.all.each do |j| %>
+          <li class><%= link_to "#{j.first_name} #{j.last_name} ", user_summary_path(j.id), class:"fa fa-anchor btn btn-primary" %>
+         </li>
+          <%end %>
+          </ul>
+        </div>
+
+    </div>
+</div>
+
+<p><%= link_to "Edit skills", dashboard_edit_skills_path %></p>
+

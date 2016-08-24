@@ -6,7 +6,6 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:linkedin]
   has_many :hosted_guys, class_name: 'connection', foreign_key: 'host_id'
   has_many :invited_guys, class_name: 'connection', foreign_key: 'guest_id'
-  has_many :connections
   has_many :meetings, through: :connections
   has_many :messages
   has_many :user_skills
