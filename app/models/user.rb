@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :messages
   has_many :user_skills
   has_many :places
+  has_many :recommended_users
 
   # se mettre d'accord sur status : false = partner, true = user (ou l'inverse)
 

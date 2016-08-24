@@ -1,2 +1,6 @@
 <h1>Pages#dashboard</h1>
 <p>Find me in app/views/pages/dashboard.html.erb</p>
+
+<%= link_to "     Profil Settings", edit_user_registration_path, class:"fa fa-cogs btn btn-primary" %>
+
+<%= current_user.first_name %>
