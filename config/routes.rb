@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   root to: "pages#dashboard", constraints: lambda { |r| r.env["warden"].authenticate? }
   get "/dashboard/", to: "pages#dashboard"
+  resources :recommended_users, only: [:create, :update, :destroy]
   resources :categories, only: [:index]
   resources :skills, only: [:index]
   resources :user_skills, only: [:create, :destroy]
