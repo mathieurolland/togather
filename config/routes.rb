@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root to: 'pages#home'
   root to: "pages#dashboard", constraints: lambda { |r| r.env["warden"].authenticate? }
+  root to: 'pages#home'
+
   get "/dashboard/", to: "pages#dashboard"
   get "/dashboard/skills", to: "pages#update_skills"
   resources :recommended_users, only: [:create, :update, :destroy]
