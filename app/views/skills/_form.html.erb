@@ -1,0 +1,7 @@
+<%= simple_form_for :id_skills, url: user_skills_path, method: :post do |f| %>
+  <% @listing_skills.each do |category, skills| %>
+    <h2><%= category %></h2>
+    <%=  f.input :skills, collection: skills, as: :check_boxes, :input_html => { multiple: true } %>
+  <% end %>
+  <%= f.button :submit, value: "submit" %>
+<% end %>
