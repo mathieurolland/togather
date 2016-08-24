@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root to: "pages#dashboard", constraints: lambda { |r| r.env["warden"].authenticate? }
   root to: 'pages#home'
-
+  get '/users/:id', to: "users#summary", as: "user_summary"
   get "/dashboard/", to: "pages#dashboard"
   get "/dashboard/edit-skills", to: "pages#edit_skills"
   patch "/dashboard/update-skills", to: "pages#update_skills"

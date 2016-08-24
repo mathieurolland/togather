@@ -4,6 +4,11 @@ class Connection < ApplicationRecord
   has_many :meetings
   has_many :messages, through: :meetings
   validates :status, presence: true
-
   validates :guest, uniqueness: { scope: :host }
+
+  def self.suggestions(user)
+    user.connections
+    raise
+
+  end
 end
