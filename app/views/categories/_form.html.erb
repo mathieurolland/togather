@@ -1,7 +1,7 @@
 <div class="cat-form">
   <%= simple_form_for :id_categories, url: skills_path, method: :get do |f| %>
-    <%= f.input :categories, collection: Category.all, as: :check_boxes, required: true, input_html: { multiple: true } %>
-    <%= f.button :submit, value: "submit"%>
+    <%= f.input :categories, collection: @categories, as: :check_boxes, required: true, input_html: { multiple: true } %>
+    <%= f.button :submit, value: "submit" %>
   <% end %>
 </div>
 
