@@ -2,3 +2,6 @@
 <p>Find me in app/views/pages/dashboard.html.erb</p>
 
 <p><%= link_to "Edit skills", dashboard_edit_skills_path %></p>
+<p><%= link_to "Profil Settings", edit_user_registration_path, class:"fa fa-cogs btn btn-primary" %></p>
+<%= current_user.first_name %>
+

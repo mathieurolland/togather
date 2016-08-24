@@ -1,4 +1,35 @@
-<%= simple_form_for :id_categories, url: skills_path, method: :get do |f| %>
-  <%=  f.input :categories, collection: @categories, as: :check_boxes, input_html: { multiple: true } %>
-  <%= f.button :submit, value: "submit" %>
+<div class="cat-form">
+  <%= simple_form_for :id_categories, url: skills_path, method: :get do |f| %>
+    <%= f.input :categories, collection: @categories, as: :check_boxes, required: true, input_html: { multiple: true } %>
+    <%= f.button :submit, value: "submit" %>
+  <% end %>
+</div>
+
+<div class="category-selection">
+  <% Category.all.each do |category| %>
+  <div class="category-card text-center" id="<%= category.id %>">
+    <img src="" alt="">
+    <h3><%= category.name %></h3>
+  </div>
+  <% end %>
+</div>
+<div class="text-center">
+  <button type="button" class="btn btn-success submit-cat">Submit</button>
+</div>
+
+<% content_for(:after_js) do %>
+  <script>
+    $(document).ready(function(){
+      $('.submit-cat').on('click', function(event){
+        $('input:submit').click();
+      });
+      $('.category-card').on('click', function(event) {
+        var val = this.id;
+        console.log(val);
+        $(this).toggleClass('active-card');
+        $('input:checkbox[value='+val+']').click();
+        // $('input:checkbox').prop('checked', !('input:checkbox').prop('checked'));
+      });
+    });
+  </script>
 <% end %>
