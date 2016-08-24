@@ -11,4 +11,6 @@ class User < ApplicationRecord
   has_many :user_skills
   has_many :places
 
+  # se mettre d'accord sur status : false = partner, true = user (ou l'inverse)
+
 end

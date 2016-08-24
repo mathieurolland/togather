@@ -4,4 +4,6 @@ class Connection < ApplicationRecord
   has_many :meetings
   has_many :messages, through: :meetings
   validates :status, presence: true
+
+  validates :guest, uniqueness: { scope: :host }
 end
