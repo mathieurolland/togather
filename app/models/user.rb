@@ -46,7 +46,7 @@ class User < ApplicationRecord
   end
 
 
-  def suggestions
+  def create_suggestions
     array = []
     self.invited_connections.each do |x|
       if x.status == "connected"
@@ -76,8 +76,20 @@ class User < ApplicationRecord
         end
       end
     end
-    array.select do |value|
+    contacts = array.select do |value|
       (Connection.where(guest: self, host: value).first == nil || Connection.where(guest: self, host: value).first.status != "connected") && (Connection.where(guest: value, host: self).first == nil || Connection.where(guest: value, host: self).first.status != "connected")
     end
+    contacts.each do |contact|
+      Connection.create(status: "suggested", guest: self, host: contact)
+    end
+  end
+
+  def suggestions
+    suggestions = []
+    selection = ["suggested", "invited", "waiting"]
+    self.invited_connections.each do |suggested|
+      suggestions << suggested if selection.include?(suggested.status)
+    end
+    suggestions
   end
 end
