@@ -9,10 +9,15 @@ class PagesController < ApplicationController
     @suggestions = current_user.suggestions
   end
 
+  def partner
+    @count_places = current_user.places.count
+  end
+
   def edit_skills
   end
 
   def update_skills
+    current_user.skills.destroy_all
     ids = skills_params[:skill_ids]
     Skill.where(id: ids).each do |skill|
       UserSkill.create( user: current_user, skill: skill )
