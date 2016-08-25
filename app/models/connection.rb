@@ -6,7 +6,4 @@ class Connection < ApplicationRecord
   validates :status, presence: true
   validates :guest, uniqueness: { scope: :host }
 
-  def self.suggestions(user)
-    user.hosted_connections
-  end
 end

@@ -1,4 +1,8 @@
 <%= simple_form_for current_user, url: dashboard_update_skills_path, method: :patch do |f| %>
-  <%=  f.association :skills, as: :check_boxes, input_html: { multiple: true } %>
-  <%= f.button :submit, value: "submit" %>
+  <%= f.association :skills, as: :check_boxes, input_html: { multiple: true }, wrapper_html: { class: 'all-skills' } %>
+  <div class="form-actions">
+    <div class="skills-submit">
+      <%= f.button :submit, value: "submit" %>
+    </div>
+  </div>
 <% end %>

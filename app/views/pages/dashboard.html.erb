@@ -1,45 +1,77 @@
-<h1 style="text-align: center"> <%= current_user.first_name %>'s Dashboard !</h1>
-
-<%= link_to "     Profil Settings", edit_user_registration_path, class:"fa fa-cogs btn btn-primary" %>
-
-
-
-<div class="container">
+<div class="max-body">
+  <div class="container">
     <div class="row">
-        <div class="col-xs-3">
-
-        <ul>
-            <% @suggestions.each_with_index do |suggestion, index| %>
-             <li> Suggestion <%= index + 1 %> <%= link_to "#{suggestion.first_name} #{suggestion.last_name} ", user_summary_path(suggestion.id), class:"fa fa-anchor btn btn-primary" %>
-             </li>
-             <% end %>
-          </ul>
-        </div>
+      <h1 class="text-center">
+        <%= current_user.first_name %>'s Dashboard !
+      </h1>
 
 
 
-
-       <div class= wrapper-grey>
-          <div class="col-xs-6">
-          <%= link_to "Profil Settings", edit_user_registration_path, class:"fa fa-cogs btn btn-primary" %>
-            <%= current_user.first_name %><%= current_user.last_name %>
-            <hr>
-            <%= current_user.bio %>
-          </div>
-       </div>
-
-        <div class="col-xs-3">
-        <h2> Vos contacts </h2>
+      <div class="row">
+        <div class="col-md-4">
+          <h3>
+            Suggestions
+          </h3>
           <ul>
-          <% User.all.each do |j| %>
-          <li class><%= link_to "#{j.first_name} #{j.last_name} ", user_summary_path(j.id), class:"fa fa-anchor btn btn-primary" %>
-         </li>
-          <%end %>
+            <% @suggestions.each_with_index do |suggestion, index| %>
+              <li> Suggestion <%= index + 1 %> <%= link_to "#{suggestion.host.first_name} #{suggestion.host.last_name} ", suggestion, class:"fa fa-anchor btn btn-primary" %>
+              </li>
+            <% end %>
           </ul>
         </div>
 
+        <div class="col-md-4">
+          <h3>
+            Portrait
+          </h3>
+          <p>
+            <%= current_user.bio %>
+          </p>
+          <p>
+            Work place: <%= current_user.work_place.nil? ? (current_user.work_place) : "-" %>
+          </p>
+          <p>
+            Birthday: <%= current_user.birthday %>
+          </p>
+          <%= link_to edit_user_registration_path, class: "btn btn-default" do %>
+            <i class='fa fa-cogs' aria-hidden='true'></i>
+            Profile Settings
+          <% end %>
+          <hr>
+          <h3>
+            Interests
+          </h3>
+          <p>
+            <% current_user.skills.each do |skill| %>
+              <%= skill.name %>
+              <%= '-' if (skill != current_user.skills.last) %>
+            <% end %>
+          </p>
+          <%= link_to dashboard_edit_skills_path, class: "btn btn-default" do %>
+            <i class='fa fa-cogs' aria-hidden='true'></i>
+            Edit interests
+          <% end %>
+        </div>
+
+        <div class="col-md-4">
+          <h3>
+            Your contacts
+          </h3>
+          <div class="box">
+            <div class="contact-list">
+              <% User.all.each do |j| %>
+                <p>
+                  <%= link_to user_summary_path(j.id), class: "btn btn-sm btn-primary" do %>
+                    <i class='fa fa-anchor' aria-hidden='true'></i>
+                    <%= "#{j.first_name} #{j.last_name}" %>
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
 </div>
-
-<p><%= link_to "Edit skills", dashboard_edit_skills_path %></p>
-

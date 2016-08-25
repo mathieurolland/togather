@@ -6,7 +6,8 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @suggestions = Connection.suggestions(current_user)
+   current_user.create_suggestions
+   @suggestions = current_user.suggestions
   end
 
   def partner
