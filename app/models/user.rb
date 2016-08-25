@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :hosting_guys, through: :hosted_connections, class_name: "User", source: :host
   has_many :invited_guys, through: :invited_connections, class_name: "User", source: :guest
 
+
   has_many :meetings, through: :connections
   has_many :messages
   has_many :user_skills
@@ -44,4 +45,39 @@ class User < ApplicationRecord
     return user
   end
 
+
+  def suggestions
+    array = []
+    self.invited_connections.each do |x|
+      if x.status == "connected"
+        x.host.invited_connections.each do |y|
+          if y.status == "connected"
+            array << y.host
+          end
+        end
+        x.host.hosted_connections.each do |y|
+          if y.guest != self && y.status == "connected"
+            array << y.guest
+          end
+        end
+      end
+    end
+    self.hosted_connections.each do |x|
+      if x.status == "connected"
+        x.guest.invited_connections.each do |y|
+          if  y.host != self && y.status == "connected" &&  array.include?(y.host) == false
+            array << y.host
+          end
+        end
+        x.guest.hosted_connections.each do |y|
+          if  y.status == "connected" &&  array.include?(y.guest) == false
+            array << y.guest
+          end
+        end
+      end
+    end
+    array.select do |value|
+      (Connection.where(guest: self, host: value).first == nil || Connection.where(guest: self, host: value).first.status != "connected") && (Connection.where(guest: value, host: self).first == nil || Connection.where(guest: value, host: self).first.status != "connected")
+    end
+  end
 end
