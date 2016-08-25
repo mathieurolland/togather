@@ -7,14 +7,39 @@ User.destroy_all
 
 # Categories and skills
 cat_skills = [
-  { name: "Business intelligence",skills: ["skill_1", "skill_2", "skill_3"] },
-  { name: "Database",skills: ["skill_1", "skill_2", "skill_3"] },
-  { name: "Digital",skills: ["skill_1", "skill_2", "skill_3"] },
-  { name: "Graphism",skills: ["skill_1", "skill_2", "skill_3"] },
-  { name: "Management",skills: ["skill_1", "skill_2", "skill_3"] },
-  { name: "Programmation",skills: ["skill_1", "skill_2", "skill_3"] },
-  { name: "Systems",skills: ["skill_1", "skill_2", "skill_3"] },
-  { name: "Network",skills: ["skill_1", "skill_2", "skill_3"] }
+  { name: "Management",skills: ["skill_1", "skill_2", "skill_3"],
+    photo_url: "http://www.projectmanagers.net/i/wp-content/uploads/2013/05/bigstock-Business-Team-Meeting-at-Sunse-62229413.jpg"
+   },
+  { name: "Database",skills: ["skill_1", "skill_2", "skill_3"],
+    photo_url: "http://bigdata.socuumcas.net/images/daat.jpg"
+    },
+  { name: "Digital",skills: ["skill_1", "skill_2", "skill_3"],
+    photo_url: "http://i.huffpost.com/gen/2050946/images/o-DIGITAL-MARKETING-facebook.jpg"
+    },
+  { name: "Graphism",skills: ["skill_1", "skill_2", "skill_3"],
+    photo_url: "http://www.lasalopette.net/wordpress/wp-content/uploads/2014/11/1517407_10154944120615601_2145974816554658412_n.jpg"
+    },
+  { name: "Management",skills: ["skill_1", "skill_2", "skill_3"],
+    photo_url: "http://www.projectmanagers.net/i/wp-content/uploads/2013/05/bigstock-Business-Team-Meeting-at-Sunse-62229413.jpg"
+    },
+  { name: "Programmation",skills: ["skill_1", "skill_2", "skill_3"],
+    photo_url: "http://jerico.strasociwebmeosis1.fr/meoblog/wp-content/uploads/sites/9/2016/03/logiciel-de-programmation.jpg"
+    },
+  { name: "Industry",skills: ["skill_1", "skill_2", "skill_3"],
+    photo_url: "https://data.motor-talk.de/data/galleries/0/188/5281/57789828/rueckrufe-usa-5076501119952349315.jpg"
+    },
+  { name: "Photography",skills: ["skill_1", "skill_2", "skill_3"],
+    photo_url: " http://dotcommate.com/wp-content/uploads/2015/05/websites-for-photographers.jpg"
+    },
+  { name: "Finance",skills: ["skill_1", "skill_2", "skill_3"],
+    photo_url: "http://static.memrise.com/uploads/course_photos/3146044000150629230223.jpg"
+    },
+  { name: "Conseil",skills: ["skill_1", "skill_2", "skill_3"],
+    photo_url: "http://www.fca-conseils.com/wp-content/uploads/2015/11/audit-conseil.jpg?quality=100.3016013118360"
+    },
+  { name: "Architecture",skills: ["skill_1", "skill_2", "skill_3"],
+    photo_url: "http://dceez.com/images/img8/architecture-drawing-design-decorating-9.jpg"
+    },
 ]
 
 cat_skills.each do |category_data|
