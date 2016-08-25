@@ -99,7 +99,6 @@ end
 end
 
 # places
-places = []
 10.times do
   partner = User.create(
     email: Faker::Internet.email,
