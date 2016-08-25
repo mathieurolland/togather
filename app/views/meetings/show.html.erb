@@ -1,4 +1,9 @@
 <h1>Meetings#show</h1>
 <p>Find me in app/views/meetings/show.html.erb</p>
-
-<%= link_to "Edit places", places_path %>
+<p>guest: <%= @connection.guest.first_name %></p>
+<p>host: <%= @connection.host.first_name %></p>
+<% if @meeting.place %>
+  <p>Place : <%= @meeting.place.name %></p>
+  <% else %>
+    <%= link_to "Choise places", connection_meeting_places_path(@connection, @meeting) %>
+  <% end %>

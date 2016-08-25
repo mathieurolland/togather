@@ -4,10 +4,17 @@
 
 <div class="container">
   <% @places.each do |place| %>
-    <p><%= link_to place.name, place_path(place) %></p>
+
+    <% if current_user.status %>
+        <p><%= link_to place.name, place_path(place) %></p>
+    <% else %>
+      <%= link_to place.name, connection_meeting_place_path(@connection, @meeting, place) %>
+    <% end %>
+
     <p><strong>Type: </strong> <%= place.type_partner %></p>
     <p>une photo?</p>
-    <p><strong>Address: </strong><%= place.address %> <strong>Phone number: </strong><%= place.phone_number %></p>
+    <p><strong>Address: </strong><%= place.address %>
+    <strong>Phone number: </strong><%= place.phone_number %></p>
     </br>
   <% end %>
 </div>
