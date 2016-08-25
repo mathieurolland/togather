@@ -14,6 +14,13 @@ class ConnectionsController < ApplicationController
     @connection = Connection.find(params[:id])
     @connection.status = "invited"
     @connection.save
+    if Connection.where(guest: @connection.host, host: current_user).first
+    @invers_connection = Connection.where(guest: @connection.host, host: current_user).first
+    @invers_connection.status = "waiting"
+    else
+    @invers_connection = Connection.new(guest: @connection.host, host: current_user, status: "waiting")
+    end
+    @invers_connection.save
     redirect_to connection_path(@connection.id)
   end
 
