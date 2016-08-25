@@ -5,8 +5,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: "users/registrations"
   }
-  root to: "pages#dashboard", constraints: lambda { |r| r.env["warden"].authenticate? && r.env["warden"].user.status }
-  root to: "pages#partner", constraints: lambda { |r| r.env["warden"].authenticate? && r.env["warden"].user.status == false }
+  root to: "pages#partner", constraints: lambda { |r| r.env["warden"].authenticate? && r.env["warden"].user.status == true }
+  root to: "pages#dashboard", constraints: lambda { |r| r.env["warden"].authenticate? }
   root to: 'pages#home'
   get '/users/:id', to: "users#summary", as: "user_summary"
   get "/dashboard/", to: "pages#dashboard"
