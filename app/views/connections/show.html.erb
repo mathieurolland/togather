@@ -5,7 +5,7 @@
     <% if @connection.status == "suggested" %>
       <%= link_to "invit", connection_path, data: { confirm: "Are you sure?" }, method: :patch %>
 
-    <% elsif @connection.status == "waiting" %>
+    <% elsif @connection.status == "invited" %>
       <h2> Wait for your confirmation </h2>
       <%= link_to "Confirm", connection_path, data: { confirm: "Are you sure?" }, method: :patch %>
     <% else %>

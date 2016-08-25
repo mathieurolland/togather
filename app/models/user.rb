@@ -86,7 +86,7 @@ class User < ApplicationRecord
 
   def suggestions
     suggestions = []
-    selection = ["suggested", "invited", "waiting"]
+    selection = ["suggested", "invited", "waiting", "valid"]
     self.invited_connections.each do |suggested|
       suggestions << suggested if selection.include?(suggested.status)
     end
