@@ -1,3 +1,18 @@
+.partner-checkbox {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+  margin-top: 30px;
+}
+
+.form-actions {
+  display: flex;
+}
+
+.form-actions > input {
+  flex-grow: 1;
+}
+
 .onoffswitch {
     position: relative;
     width: 100px;
@@ -54,7 +69,7 @@
     background: #FFFFFF;
     position: absolute;
     top: 0;
-    bottom: 0;
+    bottom: 5px;
     right: 74px;
     border: 1px solid #ccc;
     border-radius: 2px;
