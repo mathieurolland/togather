@@ -1,6 +1,5 @@
 <h1><%= @user.first_name%>'s dashboard</h1>
 </br>
-
 <p>I'm a partner: <%= @user.status %></p>
 
 
@@ -8,15 +7,15 @@
 
 <div class ="container">
   <h2>Booking to confirm (<%= @count_meetings %>)</h2>
+
     <% if @meetings.nil? %>
-      <p>nil</p>
+      <p>No meeting to confirm</p>
     <% else %>
 
-      <% @meetings.each do |meeting| %>
-        <% if @user = meeting.place.user %>
-          <p>Booking received at: <%= meeting.created_at %></p>
+      <% @user.places.each do |place| %>
+        <% place.meetings.each do |meeting| %>
           <p><%= meeting.date %></p>
-          <p><%= meeting.place.name %></p>
+          <p><%= place.name %></p>
           <% end %>
       <% end %>
 
