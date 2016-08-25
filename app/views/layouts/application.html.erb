@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TODO</title>
+    <title>Connect Linkedin</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
+    <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= cloudinary_js_config %>
   </head>
   <body>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <%= yield %>
+
+
+ <div class="footer">
+      <div>
+        <a href=""><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+        <a href=""><i class="fa fa-github" aria-hidden="true"></i></a>
+        <a href=""><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+        <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
+      </div>
+        <p>This is ToGather Website designed @LeWagon</p>
+      </div>
+
+
+    <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
+    <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/markerclusterer/src/markerclusterer_compiled.js" %>
+    <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" %>
     <%= javascript_include_tag 'application' %>
     <%= yield(:after_js) %>
   </body>
