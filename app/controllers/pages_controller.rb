@@ -11,7 +11,12 @@ class PagesController < ApplicationController
   end
 
   def partner
+    @user = current_user
     @count_places = current_user.places.count
+    @count_meetings = Meeting.count
+
+    @meetings = Meeting.all
+    @places = Place.all
   end
 
   def edit_skills
