@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @suggestions = Connection.suggestions(current_user)
+    @suggestions = current_user.suggestions
   end
 
   def edit_skills
