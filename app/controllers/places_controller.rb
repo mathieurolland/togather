@@ -2,6 +2,10 @@ class PlacesController < ApplicationController
 
   def index
     @places = Place.all
+    unless current_user.status
+      @connection = Connection.find(params[:connection_id])
+      @meeting = Meeting.find(params[:meeting_id])
+    end
   end
 
   def new
@@ -11,6 +15,10 @@ class PlacesController < ApplicationController
   def show
     @place = Place.find(params[:id])
     @place.user = current_user
+    unless current_user.status
+      @connection = Connection.find(params[:connection_id])
+      @meeting = Meeting.find(params[:meeting_id])
+    end
   end
 
   def create
@@ -28,12 +36,20 @@ class PlacesController < ApplicationController
   end
 
   def update
-     @place = Place.find(params[:id])
-     @place.update(place_params)
-     if @place.save
-      redirect_to partner_path(@user)
+    @place = Place.find(params[:id])
+    if current_user.status
+      @place.update(place_params)
+      if @place.save
+        redirect_to partner_path(@user)
+      else
+        render :edit
+      end
     else
-      render :edit
+      @connection = Connection.find(params[:connection_id])
+      @meeting = Meeting.find(params[:meeting_id])
+      @meeting.place = @place
+      @meeting.save
+      redirect_to connection_meeting_path(@connection, @meeting)
     end
   end
 

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :places
   resources :connections, only: [:index, :create, :update, :show] do
     resources :meetings, only: [:create, :show, :update] do
+      resources :places
       resources :messages, only: [:create]
     end
   end

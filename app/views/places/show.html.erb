@@ -8,6 +8,12 @@
     <p><strong>Type: </strong> <%= @place.type_partner %></p>
     <p><strong>Pax: </strong> <%= @place.pax %></p>
     </br>
+
+    <% unless current_user.status %>
+      <%= link_to "booked", connection_meeting_place_path(@connection, @meeting, @place), method: :patch %>
+    <% end %>
+
+
 </div>
 
 
