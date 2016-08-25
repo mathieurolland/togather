@@ -1,10 +1,44 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
 
-<br>
-<br>
-<br>
-<br>
-<p class="text-center">
-  <%= link_to "Please Log In", new_user_session_path, class: "btn btn-lg btn-primary" %>
-</p>
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.2) 0%, rgba(0,36,61,0.2) 40%), url(<%= @array.sample %>);">
+  <div class="banner-content">
+    <h1 class="title"> ToGather </h1>
+    <h3 class="catch-phrase">New perspectives through human strong links</h3>
+    <%= link_to "Please Log In", new_user_session_path, class: "btn btn-lg btn-primary" %>
+  </div>
+</div>
+
+<div class="col-sm-4">
+      <div class="card1">
+        <%= image_tag "group.svg"%>
+        <h2>Healthy</h2>
+        <p class="description">Find a partner to go exercise at all times. That's one more reseon to stop postponing your running session.</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card1">
+        <%= image_tag "heart.svg"%>
+        <h2>Passionate</h2>
+        <p class="description"> Find people around you with which you share the same excitement and aptitude for your favorite sport.</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card1">
+       <%= image_tag "raquette.svg"%>
+        <h2>Social</h2>
+        <p class="description">A chance to meet new people everytime you want go for a run, play soccer or hit the gym!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.2) 0%, rgba(0,36,61,0.2) 40%), url(<%= @array.sample %>);">
+  <div class="banner-content">
+    <h1 class="title"> </h1>
+    <h3 class="catch-phrase">New perspectives through human strong links</h3>
+    <%= link_to "Please Log In", new_user_session_path, class: "btn btn-lg btn-primary" %>
+  </div>
+</div>
+
+
+
+

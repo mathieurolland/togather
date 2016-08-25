@@ -1,1 +1,22 @@
 // Your footer style
+// Your footer style
+.footer {
+  background: #BAA7B0;
+  color: white;
+  padding: 50px;
+  font-size: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer p {
+  padding: 30px;
+  font-size: 15px;
+}
+
+.footer a {
+  padding: 10px;
+  font-size: 40px;
+}
+
+
