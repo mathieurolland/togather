@@ -61,7 +61,7 @@ end
     last_name: Faker::Name.last_name,
     status: true,
     gender: ["male", "female"].sample,
-    work_place: "#{Faker::Address.street_address}, #{Faker::Address.city}",
+    work_place: Faker::Address.fr_zip_and_city_in_region(region="67"),
     birthday: Faker::Date.between(300.days.ago, Date.today),
     bio: Faker::Lorem.paragraph
   )
@@ -99,7 +99,6 @@ end
 end
 
 # places
-places = []
 10.times do
   partner = User.create(
     email: Faker::Internet.email,
@@ -108,13 +107,13 @@ places = []
     last_name: Faker::Name.last_name,
     status: false,
     gender: ["male", "female"].sample,
-    work_place: "#{Faker::Address.street_address}, #{Faker::GameOfThrones.city}",
+    work_place: Faker::Address.fr_zip_and_city_in_region(region="67"),
     birthday: Faker::Date.between(300.days.ago, Date.today),
     bio: Faker::Lorem.paragraph
     )
     Place.create(
       name: Faker::Company.name,
-      address: "#{Faker::Address.street_address}, #{Faker::GameOfThrones.city}",
+      address: Faker::Address.fr_zip_and_city_in_region(region="67"),
       description: Faker::ChuckNorris.fact,
       phone_number: Faker::PhoneNumber.phone_number,
       type_partner: ["restau", "café", "after work"].sample,
