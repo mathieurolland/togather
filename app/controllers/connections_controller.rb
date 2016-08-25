@@ -11,6 +11,10 @@ class ConnectionsController < ApplicationController
   end
 
   def update
+    @connection = Connection.find(params[:id])
+    @connection.status = "invited"
+    @connection.save
+    redirect_to connection_path(@connection.id)
   end
 
   def show

@@ -14,7 +14,7 @@
           </h3>
           <ul>
             <% @suggestions.each_with_index do |suggestion, index| %>
-              <li> Suggestion <%= index + 1 %> <%= link_to "#{suggestion.first_name} #{suggestion.last_name} ", user_summary_path(suggestion.id), class:"fa fa-anchor btn btn-primary" %>
+              <li> Suggestion <%= index + 1 %> <%= link_to "#{suggestion.host.first_name} #{suggestion.host.last_name} ", suggestion, class:"fa fa-anchor btn btn-primary" %>
               </li>
             <% end %>
           </ul>
