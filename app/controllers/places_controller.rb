@@ -17,7 +17,7 @@ class PlacesController < ApplicationController
     @place = Place.new(place_params)
     @place.user = current_user
     if @place.save
-      redirect_to place_path(@place)
+      redirect_to partner_path(@user)
     else
       render :new
     end
@@ -31,7 +31,7 @@ class PlacesController < ApplicationController
      @place = Place.find(params[:id])
      @place.update(place_params)
      if @place.save
-      redirect_to place_path(@place)
+      redirect_to partner_path(@user)
     else
       render :edit
     end
@@ -40,7 +40,7 @@ class PlacesController < ApplicationController
   def destroy
     @place = Place.find(params[:id])
     @place.destroy
-    redirect_to places_path
+    redirect_to partner_path(@user)
   end
 
   private
