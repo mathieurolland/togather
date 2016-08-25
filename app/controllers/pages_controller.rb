@@ -8,6 +8,14 @@ class PagesController < ApplicationController
   def dashboard
    current_user.create_suggestions
    @suggestions = current_user.suggestions
+
+   @places = Place.where.not(latitude: nil, longitude: nil)
+
+    @hash = Gmaps4rails.build_markers(@places) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { place: place })
+    end
   end
 
   def partner
