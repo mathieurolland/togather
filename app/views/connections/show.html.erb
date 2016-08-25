@@ -4,8 +4,14 @@
     <h2> <%= @connection.status %> </h2>
     <% if @connection.status == "suggested" %>
       <%= link_to "invit", connection_path, data: { confirm: "Are you sure?" }, method: :patch %>
+
+    <% elsif @connection.status == "waiting" %>
+      <h2> Wait for your confirmation </h2>
+      <%= link_to "Confirm", connection_path, data: { confirm: "Are you sure?" }, method: :patch %>
     <% else %>
-      <h2> Wait for user's confirmation </h2>
+      <h2>
+        Wait for <%= @connection.guest.first_name %>'s confirmation
+      </h2>
     <% end %>
 
     <%= link_to "Back", dashboard_path %>
