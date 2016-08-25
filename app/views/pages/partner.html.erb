@@ -1,50 +1,53 @@
-<h1><%= @user.first_name%>'s dashboard</h1>
-</br>
-<p>I'm a partner: <%= @user.status %></p>
-
-
-</br>
-
 <div class ="container">
-  <h2>Booking to confirm (<%= @count_meetings %>)</h2>
+  <div class="row">
+    <h1 class="text-center">
+      <%= @user.first_name %>'s dashboard
+    </h1>
+    <p>I'm a partner: <%= @user.status %></p>
+  </div>
 
-    <% if @meetings.nil? %>
-      <p>No meeting to confirm</p>
-    <% else %>
+      <h2>Booking to confirm (<%= @count_meetings %>)</h2>
 
-      <% @user.places.each do |place| %>
-        <% place.meetings.each do |meeting| %>
-          <p><%= meeting.date %></p>
-          <p><%= place.name %></p>
+        <% if @meetings.nil? %>
+          <p>No meeting to confirm</p>
+        <% else %>
+
+          <% @user.places.each do |place| %>
+            <% place.meetings.each do |meeting| %>
+              <p><%= meeting.created_at %></p>
+              <p><%= meeting.date %></p>
+              <p><%= place.name %></p>
+              <p>2 personnes </p>
+              <%= link_to "Valider", partner_path(@user) %></p>
+              <% end %>
           <% end %>
+
+        <% end %>
+
+    <h2>Booking confirmed (compteur bookings)</h2>
+
+
+
+    <h2>My places (<%= @count_places %>)</h2>
+
+      <% if @places.nil? %>
+          <p> No place to show </p>
+        <%else %>
+          <% @user.places.each do |place| %>
+          <p><strong><%= place.name %></strong> &nbsp; <%= link_to "Delete", place_path(place), method: :delete, data: { confirm: "Are you sure you want to delete this product?" } %> &nbsp; <%= link_to "Edit", edit_place_path(place) %></p>
+          <p><strong>Address: </strong><%= place.address %></p>
+          <p><strong>Description: </strong><%= place.description %></p>
+          <p><strong>Phone number: </strong><%= place.phone_number %></p>
+          <p><strong>Type: </strong> <%= place.type_partner %></p>
+          <p><strong>Total pax: </strong> <%= place.pax %></p>
+          <p><strong>Available Pax: </strong> </p>
+          <p>des photos</p>
+          </br>
+        <% end %>
       <% end %>
 
-    <% end %>
+
+  <p><%= link_to "Suggest a new place", new_place_path %></p>
+
 </div>
-
-
-  <h2>Booking confirmed (compteur bookings)</h2>
-
-
-<div class="container">
-  <h2>My places (<%= @count_places %>)</h2>
-
-    <% if @places.nil? %>
-        <p> No place to show </p>
-      <%else %>
-        <% @user.places.each do |place| %>
-        <p><strong><%= place.name %></strong> &nbsp; <%= link_to "Delete", place_path(place), method: :delete, data: { confirm: "Are you sure you want to delete this product?" } %> &nbsp; <%= link_to "Edit", edit_place_path(place) %></p>
-        <p><strong>Address: </strong><%= place.address %></p>
-        <p><strong>Description: </strong><%= place.description %></p>
-        <p><strong>Phone number: </strong><%= place.phone_number %></p>
-        <p><strong>Type: </strong> <%= place.type_partner %></p>
-        <p><strong>Total pax: </strong> <%= place.pax %></p>
-        <p><strong>Available Pax: </strong> </p>
-        <p>des photos</p>
-        </br>
-      <% end %>
-    <% end %>
-</div>
-
-<p><%= link_to "New place", new_place_path %></p>
 
