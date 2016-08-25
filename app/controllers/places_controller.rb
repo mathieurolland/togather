@@ -49,8 +49,4 @@ class PlacesController < ApplicationController
     params.require(:place).permit!
   end
 
-  # def find
-  #  @place = Place.find(params[:id])
-  # end
-
 end

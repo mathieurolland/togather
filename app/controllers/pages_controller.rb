@@ -13,7 +13,14 @@ class PagesController < ApplicationController
   def partner
     @user = current_user
     @count_places = current_user.places.count
-    # @count_meetings = current_user.meetings.places.count
+
+    i = 0
+    @user.places.each do |place|
+      place.meetings.each do |meeting|
+        i += 1
+      end
+    end
+    @count_meetings = i
 
     @meetings = Meeting.all
     @places = Place.all
