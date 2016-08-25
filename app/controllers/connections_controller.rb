@@ -12,16 +12,23 @@ class ConnectionsController < ApplicationController
 
   def update
     @connection = Connection.find(params[:id])
-    @connection.status = "invited"
-    @connection.save
-    if Connection.where(guest: @connection.host, host: current_user).first
-    @invers_connection = Connection.where(guest: @connection.host, host: current_user).first
-    @invers_connection.status = "waiting"
-    else
-    @invers_connection = Connection.new(guest: @connection.host, host: current_user, status: "waiting")
+    if @connection.status == "suggested"
+      @connection.status = "invited"
+      @connection.save
+      if Connection.where(guest: @connection.host, host: current_user).first
+        @invers_connection = Connection.where(guest: @connection.host, host: current_user).first
+        @invers_connection.status = "waiting"
+      else
+        @invers_connection = Connection.new(guest: @connection.host, host: current_user, status: "waiting")
+      end
+      @invers_connection.save
+      redirect_to connection_path(@connection.id)
+    elsif @connection.status == "invited"
+      @connection.status = "valid"
+      @connection.save
+      @meeting = Meeting.create(connection: @connection)
+      redirect_to connection_meeting_path [@connection, @meeting]
     end
-    @invers_connection.save
-    redirect_to connection_path(@connection.id)
   end
 
   def show
