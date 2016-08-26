@@ -5,6 +5,93 @@ Skill.destroy_all
 Category.destroy_all
 User.destroy_all
 
+User.create(
+    email: "john@gmail.com",
+    password: "blabla",
+    first_name: "John",
+    last_name: "Begood",
+    status: false,
+    gender: "male",
+    work_place: "plopin",
+    birthday: Date.today,
+    bio: "plout"
+  )
+User.create(
+    email: "paul@gmail.com",
+    password: "blabla",
+    first_name: "Paul",
+    last_name: "Begood",
+    status: false,
+    gender: "male",
+    work_place: "plopin",
+    birthday: Date.today,
+    bio: "plout"
+  )
+User.create(
+    email: "joe@gmail.com",
+    password: "blabla",
+    first_name: "Joe",
+    last_name: "Begood",
+    status: false,
+    gender: "male",
+    work_place: "plopin",
+    birthday: Date.today,
+    bio: "plout"
+  )
+User.create(
+    email: "Bob@gmail.com",
+    password: "blabla",
+    first_name: "Bob",
+    last_name: "Begood",
+    status: false,
+    gender: "male",
+    work_place: "plopin",
+    birthday: Date.today,
+    bio: "plout"
+  )
+User.create(
+    email: "mona@gmail.com",
+    password: "blabla",
+    first_name: "mona",
+    last_name: "Begood",
+    status: false,
+    gender: "male",
+    work_place: "plopin",
+    birthday: Date.today,
+    bio: "plout"
+  )
+User.create(
+    email: "loan@gmail.com",
+    password: "blabla",
+    first_name: "Loan",
+    last_name: "Begood",
+    status: false,
+    gender: "male",
+    work_place: "plopin",
+    birthday: Date.today,
+    bio: "plout"
+  )
+User.create(
+    email: "popi@gmail.com",
+    password: "blabla",
+    first_name: "Popi",
+    last_name: "Begood",
+    status: false,
+    gender: "male",
+    work_place: "plopin",
+    birthday: Date.today,
+    bio: "plout"
+  )
+
+Connection.create!(status: "connected", guest_id: 1, host_id: 2)
+Connection.create!(status: "connected", guest_id: 1, host_id: 3)
+Connection.create!(status: "connected", guest_id: 4, host_id: 1)
+Connection.create!(status: "connected", guest_id: 1, host_id: 5)
+Connection.create!(status: "connected", guest_id: 2, host_id: 7)
+Connection.create!(status: "connected", guest_id: 7, host_id: 5)
+Connection.create!(status: "connected", guest_id: 6, host_id: 7)
+
+
 # Categories and skills
 cat_skills = [
   { name: "Management",skills: ["skill_1", "skill_2", "skill_3"],
