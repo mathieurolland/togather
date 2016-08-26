@@ -171,3 +171,6 @@ Meeting.create(
       user: [meeting.connection.guest, meeting.connection.host].sample
       )
 end
+
+User.last.places.first.availabilities.create(min_date: Date.today, max_date: Date.tomorrow)
+

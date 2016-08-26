@@ -1,0 +1,9 @@
+<h1> Choose dates </h1>
+
+<% if @availabilities.first %>
+  <% @availabilities.each do |availability| %>
+    <%= "#{availability.min_date} - #{availability.max_date}" %>
+  <% end %>
+<% end %>
+
+<%= render "form" %>
