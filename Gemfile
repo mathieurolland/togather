@@ -8,6 +8,7 @@ gem 'figaro'
 gem 'jbuilder', '~> 2.0'
 gem 'devise', github: 'plataformatec/devise'
 gem 'redis'
+gem 'turbolinks'
 
 gem 'sass-rails'
 gem 'jquery-rails'
@@ -26,6 +27,9 @@ gem 'geocoder'
 gem "gmaps4rails"
 gem 'omniauth'
 gem 'omniauth-linkedin'
+gem 'faye'
+gem 'thin', require: false
+gem 'sync'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
