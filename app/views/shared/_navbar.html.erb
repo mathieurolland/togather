@@ -1,6 +1,11 @@
 <div class="navbar-wagon">
   <!-- Logo -->
-  <h1 class="webname"> ToGather </h1>
+  <h1 class="webname">
+    <%= link_to root_path, class: "navbar-wagon-brand navbar-wagon-link" do %>
+      <%= image_tag "http://placehold.it/50x50" %>
+    <% end %>
+    ToGather
+  </h1>
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
