@@ -4,7 +4,7 @@
     <p><%= f.input :address %></p>
     <p><%= f.input :description %></p>
     <p><%= f.input :phone_number %></p>
-    <p><%= f.input :type_partner, collection: [ "Restaurant", "Afterwork", "Café" ], as: :radio_buttons %></p>
+    <p><%= f.input :type_partner, collection: [ "Restaurant", "Afterwork", "Café", "Lunch snack", "Salad bar" ], as: :radio_buttons %></p>
     <p><%= f.input :pax %></p>
     <p><%= f.button :submit %></p>
   <% end %>

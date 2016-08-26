@@ -108,15 +108,15 @@ end
     status: false,
     gender: ["male", "female"].sample,
     work_place: Faker::Address.fr_zip_and_city_in_region(region="67"),
-    birthday: Faker::Date.between(300.days.ago, Date.today),
+    birthday: Faker::Date.backward(60),
     bio: Faker::Lorem.paragraph
     )
     Place.create(
       name: Faker::Company.name,
       address: Faker::Address.fr_zip_and_city_in_region(region="67"),
-      description: Faker::ChuckNorris.fact,
+      description: Faker::Company.catch_phrase,
       phone_number: Faker::PhoneNumber.phone_number,
-      type_partner: ["restau", "café", "after work"].sample,
+      type_partner: ["restaurant", "café", "afterwork", "lunch snack", "salad bar"].sample,
       pax: Faker::Number.number(2), # balance 2 digits
       user: partner
       )
@@ -132,6 +132,35 @@ end
     place: Place.all.sample
     )
 end
+
+#test
+partner = User.create(
+    email: "parv@gmail.com",
+    password: "123123",
+    first_name: "toto",
+    last_name: "junior",
+    status: true,
+    gender: "male",
+    work_place: "rue des mimosas",
+    birthday: Faker::Date.backward(60),
+    bio: "mysterieux toto"
+    )
+    p = Place.create(
+      name: "Chez toto",
+      address: "ici",
+      description: "totoland",
+      phone_number: "060305",
+      type_partner: "café",
+      pax: 1,
+      user: partner
+      )
+Meeting.create(
+    guest_review: Faker::Superhero.power,
+    host_review: Faker::Superhero.power,
+    date: Faker::Date.between(300.days.ago, Date.today),
+    connection: Connection.all.sample,
+    place: p
+    )
 
 # Message
 10.times do

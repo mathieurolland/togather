@@ -4,6 +4,9 @@ class Place < ApplicationRecord
 
   belongs_to :user
   has_many :meetings
+  has_attachment :photo
+
+
   validates :name, presence: true
   validates :address, presence: true
   validates :address, uniqueness: true
