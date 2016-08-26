@@ -2,9 +2,14 @@
 
   <div class="row">
     <h1 class="text-center">
-      <%= @user.first_name %>'s dashboard !
+      <p><%= @user.first_name %>'s dashboard </p>
     </h1>
-    <p>I'm a partner: <%= @user.status %></p>
+
+    <% if @user.status %>
+      <h2 class="text-center">Welcome partner !</h2>
+    <% else %>
+      <p>Oups, you're no partner</p>
+      <% end%>
   </div>
 
   <div class="row">
@@ -24,31 +29,33 @@
       <% else %>
         <% place.meetings.each do |meeting| %>
 
-<ul class="text_inline">
-<li>
-        <div class="col-md-3">
+    <ul class="text_inline">
+        <li>
           <p><strong>Received the </strong><%= meeting.created_at.strftime("%B %d %Y")%> <strong> at </strong> <%= meeting.created_at.strftime("%H %M") %></p>
+          <div class="col-md-3">
           <p><%= place.name %></p>
           <p> 2 personnes </p>
-</li>
-<li>
+        </div>
+      </li>
+      <li>
+        <div>
           <p><strong>Booking date</strong> <%= meeting.date.strftime("%B %d %Y")%></p>
           <p><strong>Booking time</strong> <%= meeting.date.strftime("%H %M")%></p>
         </div>
-</li>
-<li>
+      </li>
+      <li>
       <div class="col-md-3">
           <p><%= link_to "Valider", partner_path(@user) %></p>
       </div>
-</li>
-</ul>
-</div>
+      </li>
+    </ul>
+  </div>
         <% end %>
       <% end %>
     <% end %>
-  </div>
 
-  <div>
+
+  <div class="row">
     <h2>Booking confirmed (compteur bookings)</h2>
   </div>
 
@@ -92,10 +99,10 @@
             </br>
         </li>
       </div>
-      <% end %>
-      <% end %>
     </ul>
   </div>
+      <% end %>
+    <% end %>
   </br>
 
 

@@ -2,19 +2,27 @@
   <h1> Places </h1>
 </div>
 
-<div class="container">
   <% @places.each do |place| %>
 
-    <% if current_user.status %>
-        <p><%= link_to place.name, place_path(place) %></p>
-    <% else %>
-      <%= link_to place.name, connection_meeting_place_path(@connection, @meeting, place) %>
-    <% end %>
+      <ul>
+        <li>
+         <img src="http://res.cloudinary.com/diqequpgu/image/upload/c_scale,h_175,q_100,w_600/v1472165522/photo_place_segabm.jpg" alt=""></img>
+        </li>
 
-    <p><strong>Type: </strong> <%= place.type_partner %></p>
-    <p>une photo?</p>
-    <p><strong>Address: </strong><%= place.address %>
-    <strong>Phone number: </strong><%= place.phone_number %></p>
-    </br>
-  <% end %>
-</div>
+      <li>
+        <% if current_user.status %>
+            <p><%= link_to place.name, place_path(place), style: 'color:blue;' %></p>
+        <% else %>
+          <h2><%= link_to place.name, connection_meeting_place_path(@connection, @meeting, place)%></h2>
+        <% end %>
+          <p><strong>Type: </strong> <%= place.type_partner %></p>
+          <p><strong>Address: </strong><%= place.address %></p>
+          <p><strong>Phone number: </strong><%= place.phone_number %></p>
+          </br>
+        <% end %>
+      </li>
+    </ul>
+
+
+
+
