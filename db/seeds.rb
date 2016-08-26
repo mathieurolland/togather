@@ -139,29 +139,7 @@ cat_skills.each do |category_data|
   end
 end
 
-#users and user_skills (genre 3 skills/user)
-30.times do
-  city_data = Faker::Address.fr_zip_and_city_in_departement(33)
-  zip = city_data[0]
-  city = city_data[1]
-  address = "#{Faker::Address.fr_street_name} #{zip} #{city}"
-  user = User.create(
-    email: Faker::Internet.email,
-    password: "blabla",
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    status: false,
-    gender: ["male", "female"].sample,
-    work_place: address,
-    birthday: Faker::Date.between(300.days.ago, Date.today),
-    bio: Faker::Lorem.paragraph
-  )
-  3.times do
-    user.user_skills.create(
-      skill: Skill.all.sample
-    )
-  end
-end
+
 
 #connection_status
 connection_types = [
@@ -172,14 +150,6 @@ connection_types = [
   "suggested"
 ]
 
-# connections uniques entre deux users
-50.times do |i|
-  users = User.all.shuffle[0..1]
-  begin
-  Connection.create!(status: connection_types.sample, guest: users.first, host: users.last)
-rescue
-  end
-end
 
 #recommended_users
 20.times do
@@ -221,55 +191,37 @@ end
       )
 end
 
-# meetings
-10.times do
-  Meeting.create(
-    guest_review: Faker::Superhero.power,
-    host_review: Faker::Superhero.power,
-    date: Faker::Date.between(300.days.ago, Date.today),
-    connection: Connection.all.sample,
-    place: Place.all.sample
-    )
-end
+
 
 #test
-# partner = User.create(
-#   email: "parv@gmail.com",
-#   password: "123123",
-#   first_name: "toto",
-#   last_name: "junior",
-#   status: true,
-#   gender: "male",
-#   work_place: "rue des mimosas",
-#   birthday: Faker::Date.backward(60),
-#   bio: "mysterieux toto"
-#   )
-#   p = Place.create(
-#     name: "Chez toto",
-#     address: "ici",
-#     description: "totoland",
-#     phone_number: "060305",
-#     type_partner: "café",
-#     pax: 1,
-#     user: partner
-#     )
-# Meeting.create(
-#   guest_review: Faker::Superhero.power,
-#   host_review: Faker::Superhero.power,
-#   date: Faker::Date.between(300.days.ago, Date.today),
-#   connection: Connection.all.sample,
-#   place: p
-#   )
+partner = User.create(
+  email: "parv@gmail.com",
+  password: "123123",
+  first_name: "toto",
+  last_name: "junior",
+  status: true,
+  gender: "male",
+  work_place: "rue des mimosas",
+  birthday: Faker::Date.backward(60),
+  bio: "mysterieux toto"
+  )
+  p = Place.create(
+    name: "Chez toto",
+    address: "ici",
+    description: "totoland",
+    phone_number: "060305",
+    type_partner: "café",
+    pax: 1,
+    user: partner
+    )
+Meeting.create(
+  guest_review: Faker::Superhero.power,
+  host_review: Faker::Superhero.power,
+  date: Faker::Date.between(300.days.ago, Date.today),
+  connection: Connection.all.sample,
+  place: p
+  )
 
-# Message
-10.times do
-  meeting = Meeting.all.sample
-    Message.create(
-      content: Faker::StarWars.quote,
-      meeting: Meeting.all.sample,
-      user: [meeting.connection.guest, meeting.connection.host].sample
-      )
-end
 
 User.last.places.first.availabilities.create(min_date: Date.today, max_date: Date.tomorrow)
 
