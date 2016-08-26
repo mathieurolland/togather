@@ -5,9 +5,71 @@
   /* if you have a 70px navbar => height: calc(100vh - 70px); */
   background-size: cover !important;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
+
+.wrap {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.line {
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-login a {
+  color: white;
+  text-decoration: none;
+}
+
+.login-nav {
+  font-size: 25px;
+}
+
+.stretcher {
+  flex-grow: 1;
+}
+
+.line-stretch {
+  height: 20%;
+}
+
+.banner-nav {
+  // position:absolute;
+  display: flex;
+  width: 100%;
+  height: 30px;
+  top: 0px;
+  padding: 15px;
+}
+// .banner-mini-navbar {
+//   position: absolute;
+//   left: 10px;
+//   top: 10px;
+// }
+
+.home-text {
+
+}
+
+.banner-login {
+  right: 10px;
+  top: 10px;
+}
+
 .banner h1 {
   font-size: 70px;
   font-weight: bold;

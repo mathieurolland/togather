@@ -26,6 +26,13 @@ class ConnectionsController < ApplicationController
     elsif @connection.status == "invited"
       @connection.status = "valid"
       @connection.save
+      if Connection.where(host: @connection.host, guest: current_user).first
+        @invers_connection = Connection.where(host: @connection.host, guest: current_user).first
+        @invers_connection.status = "valid"
+      else
+        @invers_connection = Connection.new(host: @connection.host, guest: current_user, status: "valid")
+      end
+      @invers_connection.save
       @meeting = Meeting.create(connection: @connection)
       redirect_to connection_meeting_path(@connection, @meeting)
     end

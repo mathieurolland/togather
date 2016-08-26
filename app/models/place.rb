@@ -4,6 +4,7 @@ class Place < ApplicationRecord
 
   belongs_to :user
   has_many :meetings
+  has_many :availabilities
   has_attachment :photo
 
 

@@ -25,7 +25,8 @@ class PlacesController < ApplicationController
     @place = Place.new(place_params)
     @place.user = current_user
     if @place.save
-      redirect_to partner_path(@user)
+      redirect_to place_availabilities_path(@place)
+      #redirect_to partner_path(@user)
     else
       render :new
     end

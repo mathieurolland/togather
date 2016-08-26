@@ -7,3 +7,5 @@
 //= require attachinary
 //= require underscore
 //= require gmaps/google
+//= require turbolinks
+//= require sync

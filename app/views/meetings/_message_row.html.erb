@@ -1,0 +1,3 @@
+<% @meeting.messages.each do |message| %>
+<li> <%= message.user.first_name %> - <%= message.content%> </li>
+<% end %>

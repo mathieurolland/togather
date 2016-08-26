@@ -1,9 +1,30 @@
+
+ <li>
+    <%= link_to "#" do %>
+      <i class="fa fa-home"></i>  <%= t(".profile", default: "Home") %>
+    <% end %>
+</li>
+
+
 <h1>Meetings#show</h1>
 <p>Find me in app/views/meetings/show.html.erb</p>
 <p>guest: <%= @connection.guest.first_name %></p>
 <p>host: <%= @connection.host.first_name %></p>
+
+
 <% if @meeting.place %>
   <p>Place : <%= @meeting.place.name %></p>
   <% else %>
     <%= link_to "Choise places", connection_meeting_places_path(@connection, @meeting) %>
   <% end %>
+
+
+<h3>Messages</h3>
+
+<%= render 'message_row' %>
+
+<hr>
+
+<%= form_for @new_message, url: connection_meeting_messages_path(@connection, @meeting), method: :post do |f| %>
+    <%= f.text_field :content %>
+<% end %>

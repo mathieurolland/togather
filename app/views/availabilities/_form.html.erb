@@ -1,0 +1,11 @@
+<div>
+  <%= simple_form_for :new_date, url: place_availabilities_path(@place), method: :post do |f| %>
+    <%= f.input :min_day, collection: @days, prompt: "Select day min" %>
+    <%= f.input :max_day, collection: @days, prompt: "Select day max" %>
+    <%= f.input :min_hour, collection: @hours, prompt: "Select hour min" %>
+    <%= f.input :min_minute, collection: @minutes, prompt: "minutes" %>
+    <%= f.input :max_hour, collection: @hours, prompt: "Select hour max" %>
+    <%= f.input :max_minute, collection: @minutes, prompt: "minutes" %>
+    <%= f.button :submit, value: "submit" %>
+  <% end %>
+</div>

@@ -1,3 +1,12 @@
+
+body {
+  color: #2A4182;
+}
+
+a {
+  color: #2A4182;
+}
+
 .partner-checkbox {
   display: flex;
   justify-content: center;
@@ -11,6 +20,10 @@
 
 .form-actions > input {
   flex-grow: 1;
+}
+
+.btn-default {
+  color: #2A4182;
 }
 
 .onoffswitch {
@@ -27,7 +40,7 @@
     display: block;
     overflow: hidden;
     cursor: pointer;
-    border: 1px solid #ccc;
+    border: 1px solid #2A4182;
     border-radius: 2px;
 }
 .onoffswitch-inner {
@@ -52,14 +65,14 @@
     padding-left: 10px;
     padding-top: 2px;
     background-color: #34A7C1;
-    color: #FFFFFF;
+    color: #2A4182;
 }
 .onoffswitch-inner:after {
     content: "Meeter";
     padding-right: 10px;
     padding-top: 2px;
     background-color: #EEEEEE;
-    color: #999999;
+    color: #2A4182;
     text-align: right;
 }
 .onoffswitch-switch {
@@ -71,7 +84,7 @@
     top: 0;
     bottom: 5px;
     right: 74px;
-    border: 1px solid #ccc;
+    border: 1px solid #2A4182;
     border-radius: 2px;
     transition: all 0.3s ease-in 0s;
 }
