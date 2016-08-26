@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20160825142755) do
     t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
   end
 
+  create_table "availabilities", force: :cascade do |t|
+    t.string   "comment"
+    t.datetime "min_date"
+    t.datetime "max_date"
+    t.integer  "place_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["place_id"], name: "index_availabilities_on_place_id", using: :btree
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.boolean  "selected"
@@ -139,6 +149,7 @@ ActiveRecord::Schema.define(version: 20160825142755) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "availabilities", "places"
   add_foreign_key "meetings", "connections"
   add_foreign_key "meetings", "places"
   add_foreign_key "messages", "meetings"

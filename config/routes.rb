@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
    devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: "users/registrations"
@@ -18,7 +17,9 @@ Rails.application.routes.draw do
   resources :categories, only: [:index]
   resources :skills, only: [:index]
   resources :user_skills, only: [:create, :destroy]
-  resources :places
+  resources :places do
+    resources :availabilities, only: [:index, :create, :edit, :update, :destroy]
+  end
   resources :connections, only: [:index, :create, :update, :show] do
     resources :meetings, only: [:create, :show, :update] do
       resources :places
