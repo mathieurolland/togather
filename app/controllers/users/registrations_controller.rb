@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if current_user.status == true
       partner_path
     else
-      dashboard_path
+      categories_path
     end
   end
 
