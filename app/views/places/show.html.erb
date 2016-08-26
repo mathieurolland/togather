@@ -1,19 +1,81 @@
-<p><%= link_to "Go back to the list", places_path %></p>
-
-<div class="container">
-    <p><h2><%= @place.name %></h2></p>
-    <p><strong>Address: </strong><%= @place.address %></p>
-    <p><strong>Description: </strong><%= @place.description %></p>
-    <p><strong>Phone number: </strong><%= @place.phone_number %></p>
-    <p><strong>Type: </strong> <%= @place.type_partner %></p>
-    <p><strong>Pax: </strong> <%= @place.pax %></p>
-    </br>
-
-    <% unless current_user.status %>
-      <%= link_to "booked", connection_meeting_place_path(@connection, @meeting, @place), method: :patch %>
-    <% end %>
-
-
+<p><%= link_to "Back", places_path %></p>
+<div class="place-picture">
+  <img src="http://res.cloudinary.com/diqequpgu/image/upload/c_scale,h_285,q_100,w_674/v1472165522/photo_place_segabm.jpg" style="position: relative; width: 100%;" alt=""></img>
 </div>
+</br>
+<div class="row">
+  <div class="text-center">
+    <ul class="list-inline">
+      <div class="col-sm-2">
+        <li>
+          <i class="fa fa-cutlery fa-2x" aria-hidden="true"></i>
+          </br>
+          </br>
+          <p><strong><%= @place.pax %></strong></p>
+          <p>available places</p>
+        </li>
+      </div>
+      <div class="col-sm-2">
+        <li>
+          <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
+          </br>
+          </br>
+          <p>Visit our <%= @place.type_partner %></p>
+        </li>
+      </div>
+      <div class="col-sm-2">
+        <li>
+          <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
+          </br>
+          </br>
+          <p> Open 7/7j </p>
+        </li>
+      </div>
+      <div class="col-sm-2">
+        <li>
+          <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+          </br>
+          </br>
+          <p><strong>Find us :</strong></p>
+          <p><%= @place.address %></p>
+        </li>
+      </div>
+      <div class="col-sm-2">
+        <li>
+          <i class="fa fa-wifi fa-2x" aria-hidden="true"></i>
+          </br>
+          </br>
+          <p> Yes we have wifi </p>
+        </li>
+      </div>
+      <div class="col-sm-2">
+        <li>
+          <i class="fa fa-phone fa-2x" aria-hidden="true"></i>
+          </br>
+          </br>
+          <p><strong>Contact us :</strong></p>
+          <p><%= @place.phone_number %></p>
+        </li>
+      </div>
+    </ul>
+  </div>
+</div>
+</br>
+<div class="text-center">
+  <h2><%= @place.name %></h2>
+  </br>
+  <p><strong>Description: </strong><%= @place.description %></p>
+  </br>
+</div>
+
+<% unless current_user.status %>
+  <%= link_to "booked", connection_meeting_place_path(@connection, @meeting, @place), method: :patch %>
+<% end %>
+
+
+
+
+
+
 
 
