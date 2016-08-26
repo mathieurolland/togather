@@ -10,12 +10,23 @@ class PagesController < ApplicationController
    @suggestions = current_user.suggestions
 
    @places = Place.where.not(latitude: nil, longitude: nil)
-
+    @url = "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png"
     @hash = Gmaps4rails.build_markers(@places) do |place, marker|
       marker.lat place.latitude
       marker.lng place.longitude
-      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { place: place })
+      marker.infowindow render_to_string(partial: "/places/map_box", locals: { place: place })
+      # icon: "#{view_context.image_path("place2.png") }"
+      # marker.picture({
+      #                 :url    => "#{view_context.image_path("place2.png") }",
+      #                 :width  => "64",
+      #                 :height => "64",
+      #                 # :scaledWidth => "15", # Scaled width is half of the retina resolution; optional
+      #                 # :scaledHeight => "11", # Scaled width is half of the retina resolution; optional
+      #               })
     end
+    # @hash.each do |marker|
+    #   marker[:icon] = "#{view_context.image_path("place2.png") }"
+    # end
   end
 
   def partner
