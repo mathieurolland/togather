@@ -12,13 +12,14 @@
 }
 
 .row.suggestions-work {
-  background-color: #F5F5F5;
-  color: #2A4182;
+  color: #456990;
+  background: -webkit-gradient(linear, left top, right bottom, from(#FAFAFA), to(#EDF7FF)) fixed;
 }
 
 .row.profil-work {
-  background-color:  #84CAE7;
-  color: #2A4182;
+
+  background: -webkit-gradient(linear, left top, right bottom, from(#5DB0EF), to(#EDEDED)) fixed;
+  color: #456990;
 }
 
 li {

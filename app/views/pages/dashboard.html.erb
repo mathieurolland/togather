@@ -29,6 +29,10 @@
             </h1>
               <h3>
                 Portrait
+                <% if current_user.photo? %>
+                  <%= cl_image_tag current_user.photo.path, width: 200, height: 300, crop: :fill %>
+               <% end %>
+
               </h3>
               <p>
                 <%= current_user.bio %>

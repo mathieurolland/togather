@@ -21,10 +21,6 @@
 
 <h3>Messages</h3>
 
-<%= render 'message_row' %>
+<%= render 'shared/message_row' %>
 
-<hr>
 
-<%= form_for @new_message, url: connection_meeting_messages_path(@connection, @meeting), method: :post do |f| %>
-    <%= f.text_field :content %>
-<% end %>

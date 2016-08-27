@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :hosting_guys, through: :hosted_connections, class_name: "User", source: :host
   has_many :invited_guys, through: :invited_connections, class_name: "User", source: :guest
 
-
+  has_attachment :photo
   has_many :meetings, through: :connections
   has_many :messages
   has_many :user_skills
