@@ -3,8 +3,129 @@
  * (margin/padding adjustments)
  * ------------------------------------- */
 
-h1 {
-  font-family: 'Satisfy', cursive !important;
+.home-banner {
+  color: white;
+  text-align: center;
+  height: 100vh;
+  /* if you have a 70px navbar => height: calc(100vh - 70px); */
+  background-size: cover !important;
+  display: flex;
+  justify-content: center;
 }
 
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
+.home-up-content {
+  display: flex;
+  justify-content: center;
+  background:
+    linear-gradient(
+      to right,
+      rgba(0,0,0,0),
+      rgba(0,0,0,0.1) 15%,
+      rgba(0,0,0,0.1) 85%,
+      rgba(0,0,0,0)
+    );
+}
+
+.home-bar {
+  width: 80%;
+  height: 80px;
+  hr {
+    margin: 0;
+    border-color: rgba(250, 250, 250, 0.3);
+  }
+}
+
+.home-bar-container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-bar-content {
+  width: 80px;
+  margin: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-bar-content.login {
+  width: 120px;
+  a {
+    font-family: 'Roboto';
+    display: flex;
+    align-items: center;
+    height:50%;
+    color: rgba(250, 250, 250, 0.7);
+    text-decoration: none;
+    text-shadow: 0 0 6px black;
+    transition: color 0.4s ease;
+  }
+  a:hover {
+    color: rgba(250, 250, 250, 1);
+  }
+}
+
+.home-down-content {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  .home-foot {
+    height: 100%;
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  .empty {
+    margin-left: 5px;
+    height: 0;
+    width: 0;
+    border-top: 40px solid rgba(0, 0, 0, 0.2);
+    border-left: 40px solid transparent;
+    border-bottom: 40px solid rgba(0, 0, 0, 0.2);
+  }
+  .arrow {
+    height: 0;
+    width: 0;
+    border-top: 40px solid transparent;
+    border-bottom: 40px solid transparent;
+    border-left: 40px solid rgba(0, 0, 0, 0.2);
+    position: absolute;
+    right: -40px;
+  }
+  .content {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(250, 250, 250, 0.7);
+    text-shadow: 0 0 6px black;
+    transition: color 0.4s ease;
+  }
+  .content:hover {
+    color: rgba(250,250,250,1);
+  }
+}
+
+.home-center-content {
+  h1 {
+    font-family: 'Satisfy', cursive !important;
+    font-size: 70px;
+    font-weight: bold;
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.6);
+  }
+  p {
+    font-size: 20px;
+    text-shadow: 0 0 3px black;
+  }
+}
