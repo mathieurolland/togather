@@ -22,9 +22,9 @@
   flex-grow: 1;
 }
 
-.btn-default {
-  color: #2A4182;
-}
+// .btn-default {
+//   color: #2A4182;
+// }
 
 .onoffswitch {
     position: relative;
@@ -40,7 +40,7 @@
     display: block;
     overflow: hidden;
     cursor: pointer;
-    border: 1px solid #2A4182;
+    border: 1px solid #CCC;
     border-radius: 2px;
 }
 .onoffswitch-inner {
@@ -58,33 +58,35 @@
     line-height: 30px;
     font-size: 14px;
     color: white;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     box-sizing: border-box;
 }
 .onoffswitch-inner:before {
     content: "Partner";
     padding-left: 10px;
     padding-top: 2px;
-    background-color: #34A7C1;
-    color: #2A4182;
+    background-color: #EEE;
+    color: #555;
 }
 .onoffswitch-inner:after {
     content: "Meeter";
     padding-right: 10px;
     padding-top: 2px;
-    background-color: #EEEEEE;
-    color: #2A4182;
+    background-color: #FFF;
+    color: #555;
     text-align: right;
 }
 .onoffswitch-switch {
     display: block;
     width: 18px;
     margin: 4px;
-    background: #FFFFFF;
+    background: #FFF;
     position: absolute;
     top: 0;
     bottom: 5px;
     right: 74px;
-    border: 1px solid #2A4182;
+    border: 1px solid #CCC;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
     border-radius: 2px;
     transition: all 0.3s ease-in 0s;
 }
