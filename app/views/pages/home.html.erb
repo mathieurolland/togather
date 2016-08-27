@@ -1,26 +1,46 @@
-<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.3) 0%, rgba(0,36,61,0.3) 40%), url(<%= @array.sample %>);">
-      <div class="wrap">
-        <div class="line">
-          <div class="nav">
-            <div class= "nav-logo">
-              <%= link_to root_path, class: "navbar-wagon-brand navbar-wagon-link" do %>
-                <%= image_tag "http://placehold.it/50x50" %>
-              <% end %>
-            </div>
-            <div class="stretcher">
-            </div>
-            <div class= "nav-login">
-              <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "login-nav" %>
-            </div>
+<div class="home-banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.3) 0%, rgba(0,36,61,0.3) 40%), url(<%= @array.sample %>);">
+  <div class="wrap">
+    <div class="home-up-content">
+      <div class="home-bar">
+        <div class="home-bar-container">
+          <div class= "home-bar-content site-logo">
+            <%= link_to root_path, class: "navbar-wagon-brand navbar-wagon-link" do %>
+              <%= image_tag "http://placehold.it/50x50" %>
+            <% end %>
           </div>
-          <hr>
+          <div class= "home-bar-content login">
+            <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "login-nav" %>&nbsp|&nbsp<%= link_to t(".sign_up", default: "Sign-up"), new_user_registration_path, class: "login-nav" %>
+          </div>
         </div>
-        <div class="line-stretch">
+        <hr>
+      </div>
+    </div>
+
+    <div class="home-center-content">
+      <h1> ToGather </h1>
+      <p>New perspectives through human strong links</p>
+    </div>
+
+    <div class="home-down-content">
+      <div class="home-foot">
+        <div class="content">
+          description géniale
         </div>
-        <div class="home-text">
-          <h1 class="title"> ToGather </h1>
-          <h3 class="catch-phrase">New perspectives through human strong links</h3>
-          <%= link_to "Enter Our World", new_user_session_path, class: "btn btn-default" %>
+        <div class="arrow"></div>
+      </div>
+      <div class="empty"></div>
+      <div class="home-foot">
+        <div class="content">
+          waw, c'est trop cool !
+        </div>
+        <div class="arrow"></div>
+      </div>
+      <div class="empty"></div>
+      <div class="home-foot">
+        <div class="content">
+          je me sign-up !
         </div>
       </div>
     </div>
+  </div>
+</div>
