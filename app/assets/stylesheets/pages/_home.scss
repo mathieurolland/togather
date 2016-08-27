@@ -137,3 +137,27 @@
     -ms-filter: blur(2px);
     filter: blur(2px);
 }
+
+#loginModal {
+  #login-link {
+    display: none;
+  }
+  #login-link + br {
+    display: none;
+  }
+}
+
+#signUpModal {
+  #signup-link {
+    display: none;
+  }
+  #signup-link + br {
+    display: none;
+  }
+  #forgotpass-link {
+    display: none;
+  }
+  #forgotpass-link + br {
+    display: none;
+  }
+}
