@@ -1,7 +1,26 @@
-<%= simple_form_for :id_skills, url: user_skills_path, method: :post do |f| %>
-  <% @listing_skills.each do |category, skills| %>
-    <h2><%= category %></h2>
-    <%=  f.input :skills, collection: skills, as: :check_boxes, :input_html => { multiple: true } %>
-  <% end %>
-  <%= f.button :submit, value: "submit" %>
-<% end %>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="skill-form">
+      <%= simple_form_for :id_skills, url: user_skills_path, method: :post do |f| %>
+        <div class="row">
+          <div class="wrap-skillgroups">
+
+            <div class="skill-groups">
+              <% @listing_skills.each do |category, skills| %>
+                <div class="category-listing">
+                  <h2><%= category %></h2>
+                  <%=  f.input :skills, collection: skills.map { |s| [image_tag(s.icon)+' '+s.name, s.id] }, include_blank: true, as: :check_boxes, :input_html => { multiple: true } %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="submit-wrap text-center">
+            <%= f.button :submit, value: "Submit your interests" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
