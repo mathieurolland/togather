@@ -3,12 +3,14 @@
 <% if @place.availabilities.first %>
   <ul>
   <% @place.availabilities.each do |availability| %>
-    <li>
-      <%= "#{availability.min_day} - #{availability.max_day} : " %>
-      <%= "#{availability.min_time.strftime "%Hh%M"} - #{availability.max_time.strftime "%Hh%M"}" %>
-      <%= link_to "Edit", edit_place_availability_path(@place, availability) %>
-      <%= link_to "Destroy", place_availability_path(@place, availability), method: :delete %>
-    </li>
+    <% if availability.id %>
+      <li>
+        <%= "#{availability.min_day} - #{availability.max_day} : " %>
+        <%= "#{availability.min_time.strftime "%Hh%M"} - #{availability.max_time.strftime "%Hh%M"}" %>
+        <%= link_to "Edit", edit_place_availability_path(@place, availability) %>
+        <%= link_to "Destroy", place_availability_path(@place, availability), method: :delete %>
+      </li>
+    <% end %>
   <% end %>
   </ul>
 <% end %>
