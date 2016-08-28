@@ -15,6 +15,7 @@ class PlacesController < ApplicationController
   def show
     @place = Place.find(params[:id])
     @place.user = current_user
+    @availabilities = @place.order_dates_by_days
     unless current_user.status
       @connection = Connection.find(params[:connection_id])
       @meeting = Meeting.find(params[:meeting_id])

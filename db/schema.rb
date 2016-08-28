@@ -32,8 +32,10 @@ ActiveRecord::Schema.define(version: 20160825142755) do
 
   create_table "availabilities", force: :cascade do |t|
     t.string   "comment"
-    t.datetime "min_date"
-    t.datetime "max_date"
+    t.string   "min_day"
+    t.string   "max_day"
+    t.time     "min_time"
+    t.time     "max_time"
     t.integer  "place_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
