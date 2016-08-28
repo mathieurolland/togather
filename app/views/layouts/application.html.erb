@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= include_sync_config %>
-    <%= cloudinary_js_config %>
+
   </head>
    <body>
 
@@ -31,6 +31,7 @@
     <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" %>
 
     <%= javascript_include_tag "application" %>
+    <%= cloudinary_js_config %>
 
     <%= yield(:after_js) %>
   </body>
