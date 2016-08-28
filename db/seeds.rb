@@ -315,5 +315,5 @@ Meeting.create(
 )
 
 
-User.last.places.first.availabilities.create(min_date: Date.today, max_date: Date.tomorrow)
+User.last.places.first.availabilities.create(min_day: "Monday", max_day: "Sunday", min_time: Time.now, max_time: Time.now)
 

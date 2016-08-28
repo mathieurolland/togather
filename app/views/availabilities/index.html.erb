@@ -1,9 +1,20 @@
 <h1> Choose dates </h1>
 
-<% if @availabilities.first %>
-  <% @availabilities.each do |availability| %>
-    <%= "#{availability.min_date} - #{availability.max_date}" %>
+<% if @place.availabilities.first %>
+  <ul>
+  <% @place.availabilities.each do |availability| %>
+    <% if availability.id %>
+      <li>
+        <%= "#{availability.min_day} - #{availability.max_day} : " %>
+        <%= "#{availability.min_time.strftime "%Hh%M"} - #{availability.max_time.strftime "%Hh%M"}" %>
+        <%= link_to "Edit", edit_place_availability_path(@place, availability) %>
+        <%= link_to "Destroy", place_availability_path(@place, availability), method: :delete %>
+      </li>
+    <% end %>
   <% end %>
+  </ul>
 <% end %>
 
 <%= render "form" %>
+
+<p> <%= link_to "Finish the place", partner_path %></p>

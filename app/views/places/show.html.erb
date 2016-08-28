@@ -68,6 +68,24 @@
   </br>
 </div>
 
+<h1> Availability </h1>
+
+<% if @availabilities.first %>
+  <ul>
+  <% @availabilities.each do |day, array| %>
+    <li>
+      <%= day+" : " %>
+      <% array.each_with_index do |availability, i| %>
+        <%= "#{availability[:min_time].strftime "%Hh%M"} - #{availability[:max_time].strftime "%Hh%M"}" %>
+        <% unless i == array.count - 1 %>
+          <%= ", " %>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+
 <% unless current_user.status %>
   <%= link_to "booked", connection_meeting_place_path(@connection, @meeting, @place), method: :patch %>
 <% end %>
