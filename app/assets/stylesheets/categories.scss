@@ -17,12 +17,71 @@
   min-width: 300px;
   height: 180px;
   margin: 20px;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  transition: filter 0.4s ease, box-shadow 0.4s ease;
+  background-color: white;
+  .category-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1;
+  }
+  .category-title {
+    position: absolute;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    h3 {
+      color: white;
+      text-shadow: 0 0 4px black;
+    }
+  }
+  .category-skills-icons {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    padding-bottom: 40px;
+    bottom: 0;
+    .category-skills-sample {
+      width: 160px;
+      margin: auto;
+    }
+  }
+}
+.unselected {
+  filter: grayscale(1) blur(1px) opacity(0.5);
+  transition: filter 0.4s ease, box-shadow 0.4s ease;
 }
 
-.category-card:hover {
+.unselected:hover {
   cursor: pointer;
+  filter: grayscale(0.8) blur(0) opacity(1);
+}
+
+.category-card:active {
+  filter: grayscale(0) blur(0) opacity(1);
+  box-shadow: 0 4px 8px #777;
 }
 
 .active-card {
-  background-color: green;
+  filter: grayscale(0) blur(0) opacity(1);
+  box-shadow: 0 4px 8px #777;
+}
+
+.inline-icons {
+  width: 160px;
+  height: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px;
+  img {
+    height: 25px;
+    // -webkit-filter: drop-shadow(5px 5px 5px white);
+    filter: drop-shadow(0 0 2px white);
+  }
 }

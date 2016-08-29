@@ -4,6 +4,7 @@
   background-size: cover !important;
   color: white;
   position: relative;
+
   margin-bottom:20px;
   // padding: 5px;
   margin: 10px;
@@ -24,6 +25,7 @@
 .card-description {
   position: absolute;
   top: 10px;
+  bottom: 10px;
   left: 10px;
 }
 .card-description h2 {
@@ -58,5 +60,4 @@
   width: 300px;
   height: 200px;
   cursor: pointer;
-
 }
