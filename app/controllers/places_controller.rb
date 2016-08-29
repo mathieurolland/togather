@@ -1,6 +1,7 @@
 class PlacesController < ApplicationController
 
   def index
+    @types = ["afterwork", "café", "lunch snack", "salad bar", "restaurant"]
     @places = Place.all
     unless current_user.status
       @connection = Connection.find(params[:connection_id])

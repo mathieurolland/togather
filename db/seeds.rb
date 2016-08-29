@@ -269,7 +269,7 @@ end
     address: address2,
     description: Faker::Company.catch_phrase,
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: ["restaurant", "café", "afterwork", "lunch snack", "salad bar"].sample,
+    type_partner: ["afterwork", "café", "lunch snack", "salad bar",  "restaurant"].sample,
     pax: Faker::Number.number(2), # balance 2 digits
     user: partner
   )

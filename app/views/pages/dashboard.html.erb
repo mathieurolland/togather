@@ -1,27 +1,22 @@
 
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="col-md-3">
-        <div class="color-suggestions">
 
-           <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-              <% end %>
-            <h3>
-              Suggestions
-            </h3>
-            <ul>
-              <% @suggestions.each_with_index do |suggestion, index| %>
-                <li> Suggestion <%= index + 1 %>
-                  <% if suggestion.status == "valid" %>
-                    <%= link_to "#{suggestion.host.first_name} #{suggestion.host.last_name} ", connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), class:"fa fa-anchor btn btn-primary" %>
-                  <% else %>
-                    <%= link_to "#{suggestion.host.first_name} #{suggestion.host.last_name} ", suggestion, class:"fa fa-anchor btn btn-primary" %>
-                  <% end %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
+    <div class="row suggestions-work">
+        <div class="col-md-3">
+        <%= render "shared/navbar" %>
+          <h3>
+            Suggestions
+          </h3>
+          <ul>
+            <% @suggestions.each_with_index do |suggestion, index| %>
+              <li> Suggestion <%= index + 1 %>
+                <% if suggestion.status == "valid" %>
+                  <%= link_to "#{suggestion.host.first_name} #{suggestion.host.last_name} ", connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), class:"fa fa-anchor btn btn-primary" %>
+                <% else %>
+                  <%= link_to "#{suggestion.host.first_name} #{suggestion.host.last_name} ", suggestion, class:"fa fa-anchor btn btn-primary" %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
         </div>
 
 
