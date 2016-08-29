@@ -58,7 +58,7 @@ class AvailabilitiesController < ApplicationController
   end
 
   def valid_form?
-    @days.index(@p[:max_day]) > @days.index(@p[:min_day]) && @max_time > @min_time && @availability.save
+    @days.index(@p[:max_day]) >= @days.index(@p[:min_day]) && @max_time > @min_time && @availability.save
   end
 end
 

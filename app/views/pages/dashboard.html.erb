@@ -4,23 +4,30 @@
     <div class="col-md-3 no-marginlr-col">
       <%= render "shared/navbar" %>
       <div class="suggestion-content">
-
         <h3>
           Suggestions
         </h3>
         <% @suggestions.each_with_index do |suggestion| %>
           <% if suggestion.status == "valid" %>
-            <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
-              <div class="suggestion-card">
-                <p>
-                  <%= suggestion.host.first_name %>
-                </p>
-              </div>
-            <% end %>
-
-
+            <% if suggestion.guest == current_user %>
+              <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
+                <div class="suggestion-card">
+                  <p>
+                    <%= suggestion.host.first_name %>
+                  </p>
+                </div>
+              <% end %>
             <% else %>
-              <%= link_to suggestion do %>
+              <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
+                <div class="suggestion-card">
+                  <p>
+                    <%= suggestion.guest.first_name %>
+                  </p>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= link_to suggestion do %>
               <div class="suggestion-card">
                 <div class="media">
                   <div class="media-left">
@@ -70,7 +77,7 @@
                   </div>
                 </div>
               </div>
-            <% end %>
+          <% end %>
         <% end %>
       <% end %>
       </div>

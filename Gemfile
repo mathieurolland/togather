@@ -27,6 +27,8 @@ gem 'geocoder'
 gem "gmaps4rails"
 gem 'omniauth'
 gem 'omniauth-linkedin'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

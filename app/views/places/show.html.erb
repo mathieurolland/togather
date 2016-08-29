@@ -74,8 +74,10 @@
   </ul>
 <% end %>
 
-<% unless current_user.status %>
-  <%= link_to "booked", connection_meeting_place_path(@connection, @meeting, @place), method: :patch %>
+<% if current_user.status %>
+  <%= link_to "back", partner_path %>
+<% else %>
+  <%= render "options_meeter" %>
 <% end %>
 
 
