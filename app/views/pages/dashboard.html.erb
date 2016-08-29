@@ -1,129 +1,182 @@
+<div class="container-fluid">
 
-
-    <div class="row suggestions-work">
-        <div class="col-md-3">
-        <%= render "shared/navbar" %>
-          <h3>
-            Suggestions
-          </h3>
-          <ul>
-            <% @suggestions.each_with_index do |suggestion, index| %>
-              <li> Suggestion <%= index + 1 %>
-                <% if suggestion.status == "valid" %>
-                  <% if suggestion.guest == current_user %>
-                    <%= link_to "#{suggestion.host.first_name} #{suggestion.host.last_name} ", connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), class:"fa fa-anchor btn btn-primary" %>
-                  <% else %>
-                    <%= link_to "#{suggestion.guest.first_name} #{suggestion.guest.last_name} ", connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), class:"fa fa-anchor btn btn-primary" %>
-                  <% end %>
-                <% else %>
-                  <%= link_to "#{suggestion.host.first_name} #{suggestion.host.last_name} ", suggestion, class:"fa fa-anchor btn btn-primary" %>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-
-
-
-
-
-
-        <div class="col-md-9">
-          <div class="profil">
-           <div class="row-fluid">
-             <div class="color-suggestions">
-              <div class="col-md-6">
-
-                <div class="profil-statut">
-                  <h1 class="text-center">
-                  <%= current_user.first_name %>'s Dashboard !
-                </h1>
-                  <h3>
-                    Portrait
-                    <% if current_user.photo? %>
-                      <%= cl_image_tag current_user.photo.path, width: 200, height: 300, crop: :fill %>
-                   <% end %>
-                  </h3>
+  <div class="row">
+    <div class="col-md-3 no-marginlr-col">
+      <%= render "shared/navbar" %>
+      <div class="suggestion-content">
+        <h3>
+          Suggestions
+        </h3>
+        <% @suggestions.each_with_index do |suggestion| %>
+          <% if suggestion.status == "valid" %>
+            <% if suggestion.guest == current_user %>
+              <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
+                <div class="suggestion-card">
                   <p>
-                    <%= current_user.bio %>
+                    <%= suggestion.host.first_name %>
                   </p>
-                  <p>
-                    Work place: <%= current_user.work_place.nil? ? (current_user.work_place) : "-" %>
-                  </p>
-                  <p>
-                    Birthday: <%= current_user.birthday %>
-                  </p>
-                  <%= link_to edit_user_registration_path, class: "btn btn-default" do %>
-                    <i class='fa fa-cogs' aria-hidden='true'></i>
-                    Profile Settings
-                  <% end %>
-                  <hr>
                 </div>
-
-                <div class="profil-description">
-                  <h3>
-                    Interests
-                  </h3>
+              <% end %>
+            <% else %>
+              <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
+                <div class="suggestion-card">
                   <p>
-                    <% current_user.skills.each do |skill| %>
-                      <%= skill.name %>
-                      <%= '-' if (skill != current_user.skills.last) %>
-                    <% end %>
+                    <%= suggestion.guest.first_name %>
                   </p>
-                  <%= link_to dashboard_edit_skills_path, class: "btn btn-default" do %>
-                    <i class='fa fa-cogs' aria-hidden='true'></i>
-                    Edit interests
-                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= link_to suggestion do %>
+              <div class="suggestion-card">
+                <div class="media">
+                  <div class="media-left">
+                    <div class="center-picture">
+                      <% if suggestion.host.photo? %>
+                        <%= cl_image_tag suggestion.host.photo.path, gravity: "face", width: 65, height: 65, :crop=>"thumb", radius: "max" %>
+                      <% else %>
+                        <%= image_tag "http://placehold.it/65x65" %>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <span>
+                      <%= suggestion.host.first_name %>
+                    </span><br>
+                    <span>
+                      <%= truncate(suggestion.host.bio, length: 20) %>
+                    </span>
+                    <div class="carousel slide" data-ride="carousel" data-interval=<%= rand(3000..5000) %> data-pause="null" >
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <div class="inline-icons">
+                            <% askills = suggestion.host.skills.sample(3) %>
+                            <% askills.each do |askill| %>
+                              <%= image_tag(askill.icon) %>
+                            <% end %>
+                          </div>
+                        </div>
+                        <div class="item">
+                          <div class="inline-icons">
+                            <% bskills = suggestion.host.skills.sample(3) %>
+                            <% bskills.each do |bskill| %>
+                              <%= image_tag(bskill.icon) %>
+                            <% end %>
+                          </div>
+                        </div>
+                        <div class="item">
+                          <div class="inline-icons">
+                            <% cskills = suggestion.host.skills.sample(3) %>
+                            <% cskills.each do |cskill| %>
+                              <%= image_tag(cskill.icon) %>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+          <% end %>
+        <% end %>
+      <% end %>
+      </div>
 
-            <div class="col-md-6">
-              <div class="map-work">
-                  <h3>
-                    Surroundings
-                  </h3>
-                  <% @hash.each do |marker| %>
-                    <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
-                  <% end %>
-                  <% @hashcontent = raw @hash.to_json %>
+    </div>
 
-                  <div id="map">
-                    <% content_for(:after_js) do %>
-                      <script>
-                        $(document).ready(function() {
-                          var styles = [{"featureType":"all","elementType":"all","stylers":[{"lightness":"42"},{"visibility":"on"},{"hue":"#ff0000"},{"saturation":"-100"},{"gamma":"0.78"},{"weight":"0.37"},{"invert_lightness":true}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#3ec7c9"},{"visibility":"on"}]}];
-
-                          var handler = Gmaps.build('Google');
-                          handler.buildMap({
-                            // provider: {
-                            //   styles: styles
-                            // },
-                            internal: {
-                              id: 'map' }
-                            },
-                            function() {
-                              markers = handler.addMarkers(<%= @hashcontent %>);
-                              handler.bounds.extendWith(markers);
-                              handler.fitMapToBounds();
-                              if (markers.length == 0) {
-                                handler.getMap().setZoom(2);
-                              } else if (markers.length == 1) {
-                                handler.getMap().setZoom(14);
-                              }
-                            }
-                          );
-                        });
-                      </script>
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-6 no-marginlr-col">
+          <div class="profil-wrapper">
+            <div class="bio">
+              <div class="media">
+                <div class="media-left">
+                  <div class="profile-picture">
+                    <% if current_user.photo? %>
+                      <%= cl_image_tag current_user.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
+                    <% else %>
+                      <%= image_tag "http://placehold.it/100x100" %>
                     <% end %>
+                    <%= link_to "- edit -", edit_user_registration_path %>
                   </div>
-               </div>
+                </div>
+                <div class="media-body desc-bio">
+                  <span class="bio-title"><%= current_user.first_name %></span>
+                  <p>
+                    <%= truncate(current_user.bio, length: 77) %>
+                  </p>
+                  <span class="bio-title">Work place</span>
+                  <p>
+                    <% if current_user.work_place.nil? %>
+                      <%= "-" %>
+                    <% else %>
+                      <%= current_user.work_place %>
+                    <% end %>
+                  </p>
+                </div>
+                <hr>
+              </div>
             </div>
+            <div class="profile-skills">
+              <div class="skills-icons">
+                <% current_user.skills.each do |skill| %>
+                  <%= image_tag(skill.icon) %>
+                  <%= '-' if (skill != current_user.skills.last) %>
+                <% end %>
+              </div>
+              <%= link_to "- edit interests -", dashboard_edit_skills_path %>
             </div>
           </div>
         </div>
+
+      <div class="col-md-6">
+      <div class="row">
+        <div class="map-work">
+            <% @hash.each do |marker| %>
+              <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
+            <% end %>
+            <% @hashcontent = raw @hash.to_json %>
+
+            <div id="map">
+              <% content_for(:after_js) do %>
+                <script>
+                  $(document).ready(function() {
+                    var styles = [{"featureType":"all","elementType":"all","stylers":[{"lightness":"42"},{"visibility":"on"},{"hue":"#ff0000"},{"saturation":"-100"},{"gamma":"0.78"},{"weight":"0.37"},{"invert_lightness":true}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#3ec7c9"},{"visibility":"on"}]}];
+
+                    var handler = Gmaps.build('Google');
+                    handler.buildMap({
+                      // provider: {
+                      //   styles: styles
+                      // },
+                      internal: {
+                        id: 'map' }
+                      },
+                      function() {
+                        markers = handler.addMarkers(<%= @hashcontent %>);
+                        handler.bounds.extendWith(markers);
+                        handler.fitMapToBounds();
+                        if (markers.length == 0) {
+                          handler.getMap().setZoom(2);
+                        } else if (markers.length == 1) {
+                          handler.getMap().setZoom(14);
+                        }
+                      }
+                    );
+                  });
+                </script>
+              <% end %>
+            </div>
+         </div>
+      </div>
+
+      </div>
       </div>
     </div>
   </div>
+</div>
+</div>
+  </div>
+</div>
 
    <%= render 'network' %>
 

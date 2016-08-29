@@ -1,42 +1,109 @@
+.no-marginlr-col {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.profil-wrapper {
+  padding: 20px;
+  margin-top: 52px;
+  .profile-picture {
+    text-align: center;
+    img {
+      margin-bottom: 10px;
+    }
+    a {
+
+    }
+  }
+  .desc-bio {
+    padding-left: 10px;
+    .bio-title {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 600;
+    }
+    p {
+      font-size: 14px;
+    }
+  }
+  .desc-bio + hr {
+    margin: 10px 100px;
+  }
+  .profile-skills {
+    text-align: center;
+    .skills-icons {
+      margin: 10px 60px 0 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        height: 25px;
+        margin: 0 5px;
+      }
+    }
+  }
+}
+
+.suggestion-content {
+  padding-left: 15px;
+}
+
+.suggestion-card {
+  margin: 15px 15px 15px 0;
+  padding: 15px;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.07), 0 1px 0 0 rgba(0, 0, 0, 0.03);
+  .center-picture {
+    height: 80px;
+    display: flex;
+    align-items: center;
+  }
+  .inline-icons {
+    width: 120px;
+    padding-left: 0;
+    img {
+      height: 17px;
+    }
+  }
+}
+
 .max-body {
   height: 80%;
 }
 
 #map {
-  height: 60vh;
+  height: 100vh;
   width: 100%;
 }
-.color-suggestions {
-  background: black;
-}
-.row-fluid {
-  padding: 0px !important;
-}
-.container-fluid {
-  padding: 0px !important;
-}
+// .color-suggestions {
+//   background: black;
+// }
+// .row-fluid {
+//   padding: 0px !important;
+// }
+// .container-fluid {
+//   padding: 0px !important;
+// }
 
-.no_padding {
-  padding: 0px;
-}
+// .no_padding {
+//   padding: 0px;
+// }
 
-#menu {
-   background-color: white !important;
-}
+// #menu {
+//    background-color: white !important;
+// }
 
-.body-dashboard {
-  background: -webkit-gradient(linear, left top, right bottom, from(#91A0B6 ), to(#A7A9B4 )) fixed;
-  color: #223843;
-}
+// .body-dashboard {
+//   background: -webkit-gradient(linear, left top, right bottom, from(#91A0B6 ), to(#A7A9B4 )) fixed;
+//   color: #223843;
+// }
 
 
-li {
-  list-style-type:none;
-}
+// li {
+//   list-style-type:none;
+// }
 
-.btn-primary {
-  background-color: #2A4182;
-}
+// .btn-primary {
+//   background-color: #2A4182;
+// }
 
 .graph {
     max-width: 400px;
