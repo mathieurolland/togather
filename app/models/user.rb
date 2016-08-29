@@ -92,4 +92,30 @@ class User < ApplicationRecord
     end
     suggestions
   end
+
+  def connected_data
+    data_connection = []
+    self.invited_connections.where(status: "connected").each do |x|
+    data_connection << { from: x.host_id,
+                to: self.id}
+    end
+    self.hosted_connections.where(status: "connected").each do |x|
+    data_connection << { from: self.id,
+                to: x.guest_id}
+    end
+    data_connection
+  end
+
+  def node_user
+    node = []
+    node << { id: self.id, label: "#{self.first_name} #{self.last_name}" }
+    self.invited_connections.where(status: "connected").each do |x|
+      node << { id: x.host_id, label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
+    end
+   self.hosted_connections.where(status: "connected").each do |x|
+      node << { id: x.guest_id, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
+    end
+    node
+  end
+
 end
