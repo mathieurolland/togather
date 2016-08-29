@@ -27,9 +27,6 @@ gem 'geocoder'
 gem "gmaps4rails"
 gem 'omniauth'
 gem 'omniauth-linkedin'
-gem 'faye'
-gem 'thin', require: false
-gem 'sync'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 

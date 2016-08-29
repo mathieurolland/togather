@@ -7,7 +7,6 @@
 //= require underscore
 //= require gmaps/google
 //= require turbolinks
-//= require sync
 //= require moment
 //= require bootstrap-datetimepicker
 //= require vis
