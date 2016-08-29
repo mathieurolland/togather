@@ -5,11 +5,16 @@
   color: white;
   position: relative;
 
-  margin-bottom:20px;
+  // margin-bottom:20px;
   // padding: 5px;
-  margin: 10px;
+  // margin: 10px;
 }
-
+.marow {
+  margin-bottom:40px;
+}
+.macol {
+  margin-bottom:40px;
+}
 .card-user {
   position: absolute;
   right: 10px;
@@ -27,6 +32,9 @@
   top: 10px;
   bottom: 10px;
   left: 10px;
+  p {
+
+  }
 }
 .card-description h2 {
   font-size: 24px;
@@ -47,17 +55,21 @@
   opacity: 0.1;
 }
 
-.background {
-  background-color: #D3CDCD;
+.montitre{
+  text-align: center;
 }
-.title {
-  margin: 20px;
-  padding: 20px;
-}
-.image {
 
-  border-radius:7px;
-  width: 300px;
-  height: 200px;
-  cursor: pointer;
-}
+// .background {
+//   background-color: #D3CDCD;
+// }
+// .title {
+//   margin: 20px;
+//   padding: 20px;
+// }
+.monimage {
+
+   border-radius:7px;
+//   width: 300px;
+//   height: 200px;
+//   cursor: pointer;
+ }
