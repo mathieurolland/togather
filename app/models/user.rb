@@ -41,10 +41,8 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]  # Fake password for validation
       user.save
     end
-
     return user
   end
-
 
   def create_suggestions
     array = []
@@ -80,16 +78,18 @@ class User < ApplicationRecord
       (Connection.where(guest: self, host: value).first == nil || Connection.where(guest: self, host: value).first.status != "connected") && (Connection.where(guest: value, host: self).first == nil || Connection.where(guest: value, host: self).first.status != "connected")
     end
     contacts.each do |contact|
-      Connection.create(status: "suggested", guest: self, host: contact)
+      invers_connection = Connection.where(guest: contact, host: self).first
+      if invers_connection == nil || invers_connection.status != "valid"
+        Connection.create(status: "suggested", guest: self, host: contact)
+      end
     end
   end
 
   def suggestions
     suggestions = []
-    selection = ["suggested", "invited", "waiting", "valid"]
-    self.invited_connections.each do |suggested|
-      suggestions << suggested if selection.include?(suggested.status)
-    end
+    selec = ["suggested", "invited", "waiting", "valid"]
+    self.invited_connections.each { |s| suggestions << s if selec.include?(s.status) }
+    self.hosted_connections.each { |s| suggestions << s if s.status == "valid" }
     suggestions
   end
 

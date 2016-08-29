@@ -12,7 +12,7 @@ class MeetingsController < ApplicationController
 
   def show
     @meeting = Meeting.find(params[:id])
-    @connection = Connection.find(params[:connection_id])
+    @connection = @meeting.connection
     @messages = @meeting.messages
     @new_message = Message.new
   end

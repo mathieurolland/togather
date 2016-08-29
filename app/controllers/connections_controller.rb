@@ -1,4 +1,5 @@
 class ConnectionsController < ApplicationController
+  before_action :find_connection, only: [ :update, :show ]
 
   def index
     @connection = Connection.all
@@ -11,12 +12,11 @@ class ConnectionsController < ApplicationController
   end
 
   def update
-    @connection = Connection.find(params[:id])
     if @connection.status == "suggested"
       @connection.status = "waiting"
       @connection.save
-      if Connection.where(guest: @connection.host, host: current_user).first
-        @invers_connection = Connection.where(guest: @connection.host, host: current_user).first
+      @invers_connection = Connection.where(guest: @connection.host, host: current_user).first
+      if @invers_connection
         @invers_connection.status = "invited"
       else
         @invers_connection = Connection.new(guest: @connection.host, host: current_user, status: "invited")
@@ -24,21 +24,21 @@ class ConnectionsController < ApplicationController
       @invers_connection.save
       redirect_to connection_path(@connection.id)
     elsif @connection.status == "invited"
-      @connection.status = "valid"
-      @connection.save
-      if Connection.where(host: @connection.host, guest: current_user).first
-        @invers_connection = Connection.where(host: @connection.host, guest: current_user).first
-        @invers_connection.status = "valid"
-      else
-        @invers_connection = Connection.new(host: @connection.host, guest: current_user, status: "valid")
-      end
+      @connection.destroy
+      @invers_connection = Connection.where(guest: @connection.host, host: current_user).first
+      @invers_connection.status = "valid"
       @invers_connection.save
-      @meeting = Meeting.create(connection: @connection)
+      @meeting = Meeting.create(connection: @invers_connection)
       redirect_to connection_meeting_path(@connection, @meeting)
     end
   end
 
   def show
+  end
+
+  private
+
+  def find_connection
     @connection = Connection.find(params[:id])
   end
 end
