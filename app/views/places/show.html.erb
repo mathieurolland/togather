@@ -1,21 +1,17 @@
 <p><%= link_to "Back", places_path %></p>
 <div class="place-picture">
   <img src="http://res.cloudinary.com/diqequpgu/image/upload/c_scale,h_285,q_100,w_674/v1472165522/photo_place_segabm.jpg" style="position: relative; width: 100%;" alt=""></img>
+
+  <% if @place.photo? %>
+    <%= cl_image_tag @place.photo.path, width: 200, height: 300, crop: :fill %>
+  <% end %>
+
 </div>
 </br>
 <div class="row">
   <div class="text-center">
     <ul class="list-inline">
-      <div class="col-sm-2">
-        <li>
-          <i class="fa fa-cutlery fa-2x" aria-hidden="true"></i>
-          </br>
-          </br>
-          <p><strong><%= @place.pax %></strong></p>
-          <p>available places</p>
-        </li>
-      </div>
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <li>
           <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
           </br>
@@ -23,7 +19,7 @@
           <p>Visit our <%= @place.type_partner %></p>
         </li>
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <li>
           <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
           </br>
@@ -31,7 +27,7 @@
           <p> Open 7/7j </p>
         </li>
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <li>
           <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
           </br>
@@ -40,15 +36,7 @@
           <p><%= @place.address %></p>
         </li>
       </div>
-      <div class="col-sm-2">
-        <li>
-          <i class="fa fa-wifi fa-2x" aria-hidden="true"></i>
-          </br>
-          </br>
-          <p> Yes we have wifi </p>
-        </li>
-      </div>
-      <div class="col-sm-2">
+
         <li>
           <i class="fa fa-phone fa-2x" aria-hidden="true"></i>
           </br>

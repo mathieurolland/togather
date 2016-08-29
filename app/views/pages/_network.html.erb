@@ -1,0 +1,21 @@
+
+<div id="mynetwork"></div>
+
+<% content_for(:after_js) do %>
+<script type="text/javascript">
+  // create an array with nodes
+  var nodes = new vis.DataSet(<%= raw current_user.node_user.to_json %>);
+
+  // create an array with edges
+  var edges = new vis.DataSet(<%= raw current_user.connected_data.to_json %>);
+
+  // create a network
+  var container = document.getElementById('mynetwork');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {};
+  var network = new vis.Network(container, data, options);
+</script>
+<% end %>

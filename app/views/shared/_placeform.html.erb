@@ -1,4 +1,4 @@
-<div class="container">
+
   <%= simple_form_for @place do |f| %>
     <p><%= f.input :name %></p>
     <p><%= f.input :address %></p>
@@ -6,7 +6,9 @@
     <p><%= f.input :phone_number %></p>
     <p><%= f.input :type_partner, collection: [ "Restaurant", "Afterwork", "Café", "Lunch snack", "Salad bar" ], as: :radio_buttons %></p>
     <p><%= f.input :pax %></p>
+    <%= f.input :photo, as: :attachinary %>
     <p><%= f.button :submit %></p>
   <% end %>
-</div>
+
+
 
