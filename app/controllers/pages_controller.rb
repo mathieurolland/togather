@@ -7,7 +7,7 @@ class PagesController < ApplicationController
 
   def dashboard
    current_user.create_suggestions
-   @suggestions = current_user.suggestions
+   @suggestions = current_user.suggestions.sample(5)
 
    @places = Place.where.not(latitude: nil, longitude: nil)
     @url = "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png"

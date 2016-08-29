@@ -27,12 +27,10 @@ gem 'geocoder'
 gem "gmaps4rails"
 gem 'omniauth'
 gem 'omniauth-linkedin'
-gem 'faye'
-gem 'thin', require: false
-gem 'sync'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
+  gem 'rails-assets-vis'
 end
 
 group :development, :test do
