@@ -106,6 +106,8 @@ class User < ApplicationRecord
     data_connection
   end
 
+
+
   def node_user
     node = []
     node << { id: self.id, label: "#{self.first_name} #{self.last_name}" }
@@ -117,5 +119,15 @@ class User < ApplicationRecord
     end
     node
   end
+
+  def node_util
+      node_users = []
+      self.node_user.each do |x|
+        node_users << User.find(x[:id])
+      end
+      node_users
+  end
+
+
 
 end
