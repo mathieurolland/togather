@@ -28,4 +28,19 @@ class Place < ApplicationRecord
     order_dates.each { |day, arr| order_dates[day] = arr.sort_by { |hours| hours[:min_time] } }
     order_dates
   end
+
+  def available?(date)
+    days = ["Monday", "Tuesday", "Wenesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    availanilities = self.order_dates_by_days
+    t = DateTime.strptime(date.strftime("%I:%M%p"), '%I:%M %p')
+    day = days[date.wday - 1]
+    availanilities[day].each do |a|
+      t_min = DateTime.strptime(a[:min_time].strftime("%I:%M%p"), '%I:%M %p')
+      t_max = DateTime.strptime(a[:max_time].strftime("%I:%M%p"), '%I:%M %p')
+      if t >= t_min && t <= t_max
+        return true
+      end
+    end
+    false
+  end
 end

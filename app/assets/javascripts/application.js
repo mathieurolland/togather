@@ -9,6 +9,9 @@
 //= require gmaps/google
 //= require turbolinks
 //= require sync
+//= require moment
+//= require bootstrap-datetimepicker
+
 
 $('#signUpModal').on('shown.bs.modal', function () {
   $('#user_first_name').focus();

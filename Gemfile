@@ -30,6 +30,8 @@ gem 'omniauth-linkedin'
 gem 'faye'
 gem 'thin', require: false
 gem 'sync'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
