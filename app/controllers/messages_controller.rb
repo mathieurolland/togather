@@ -9,14 +9,10 @@ class MessagesController < ApplicationController
     @connection = @meeting.connection
 
     if @message.save
-      # sync_new @message
       redirect_to connection_meeting_path(@connection, @meeting)
     else
       render '../meeting_show'
     end
-
-    # respond_with { @message }
-
   end
 
   private
