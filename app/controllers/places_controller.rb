@@ -40,6 +40,7 @@ class PlacesController < ApplicationController
 
   def update
     @place = Place.find(params[:id])
+    @availabilities = @place.order_dates_by_days
     if current_user.status
       @place.update(place_params)
       if @place.save
@@ -51,8 +52,13 @@ class PlacesController < ApplicationController
       @connection = Connection.find(params[:connection_id])
       @meeting = Meeting.find(params[:meeting_id])
       @meeting.place = @place
-      @meeting.save
-      redirect_to connection_meeting_path(@connection, @meeting)
+      if resa_params[:date] != "" && @place.available?(str_to_date(resa_params[:date]))
+        @meeting.date = str_to_date(resa_params[:date])
+        @meeting.save
+        redirect_to connection_meeting_path(@connection, @meeting)
+      else
+        render :show
+      end
     end
   end
 
@@ -68,4 +74,11 @@ class PlacesController < ApplicationController
     params.require(:place).permit!
   end
 
+  def resa_params
+    params.permit!
+  end
+
+  def str_to_date(date)
+    DateTime.strptime(date, '%m/%d/%Y %I:%M %p')
+  end
 end
