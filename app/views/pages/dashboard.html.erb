@@ -1,9 +1,8 @@
-<%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-              <% end %>
+
 
     <div class="row suggestions-work">
         <div class="col-md-3">
+        <%= render "shared/navbar" %>
           <h3>
             Suggestions
           </h3>
