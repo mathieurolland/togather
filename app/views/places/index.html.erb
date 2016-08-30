@@ -10,7 +10,7 @@
   <% @types.each do |type| %>
     <div class="row">
       <div class="marow">
-        <h2><%= type.capitalize %> :</h2>
+        <h2><%= type %> :</h2>
         <% @places.where(type_partner: type).each do |place| %>
           <div class="col-xs-4">
             <div class="macol">

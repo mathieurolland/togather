@@ -338,7 +338,7 @@ end
 #     address: fake_address_gironde,
 #     description: Faker::Company.catch_phrase,
 #     phone_number: Faker::PhoneNumber.phone_number,
-#     type_partner: ["afterwork", "café", "lunch snack", "salad bar", "restaurant"].sample,
+#     type_partner: ["Afterwork", "Café", "Lunch snack", "Salad bar", "restaurant"].sample,
 #     pax: Faker::Number.number(2), # balance 2 digits
 #     user: partner
 #   )
@@ -363,7 +363,7 @@ p = Place.create(
   address: fake_address_gironde,
   description: "totoland",
   phone_number: "060305",
-  type_partner: "café",
+  type_partner: "Café",
   pax: 1,
   photo_url: "http://lesmondaines.com/wp-content/uploads/2012/12/french-coffee-shop-grenoble-1.png",
   user: partner
@@ -397,7 +397,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Come to relax after work",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "afterwork",
+    type_partner: "Afterwork",
     pax: 10,
     photo_url: "http://www.leboost.com/images/etablissements/2011/01/31/564/1.originale.jpg",
     user: philipe
@@ -407,7 +407,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Take a break",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "afterwork",
+    type_partner: "Afterwork",
     pax: 12,
     photo_url: "http://irishpubcompany.com/wp-content/uploads/2014/08/Slider-for-pcb.jpg",
     user: pierre
@@ -415,9 +415,9 @@ Place.create(
 Place.create(
     name: Faker::Company.name,
     address: fake_address_gironde,
-    description: "",
+    description: "Take a break",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "afterwork",
+    type_partner: "Afterwork",
     pax: 12,
     photo_url: "http://centrenav.ca/files/tinymce/uploaded/nc-food-and-beverage-pub.jpg",
     user: pierre
@@ -427,7 +427,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Enjoy a coffee",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "café",
+    type_partner: "Café",
     pax: 16,
     photo_url: "https://surlaterrasseduncafe.files.wordpress.com/2014/06/cropped-cafes-in-montpellier.jpg",
     user: polo
@@ -437,7 +437,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Get your dose of energy with a warm coffee",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "café",
+    type_partner: "Café",
     pax: 14,
     photo_url: "https://actubordelaiseblog.files.wordpress.com/2016/06/patio-restaurant-bordeaux.jpg?w=620",
     user: patrick
@@ -447,7 +447,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Fast service and great quality",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "lunch snack",
+    type_partner: "Lunch snack",
     pax: 20,
     photo_url: "https://media-cdn.tripadvisor.com/media/photo-s/08/8e/63/ad/camping-le-verger-fleuri.jpg",
     user: patrice
@@ -457,7 +457,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Take a break",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "lunch snack",
+    type_partner: "Lunch snack",
     pax: 20,
     photo_url: "http://www.latableduhuit.fr/wp-content/uploads/2016/03/terrasse_bd-resized.jpg",
     user: patrice
@@ -467,7 +467,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Best qualit lunch ever",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "lunch snack",
+    type_partner: "Lunch snack",
     pax: 8,
     photo_url: "https://media-cdn.tripadvisor.com/media/photo-s/02/a3/c2/8a/filename-photo-051-jpg.jpg",
     user: paco
@@ -477,7 +477,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Hot summer, fresh salad",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "salad bar",
+    type_partner: "Salad bar",
     pax: 10,
     photo_url: "https://u.tfstatic.com/restaurant_photos/499/39499/169/612/bar-toit-terrasse-molitor-f7535.jpg",
     user: patricia
@@ -487,7 +487,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Hungry ?",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "salad bar",
+    type_partner: "Salad bar",
     pax: 10,
     photo_url: "http://villa-honegg.ch/media/content/text_image/villa-honegg-restaurant-terrasse.jpg.1150x0_q85.jpg",
     user: patricia
@@ -497,7 +497,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Fresh vegetables and fruits, all bio !",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "salad bar",
+    type_partner: "Salad bar",
     pax: 12,
     photo_url: "http://www.gqmagazine.fr/uploads/images/thumbs/201623/18/buddha_bar_hotel_paris_lounge_bar_le_qu4tre_sizel_437636_1600_1200_jpg_941_jpeg_2922.jpeg_north_600x_white.jpg",
     user: paola
@@ -507,7 +507,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Bon appétit!",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "restaurant",
+    type_partner: "Restaurant",
     pax: 16,
     photo_url: "http://www.thonhotels.be/Thonhotels/Hoteller/Belgia/Thon_Hotel_EU/Restaurant/thon-hotel-eu-restaurant-4.jpg",
     user: pepita
@@ -517,7 +517,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Best restaurant in town",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "restaurant",
+    type_partner: "Restaurant",
     pax: 10,
     photo_url: "https://media-cdn.tripadvisor.com/media/photo-s/03/ac/61/2d/albert-cafe.jpg",
     user: paulette
@@ -527,7 +527,7 @@ Place.create(
     address: fake_address_gironde,
     description: "Traditional specialities",
     phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: "restaurant",
+    type_partner: "Restaurant",
     pax: 10,
     photo_url: "http://www.tourisme-montreal.org/blog/wp-content/uploads/2014/06/terrasse-montreal-boris-bistro.jpg",
     user: paulette

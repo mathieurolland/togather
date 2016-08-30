@@ -5,7 +5,7 @@ class Place < ApplicationRecord
   belongs_to :user
   has_many :meetings
   has_many :availabilities
-  has_attachment :photo
+  has_attachment :photo, accept: [:jpg, :png]
 
 
   validates :name, presence: true
