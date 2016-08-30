@@ -21,24 +21,7 @@ class PlacesController < ApplicationController
       @connection = Connection.find(params[:connection_id])
       @meeting = Meeting.find(params[:meeting_id])
     end
-
-    @url = "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png"
-    @hash = Gmaps4rails.build_markers(@place) do |place, marker|
-      marker.lat place.latitude
-      marker.lng place.longitude
-      marker.infowindow render_to_string(partial: "/places/map_box", locals: { place: place })
-      # icon: "#{view_context.image_path("place2.png") }"
-      # marker.picture({
-      #                 :url    => "#{view_context.image_path("place2.png") }",
-      #                 :width  => "64",
-      #                 :height => "64",
-      #                 # :scaledWidth => "15", # Scaled width is half of the retina resolution; optional
-      #                 # :scaledHeight => "11", # Scaled width is half of the retina resolution; optional
-      #               })
-    end
-    # @hash.each do |marker|
-    #   marker[:icon] = "#{view_context.image_path("place2.png") }"
-    # end
+    @hash = hash_geocoder(@place)
   end
 
   def create
@@ -58,6 +41,7 @@ class PlacesController < ApplicationController
 
   def update
     @place = Place.find(params[:id])
+    @hash = hash_geocoder(@place)
     @availabilities = @place.order_dates_by_days
     if current_user.status
       @place.update(place_params)
@@ -87,6 +71,14 @@ class PlacesController < ApplicationController
   end
 
   private
+
+  def hash_geocoder(place_model)
+    Gmaps4rails.build_markers(place_model) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+      marker.infowindow render_to_string(partial: "/places/map_box", locals: { place: place })
+    end
+  end
 
   def place_params
     params.require(:place).permit!

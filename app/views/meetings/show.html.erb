@@ -26,7 +26,7 @@
 <%= render 'shared/message_row' %>
 
 <!-- Reviews -->
-<% if meeting.date && @meeting.date > DateTime.now %>
+<% if @meeting.date && @meeting.date > DateTime.now %>
   <%= render 'reviews' %>
 <% end %>
 
