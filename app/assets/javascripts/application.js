@@ -20,7 +20,10 @@ $('#loginModal').on('shown.bs.modal', function () {
   $('#user_email').focus();
 });
 
-// $('#mapSlider').click(function () {
-//   // alert("hello");
-//   $('#mapContainer').toggle('slide', { direction: 'right' }, 10000);
-// });
+$('.suggestion-content').scroll(function() {
+    $('#hiding-bar').css({opacity: 0});
+
+    if ($('.suggestion-content').scrollTop() === 0) {
+        $('#hiding-bar').css({opacity: 1});
+    }
+});
