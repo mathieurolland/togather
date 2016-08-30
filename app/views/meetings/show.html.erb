@@ -20,9 +20,21 @@
   <%= link_to "Choise places", connection_meeting_places_path(@connection, @meeting) %>
 <% end %>
 
-
+<!-- Messages -->
 <h3>Messages</h3>
 
 <%= render 'shared/message_row' %>
 
+<!-- Reviews -->
+<% if meeting.date && @meeting.date > DateTime.now %>
+  <%= render 'reviews' %>
+<% end %>
+
+<!-- Finalize -->
+<% if @connection.status == "valid" %>
+  <%= render "form_finalize_status", value: "connected" %>
+  <%= render "form_finalize_status", value: "refused" %>
+<% elsif @connection.status == "connected" %>
+  <%= render "form_finalize_status", value: "refused" %>
+<% end %>
 

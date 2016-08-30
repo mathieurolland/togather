@@ -1,0 +1,11 @@
+<div>
+  <%= simple_form_for @meeting, url: review_path(@connection, @meeting), method: :patch do |f| %>
+    <%= f.error_notification %>
+    <% if @connection.guest == current_user %>
+      <%= f.input :guest_review %>
+    <% else %>
+      <%= f.input :host_review %>
+    <% end %>
+    <%= f.button :submit, value: "submit" %>
+  <% end %>
+</div>
