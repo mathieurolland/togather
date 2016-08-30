@@ -122,7 +122,7 @@ class User < ApplicationRecord
     data_connection = []
     datas.each do |x|
       # y = { from: x[:to], to: x[:from] }
-      unless data_connection.include?({ from: x[:to], to: x[:from] })
+      unless data_connection.include?({ from: x[:to], to: x[:from] } && { from: x[:from], to: x[:to] })
         data_connection << x
       end
     end
