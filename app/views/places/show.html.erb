@@ -1,12 +1,15 @@
 <p><%= link_to "Back", places_path %></p>
-<div class="place-picture">
 
-  <% if @place.photo? %>
-    <%= cl_image_tag @place.photo.path, width: 1900, height: 800, crop: :fill %>
-  <% end %>
-
+<div class="monbackground">
+<div class="maphotosize">
+  <div class="place-picture">
+    <% if @place.photo? %>
+      <%= cl_image_tag @place.photo.path, width: 1900, height: 400, crop: :fill %>
+    <% end %>
+  </div>
 </div>
 </br>
+
 <div class="row">
   <div class="text-center">
     <ul class="list-inline">
@@ -35,7 +38,6 @@
           <p><%= @place.address %></p>
         </li>
       </div>
-
         <li>
           <i class="fa fa-phone fa-2x" aria-hidden="true"></i>
           </br>
@@ -43,15 +45,15 @@
           <p><strong>Contact us :</strong></p>
           <p><%= @place.phone_number %></p>
         </li>
-      </div>
     </ul>
   </div>
 </div>
 </br>
+
 <div class="text-center">
   <h2><%= @place.name %></h2>
   </br>
-  <p><strong>Description: </strong><%= @place.description %></p>
+  <h3><%= @place.description %></h3>
   </br>
 </div>
 
@@ -72,6 +74,53 @@
   <% end %>
   </ul>
 <% end %>
+
+<div class="row">
+</div>
+</div>
+
+<div class="row">
+  <div class="map-work">
+    <% @hash.each do |marker| %>
+      <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
+    <% end %>
+      <% @hashcontent = raw @hash.to_json %>
+
+<div id="map">
+              <% content_for(:after_js) do %>
+                <script>
+                  $(document).ready(function() {
+                    var styles = [{"featureType":"all","elementType":"all","stylers":[{"lightness":"42"},{"visibility":"on"},{"hue":"#ff0000"},{"saturation":"-100"},{"gamma":"0.78"},{"weight":"0.37"},{"invert_lightness":true}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#3ec7c9"},{"visibility":"on"}]}];
+
+                    var handler = Gmaps.build('Google');
+                    handler.buildMap({
+                      // provider: {
+                      //   styles: styles
+                      // },
+                      internal: {
+                        id: 'map' }
+                      },
+                      function() {
+                        markers = handler.addMarkers(<%= @hashcontent %>);
+                        handler.bounds.extendWith(markers);
+                        handler.fitMapToBounds();
+                        if (markers.length == 0) {
+                          handler.getMap().setZoom(2);
+                        } else if (markers.length == 1) {
+                          handler.getMap().setZoom(14);
+                        }
+                      }
+                    );
+                  });
+                </script>
+                <!-- <script>
+                  google.maps.event.addListener(Gmaps4Rails.markers[0].google_object, 'click', function(object){ alert("hello"); });
+                </script> -->
+              <% end %>
+</div>
+</div>
+</div>
+
 
 <% if current_user.status %>
   <%= link_to "back", partner_path %>
