@@ -5,12 +5,10 @@
         <%= render "shared/navbar" %>
         <div class="profil-wrapper">
           <div class="partner-profile">
-
-
           <h2>
             Hello <%= current_user.first_name %>
           </h2>
-          <% current_user.places.each do |place| %>
+          <% @places.each do |place| %>
           <% if !place.meetings %>
             <p>No booking to confirm</p>
           <% else %>
@@ -46,7 +44,6 @@
                       <% else %>
                         <%= image_tag "http://placehold.it/65x65" %>
                       <% end %>
-
                     </div>
                   </div>
                 </li>
@@ -122,13 +119,9 @@
               <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
             <% end %>
             <% @hashcontent = raw @hash.to_json %>
-
             <div id="map">
               <% content_for(:after_js) do %>
                 <%= render partial: 'gmaps', locals: {hash: @hashcontent} %>
-                <!-- <script>
-                  google.maps.event.addListener(Gmaps4Rails.markers[0].google_object, 'click', function(object){ alert("hello"); });
-                </script> -->
               <% end %>
             </div>
          </div>
@@ -141,4 +134,8 @@
 </div>
 </div>
   </div>
+</div>
+
+<div>
+<%= link_to "Suggest a new place", new_place_path %>
 </div>

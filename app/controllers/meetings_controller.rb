@@ -37,7 +37,11 @@ class MeetingsController < ApplicationController
   end
 
   def destroy_review
-    if @connection.guest == current_user ? @meeting.guest_review = "" : @meeting.host_review = ""
+    if @connection.guest == current_user
+      @meeting.guest_review = ""
+    else
+      @meeting.host_review = ""
+    end
     @meeting.save
     redirect_to connection_meeting_path(@connection, @meeting)
   end

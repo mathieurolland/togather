@@ -5,7 +5,7 @@ class PlacesController < ApplicationController
   before_action :find_availabilities, only: [ :show, :update ]
 
   def index
-    @types = ["afterwork", "café", "lunch snack", "salad bar", "restaurant"]
+    @types = ["Afterwork", "Café", "Lunch snack", "Salad bar", "restaurant"]
     @places = Place.all
   end
 
@@ -63,7 +63,7 @@ class PlacesController < ApplicationController
   end
 
   def place_params
-    params.require(:place).permit!
+    params.require(:place).permit(:name, :address, :description, :phone_number, :type_partner, :pax, :photo )
   end
 
   def resa_params
