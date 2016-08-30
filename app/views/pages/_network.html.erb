@@ -4,6 +4,9 @@
 <% content_for(:after_js) do %>
 <script type="text/javascript">
   // create an array with nodes
+  var len = undefined;
+  var DIR = 'img/soft-scraps-icons/';
+
   var nodes = new vis.DataSet(<%= raw current_user.node_user.to_json %>);
 
   // create an array with edges
@@ -18,50 +21,27 @@
   var options = {};
   var network = new vis.Network(container, data, options);
 
-  var options = {
-  interaction:{
-    dragNodes:true,
-    dragView: true,
-    hideEdgesOnDrag: false,
-    hideNodesOnDrag: false,
-    hover: true,
-    hoverConnectedEdges: true,
-    keyboard: {
-      enabled: false,
-      speed: {x: 10, y: 10, zoom: 0.02},
-      bindToWindow: true
-    },
-    multiselect: false,
-    navigationButtons: false,
-    selectable: true,
-    selectConnectedEdges: true,
-    tooltipDelay: 300,
-    zoomView: true,
-    clickToUse: true
-  },
-  nodes:{
-    borderWidth: 1,
-    borderWidthSelected: 2,
-    brokenImage:undefined,
-    color: {
-      border: '#2B7CE9',
-      background: '#97C2FC',
-      highlight: {
-        border: '#2B7CE9',
-        background: '#D2E5FF'
-      },
-      hover: {
-        border: '#2B7CE9',
-        background: '#D2E5FF'
-      }
-    },
-    size: 45,
-    title: "plop",
-    value: undefined,
-    x: undefined,
-    y: undefined
-  }
-}
+   var options = {
+        nodes: {
+          borderWidth:4,
+          size:30,
+          shape: 'dot',
+        color: {
+            border: '#222222',
+            background: '#DBD3D8'
+          },
+        font: {
+                size: 32
+           },
+          font:{color:'#5968D9'},
+          shadow:true
+        },
+        edges: {
+          color: '#223843',
+          width: 2,
+          shadow:true
+        }
+      };
 
 network.setOptions(options);
 </script>

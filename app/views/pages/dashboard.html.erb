@@ -144,15 +144,13 @@
     <div class="col-md-6">
       <div class="row">
         <div class="map-work">
-          <div id="mapSlider" class="map-slider">
-            Map
-          </div>
+          <input type="checkbox" name="toggle-map" id="toggle-map"/>
+          <label for="toggle-map"></label>
           <% @hash.each do |marker| %>
             <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
           <% end %>
             <% @hashcontent = raw @hash.to_json %>
             <div id="network">
-              <%= render 'network' %>
             </div>
             <div id="mapContainer" class="map-container">
               <div id="map">
