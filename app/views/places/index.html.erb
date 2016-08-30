@@ -12,22 +12,28 @@
           <div class="col-xs-4">
             <div class="macol">
               <% if current_user.status %>
-                <div class="card monimage" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url('http://res.cloudinary.com/diqequpgu/image/upload/v1472165522/photo_place_segabm.jpg');">
-                <div class="card-description">
-                  <h2><%= place.name %></h2>
-                  <p><%= place.description %></p>
-                </div>
-                <%= link_to "", place_path(place), class: "card-link" %>
-                <a href=""></a>
-              </div>
-                <!-- <h2><%= link_to place.name, place_path(place) %></h2> -->
-              <% else %>
-                <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url('http://res.cloudinary.com/diqequpgu/image/upload/v1472165522/photo_place_segabm.jpg');">
+
+                <div class="card monimage" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url(<%= cl_image_path(place.photo.public_id) %>);">
                   <div class="card-description">
-                  <h2><%= place.name %></h2>
+                    <h2><%= place.name %></h2>
+                    <p><%= place.description %></p>
                   </div>
+                  <%= link_to "", place_path(place), class: "card-link" %>
                   <a href=""></a>
                 </div>
+
+              <% else %>
+
+                <div class="card monimage" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url('http://res.cloudinary.com/diqequpgu/image/upload/v1472165522/photo_place_segabm.jpg');">
+                  <div class="card-description">
+                    <h2><%= place.name %></h2>
+                    <p><%= place.description %></p>
+                  </div>
+                </div>
+                <%= link_to "", connection_meeting_place_path(@connection, @meeting, place), class: "card-link" %>
+                <a href=""></a>
+              </div>
+
               <% end %>
           </div>
           </div>
