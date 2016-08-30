@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :hosting_guys, through: :hosted_connections, class_name: "User", source: :host
   has_many :invited_guys, through: :invited_connections, class_name: "User", source: :guest
 
-  has_attachment :photo
+  has_attachment :photo, accept: [:jpg, :png]
   has_many :meetings, through: :connections
   has_many :messages
   has_many :user_skills
@@ -122,7 +122,7 @@ class User < ApplicationRecord
     data_connection = []
     datas.each do |x|
       # y = { from: x[:to], to: x[:from] }
-      unless data_connection.include?({ from: x[:to], to: x[:from] } && { from: x[:from], to: x[:to] })
+      unless data_connection.include?({ from: x[:to], to: x[:from] })
         data_connection << x
       end
     end
@@ -134,39 +134,41 @@ class User < ApplicationRecord
   def node_user
     nodeconnected = []
     nodesuggested = []
-    nodeconnected << { id: self.id, label: "#{self.first_name} #{self.last_name}" }
+    nodeconnected << { id: self.id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{self.photo.path}",  brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", label: "#{self.first_name} #{self.last_name}" }
     self.invited_connections.where(status: "connected").each do |x|
-      nodeconnected << { id: x.host_id, label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
+      nodeconnected << { id: x.host_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{User.find(x.host_id).photo.path}",  brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", group: 1, label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
     end
         nodeconnected.each do |y|
         User.find(y[:id]).invited_connections.where(status: "connected").each do |x|
-        nodesuggested << { id: x.host_id, label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
+        nodesuggested << { id: x.host_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{User.find(x.host_id).photo.path}", brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", group: 2, label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
       end
         User.find(y[:id]).hosted_connections.where(status: "connected").each do |x|
-        nodesuggested << { id: x.guest_id, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
+        nodesuggested << { id: x.guest_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{User.find(x.guest_id).photo.path}", brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", group: 2, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
       end
     end
     self.hosted_connections.where(status: "connected").each do |x|
-      nodeconnected << { id: x.guest_id, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
+      nodeconnected << { id: x.guest_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{User.find(x.guest_id).photo.path}",  brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", group: 1, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
     end
       nodeconnected.each do |y|
         User.find(y[:id]).invited_connections.where(status: "connected").each do |x|
-        nodesuggested << { id: x.host_id, label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
+        nodesuggested << { id: x.host_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{User.find(x.host_id).photo.path}", group: 2, brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
       end
         User.find(y[:id]).hosted_connections.where(status: "connected").each do |x|
-        nodesuggested << { id: x.guest_id, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
+        nodesuggested << { id: x.guest_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{User.find(x.guest_id).photo.path}", group: 2, brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
       end
     end
-    node_us = nodesuggested + nodesuggested
-    b =node_us.map{ |h| h[:id]}.uniq
+    node_us = nodesuggested + nodeconnected
+    b =nodeconnected.map{ |h| h[:id]}.uniq
+    c = nodesuggested.map{ |h| h[:id]}.uniq
     node = []
     b.each do |x|
-      node << { id: x, label: "#{User.find(x).first_name} #{User.find(x).last_name}" }
+      node << { id: x, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{User.find(x).photo.path}", brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", label: "#{User.find(x).first_name} #{User.find(x).last_name}", group: 1 }
     end
-    node
+     c.each do |x|
+      unless node.include?({ id: x, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{User.find(x).photo.path}", brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", label: "#{User.find(x).first_name} #{User.find(x).last_name}", group: 1 })
+      node << { id: x, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{User.find(x).photo.path}", brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", label: "#{User.find(x).first_name} #{User.find(x).last_name}", group: 2 }
+      end
+    end
+    node - [{ id: self.id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{self.photo.path}", brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", label: "#{self.first_name} #{self.last_name}", group: 1 }] + [{ id: self.id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{self.photo.path}", label: "#{self.first_name} #{self.last_name}", group: 0 }]
   end
-
-
-
-
 end
