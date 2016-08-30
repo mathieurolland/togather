@@ -166,7 +166,11 @@ class User < ApplicationRecord
     node
   end
 
-
+  def count_meetings
+    count = 0
+    self.places.each { |place| count += place.meetings.count }
+    count
+  end
 
 
 end
