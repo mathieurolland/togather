@@ -5,18 +5,43 @@
 
 .profil-wrapper {
   padding: 20px;
-  margin-top: 52px;
-  .profile-picture {
-    text-align: center;
-    img {
-      margin-bottom: 10px;
+  .profile-bio {
+    display: flex;
+    .profile-picture {
+      display: flex;
+      flex-direction: column;
+      // justify-content: center;
+      img {
+        margin-bottom: 18px;
+      }
+      a {
+        text-align: center;
+      }
     }
-    a {
-
+  }
+  .profile-details {
+    display: flex;
+    .profile-workplace {
+      width: 120px;
+      padding-right: 7px;
+      .bio-title {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 600;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+    .profile-interests {
+      width: 50%;
+      .bio-title {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 600;
+      }
     }
   }
   .desc-bio {
-    padding-left: 10px;
+    padding-left: 20px;
     .bio-title {
       font-family: 'Roboto', sans-serif;
       font-weight: 600;
@@ -29,15 +54,11 @@
     margin: 10px 100px;
   }
   .profile-skills {
-    text-align: center;
     .skills-icons {
-      margin: 10px 60px 0 60px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      margin: 7px 0;
       img {
-        height: 25px;
-        margin: 0 5px;
+        height: 17px;
+
       }
     }
   }
@@ -45,20 +66,39 @@
 
 .suggestion-content {
   padding-left: 15px;
+  margin-top: 32px;
 }
 
 .suggestion-card {
   margin: 15px 15px 15px 0;
   padding: 15px;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.07), 0 1px 0 0 rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+
   .center-picture {
-    height: 80px;
+    margin-right: 15px;
     display: flex;
     align-items: center;
   }
+  .suggestion-card-body {
+    width: 100%;
+    height: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .suggestion-card-text {
+      display: flex;
+      justify-content: space-between;
+      span {
+        padding-right: 15px;
+      }
+
+    }
+
+  }
   .inline-icons {
-    width: 120px;
-    padding-left: 0;
+    width: 100%;
+    height: 20px;
+    padding: 0 15px 0 0;
     img {
       height: 17px;
     }
