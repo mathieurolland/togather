@@ -14,6 +14,13 @@ Rails.application.routes.draw do
   patch "/dashboard/update-skills", to: "pages#update_skills"
   put "/dashboard/update-skills", to: "pages#update_skills"
   get "/partner/", to: "pages#partner"
+  patch "/connections/:connection_id/meetings/:id/review", to: "meetings#change_review", as: "review"
+  put "/connections/:connection_id/meetings/:id/review", to: "meetings#change_review"
+  delete "/connections/:connection_id/meetings/:id/review", to: "meetings#destroy_review"
+  get "/connections/:connection_id/meetings/:id/edit-review", to: "meetings#edit_review", as: "edit_review"
+  patch "/connections/:connection_id/meetings/:id/status/", to: "connections#finalize_status", as: "status"
+  put "/connections/:id/status/", to: "connections#finalize-status"
+
   resources :recommended_users, only: [:create, :update, :destroy]
   resources :categories, only: [:index]
   resources :skills, only: [:index]

@@ -36,9 +36,24 @@ class ConnectionsController < ApplicationController
   def show
   end
 
+  def finalize_status
+    @meeting =  Meeting.find(params[:id])
+    @connection = @meeting.connection
+    @connection.update(status_params)
+    if status_params[:status] == "connected"
+      redirect_to connection_meeting_path(@connection, @meeting)
+    else
+      redirect_to dashboard_path
+    end
+  end
+
   private
 
   def find_connection
     @connection = Connection.find(params[:id])
+  end
+
+  def status_params
+    params.require(:connection).permit(:status)
   end
 end
