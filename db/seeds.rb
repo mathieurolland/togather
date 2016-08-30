@@ -320,29 +320,29 @@ connection_types = [
 end
 
 # places
-10.times do
-  partner = User.create(
-    email: Faker::Internet.email,
-    password: Faker::Internet.password(8),
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    status: true,
-    gender: ["male", "female"].sample,
-    work_place: fake_address_gironde,
-    birthday: Faker::Date.backward(60),
-    bio: Faker::Lorem.paragraph
-  )
+# 10.times do
+#   partner = User.create(
+#     email: Faker::Internet.email,
+#     password: Faker::Internet.password(8),
+#     first_name: Faker::Name.first_name,
+#     last_name: Faker::Name.last_name,
+#     status: true,
+#     gender: ["male", "female"].sample,
+#     work_place: fake_address_gironde,
+#     birthday: Faker::Date.backward(60),
+#     bio: Faker::Lorem.paragraph
+#   )
 
-  Place.create(
-    name: Faker::Company.name,
-    address: fake_address_gironde,
-    description: Faker::Company.catch_phrase,
-    phone_number: Faker::PhoneNumber.phone_number,
-    type_partner: ["afterwork", "café", "lunch snack", "salad bar", "restaurant"].sample,
-    pax: Faker::Number.number(2), # balance 2 digits
-    user: partner
-  )
-end
+#   Place.create(
+#     name: Faker::Company.name,
+#     address: fake_address_gironde,
+#     description: Faker::Company.catch_phrase,
+#     phone_number: Faker::PhoneNumber.phone_number,
+#     type_partner: ["afterwork", "café", "lunch snack", "salad bar", "restaurant"].sample,
+#     pax: Faker::Number.number(2), # balance 2 digits
+#     user: partner
+#   )
+# end
 
 
 
@@ -365,6 +365,7 @@ p = Place.create(
   phone_number: "060305",
   type_partner: "café",
   pax: 1,
+  photo_url: "http://lesmondaines.com/wp-content/uploads/2012/12/french-coffee-shop-grenoble-1.png",
   user: partner
 )
 Meeting.create(
@@ -378,3 +379,156 @@ Meeting.create(
 
 User.last.places.first.availabilities.create(min_day: "Monday", max_day: "Sunday", min_time: Time.now, max_time: Time.now)
 
+# partners
+philipe = User.create( email: "philipe@gmail.com", password: "blabla", first_name: "Philipe", last_name: Faker::Name.last_name, status: true, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout")
+pierre = User.create( email: "pierre@gmail.com", password: "blabla", first_name: "Pierre", last_name: Faker::Name.last_name, status: true, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout")
+polo = User.create( email: "polo@gmail.com", password: "blabla", first_name: "Polo", last_name: Faker::Name.last_name, status: true, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout")
+patrick = User.create( email: "patrick@gmail.com", password: "blabla", first_name: "Patrick", last_name: Faker::Name.last_name, status: true, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout")
+patrice = User.create( email: "patrice@gmail.com", password: "blabla", first_name: "Patrice", last_name: Faker::Name.last_name, status: true, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout")
+paco = User.create( email: "paco@gmail.com", password: "blabla", first_name: "Paco", last_name: Faker::Name.last_name, status: true, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout")
+patricia = User.create( email: "patricia@gmail.com", password: "blabla", first_name: "Patricia", last_name: Faker::Name.last_name, status: true, gender: "female", work_place: fake_address_gironde, birthday: time_rand, bio: "plout")
+paola = User.create( email: "paola@gmail.com", password: "blabla", first_name: "Paola", last_name: Faker::Name.last_name, status: true, gender: "female", work_place: fake_address_gironde, birthday: time_rand, bio: "plout")
+pepita = User.create( email: "pepita@gmail.com", password: "blabla", first_name: "Pepita", last_name: Faker::Name.last_name, status: true, gender: "female", work_place: fake_address_gironde, birthday: time_rand, bio: "plout")
+paulette = User.create( email: "paulette@gmail.com", password: "blabla", first_name: "Paulette", last_name: Faker::Name.last_name, status: true, gender: "female", work_place: fake_address_gironde, birthday: time_rand, bio: "plout")
+
+#places
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Come to relax after work",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "afterwork",
+    pax: 10,
+    photo_url: "http://www.leboost.com/images/etablissements/2011/01/31/564/1.originale.jpg",
+    user: philipe
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Take a break",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "afterwork",
+    pax: 12,
+    photo_url: "http://irishpubcompany.com/wp-content/uploads/2014/08/Slider-for-pcb.jpg",
+    user: pierre
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "afterwork",
+    pax: 12,
+    photo_url: "http://centrenav.ca/files/tinymce/uploaded/nc-food-and-beverage-pub.jpg",
+    user: pierre
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Enjoy a coffee",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "café",
+    pax: 16,
+    photo_url: "https://surlaterrasseduncafe.files.wordpress.com/2014/06/cropped-cafes-in-montpellier.jpg",
+    user: polo
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Get your dose of energy with a warm coffee",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "café",
+    pax: 14,
+    photo_url: "https://actubordelaiseblog.files.wordpress.com/2016/06/patio-restaurant-bordeaux.jpg?w=620",
+    user: patrick
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Fast service and great quality",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "lunch snack",
+    pax: 20,
+    photo_url: "https://media-cdn.tripadvisor.com/media/photo-s/08/8e/63/ad/camping-le-verger-fleuri.jpg",
+    user: patrice
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Take a break",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "lunch snack",
+    pax: 20,
+    photo_url: "http://www.latableduhuit.fr/wp-content/uploads/2016/03/terrasse_bd-resized.jpg",
+    user: patrice
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Best qualit lunch ever",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "lunch snack",
+    pax: 8,
+    photo_url: "https://media-cdn.tripadvisor.com/media/photo-s/02/a3/c2/8a/filename-photo-051-jpg.jpg",
+    user: paco
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Hot summer, fresh salad",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "salad bar",
+    pax: 10,
+    photo_url: "https://u.tfstatic.com/restaurant_photos/499/39499/169/612/bar-toit-terrasse-molitor-f7535.jpg",
+    user: patricia
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Hungry ?",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "salad bar",
+    pax: 10,
+    photo_url: "http://villa-honegg.ch/media/content/text_image/villa-honegg-restaurant-terrasse.jpg.1150x0_q85.jpg",
+    user: patricia
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Fresh vegetables and fruits, all bio !",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "salad bar",
+    pax: 12,
+    photo_url: "http://www.gqmagazine.fr/uploads/images/thumbs/201623/18/buddha_bar_hotel_paris_lounge_bar_le_qu4tre_sizel_437636_1600_1200_jpg_941_jpeg_2922.jpeg_north_600x_white.jpg",
+    user: paola
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Bon appétit!",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "restaurant",
+    pax: 16,
+    photo_url: "http://www.thonhotels.be/Thonhotels/Hoteller/Belgia/Thon_Hotel_EU/Restaurant/thon-hotel-eu-restaurant-4.jpg",
+    user: pepita
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Best restaurant in town",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "restaurant",
+    pax: 10,
+    photo_url: "https://media-cdn.tripadvisor.com/media/photo-s/03/ac/61/2d/albert-cafe.jpg",
+    user: paulette
+  )
+Place.create(
+    name: Faker::Company.name,
+    address: fake_address_gironde,
+    description: "Traditional specialities",
+    phone_number: Faker::PhoneNumber.phone_number,
+    type_partner: "restaurant",
+    pax: 10,
+    photo_url: "http://www.tourisme-montreal.org/blog/wp-content/uploads/2014/06/terrasse-montreal-boris-bistro.jpg",
+    user: paulette
+  )

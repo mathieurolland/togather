@@ -1,9 +1,8 @@
 <p><%= link_to "Back", places_path %></p>
 <div class="place-picture">
-  <img src="http://res.cloudinary.com/diqequpgu/image/upload/c_scale,h_285,q_100,w_674/v1472165522/photo_place_segabm.jpg" style="position: relative; width: 100%;" alt=""></img>
 
   <% if @place.photo? %>
-    <%= cl_image_tag @place.photo.path, width: 200, height: 300, crop: :fill %>
+    <%= cl_image_tag @place.photo.path, width: 1900, height: 800, crop: :fill %>
   <% end %>
 
 </div>
