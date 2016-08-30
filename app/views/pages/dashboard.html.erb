@@ -58,9 +58,10 @@
             <div class="suggestion-wrapper">
 
             <div class="suggestion-content">
-              <h3>
+              <h3 id="hiding-bar">
                 Suggestions
               </h3>
+              <div class="underspace"></div>
               <% @suggestions.each do |suggestion| %>
                 <% if suggestion.status == "valid" %>
                   <% if suggestion.guest == current_user %>
