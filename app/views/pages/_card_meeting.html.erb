@@ -1,0 +1,34 @@
+<li>
+  <span class="partner-place-name">
+    <%= place.name %>
+  </span>
+  <br>
+  <span class="partner-resa-details"> 2 clients reservation for the <%= meeting.date.strftime("%d %B %Y") %> at <%= meeting.date.strftime("%H")%>:<%= meeting.date.strftime("%M")%></span>
+  <div class="meeters">
+    <div class="host-meeter">
+      <% host = meeting.connection.host %>
+      <% if host.photo? %>
+        <%= cl_image_tag host.photo.path, gravity: "face", width: 65, height: 65, :crop=>"thumb", radius: "max" %>
+      <% else %>
+        <%= image_tag "http://placehold.it/65x65" %>
+      <% end %>
+      <div class="host-name">
+        <%= host.first_name %>
+        <%= host.last_name %>
+      </div>
+    </div>
+    <div class="guest-meeter">
+      <% guest = meeting.connection.guest %>
+      <div class="guest-name">
+        <%= guest.first_name %>
+        <%= guest.last_name %>
+      </div>
+      <% if guest.photo? %>
+        <%= cl_image_tag guest.photo.path, gravity: "face", width: 65, height: 65, :crop=>"thumb", radius: "max" %>
+      <% else %>
+        <%= image_tag "http://placehold.it/65x65" %>
+      <% end %>
+    </div>
+  </div>
+</li>
+<br>
