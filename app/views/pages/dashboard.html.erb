@@ -1,203 +1,174 @@
 <div class="container-fluid">
-
   <div class="row">
     <div class="col-md-3 no-marginlr-col">
       <div class="row">
         <%= render "shared/navbar" %>
-          <div class="profil-wrapper">
-              <!-- <div class="media"> -->
-                <!-- <div class="media-left"> -->
-                <div class="profile-bio">
-
-                  <div class="profile-picture">
-                    <% if current_user.photo? %>
-                      <%= cl_image_tag current_user.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
-                    <% else %>
-                      <%= image_tag "http://placehold.it/100x100" %>
-                    <% end %>
-                    <%= link_to "Edit profile", edit_user_registration_path %>
-                  </div>
-                <!-- </div> -->
-                <!-- <div class="media-body desc-bio"> -->
-                  <div class="desc-bio">
-                    <span class="bio-title"><%= current_user.first_name %></span>
-                    <p>
-                      <%= truncate(current_user.bio, length: 105) %>
-                    </p>
-                  </div>
+        <div class="profil-wrapper">
+          <div class="profile-bio">
+            <div class="profile-picture">
+              <% if current_user.photo? %>
+                <%= cl_image_tag current_user.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
+              <% else %>
+                <%= image_tag "http://placehold.it/100x100" %>
+              <% end %>
+              <%= link_to "Edit profile", edit_user_registration_path %>
+            </div>
+            <div class="desc-bio">
+              <span class="bio-title"><%= current_user.first_name %></span>
+              <p>
+                <%= truncate(current_user.bio, length: 105) %>
+              </p>
+            </div>
+          </div>
+          <div class="profile-details">
+            <div class="profile-workplace">
+              <span class="bio-title">Work place</span>
+              <p>
+                <% if current_user.work_place.nil? %>
+                  <%= "-" %>
+                <% else %>
+                  <%= current_user.work_place %>
+                <% end %>
+              </p>
+            </div>
+            <div class="profile-interests">
+              <span class="bio-title">Your interests</span>
+              <div class="profile-skills">
+                <div class="skills-icons">
+                  <% s = current_user.skills.shuffle %>
+                  <% skills = s.sample(14) %>
+                  <% skills.each do |skill| %>
+                    <%= image_tag(skill.icon) %>
+                  <% end %>
                 </div>
-                <div class="profile-details">
-                  <div class="profile-workplace">
-                    <span class="bio-title">Work place</span>
-                    <p>
-                      <% if current_user.work_place.nil? %>
-                        <%= "-" %>
-                      <% else %>
-                        <%= current_user.work_place %>
-                      <% end %>
-                    </p>
-                  </div>
-                  <div class="profile-interests">
-                    <span class="bio-title">Your interests</span>
-                    <div class="profile-skills">
-                      <div class="skills-icons">
-                        <% s = current_user.skills %>
-                        <% skills = s.sample(8) %>
-                        <% skills.each do |skill| %>
-                          <%= image_tag(skill.icon) %>
-                          <%= '-' if (skill != current_user.skills.last) %>
-                        <% end %>
-                      </div>
-                      <%= link_to "Edit interests", dashboard_edit_skills_path %>
-                    </div>
-                  </div>
-                </div>
-                <!-- </div> -->
-                <hr>
-              <!-- </div> media -->
-
-          </div> <!--profil wrapper-->
+                <%= link_to "Edit interests", dashboard_edit_skills_path %>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div> <!--profil wrapper-->
       </div> <!--row-->
     </div> <!--col-->
-
     <div class="col-md-9">
       <div class="row">
-        <div class="col-md-6 no-marginlr-col">
-          <div class="suggestion-content">
-            <div class="row">
-
-            <h3>
-              Suggestions
-            </h3>
-            <% @suggestions.each_with_index do |suggestion| %>
-              <% if suggestion.status == "valid" %>
-                <% if suggestion.guest == current_user %>
-                  <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
-                    <div class="suggestion-card">
-                      <p>
-                        <%= suggestion.host.first_name %>
-                      </p>
-                    </div>
+        <div class="dashboard-not-profile">
+          <div class="col-md-6 no-marginlr-col">
+            <div class="suggestion-content">
+              <!-- <div class="row"> -->
+              <h3 class="map-slider">
+                Suggestions
+              </h3>
+              <% @suggestions.each_with_index do |suggestion| %>
+                <% if suggestion.status == "valid" %>
+                  <% if suggestion.guest == current_user %>
+                    <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
+                      <div class="suggestion-card">
+                        <p>
+                          <%= suggestion.host.first_name %>
+                        </p>
+                      </div>
+                    <% end %>
+                  <% else %>
+                    <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
+                      <div class="suggestion-card">
+                        <p>
+                          <%= suggestion.guest.first_name %>
+                        </p>
+                      </div>
+                    <% end %>
                   <% end %>
                 <% else %>
-                  <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
+                  <%= link_to suggestion do %>
                     <div class="suggestion-card">
-                      <p>
-                        <%= suggestion.guest.first_name %>
-                      </p>
-                    </div>
-                  <% end %>
-                <% end %>
-              <% else %>
-                <%= link_to suggestion do %>
-                  <div class="suggestion-card">
-                    <div class="media">
-                      <div class="media-left">
-                        <div class="center-picture">
-                          <% if suggestion.host.photo? %>
-                            <%= cl_image_tag suggestion.host.photo.path, gravity: "face", width: 65, height: 65, :crop=>"thumb", radius: "max" %>
-                          <% else %>
-                            <%= image_tag "http://placehold.it/65x65" %>
-                          <% end %>
-                        </div>
-                      </div>
-                      <div class="media-body">
-                        <div class="suggestion-card-body">
-
-                          <div class="suggestion-card-text">
-                            <span>
-                              <%= suggestion.host.first_name %>
-                            </span>
-                            <span>
-                              <%= suggestion.host.status %>
-                            </span>
+                      <div class="media">
+                        <div class="media-left">
+                          <div class="center-picture">
+                            <% if suggestion.host.photo? %>
+                              <%= cl_image_tag suggestion.host.photo.path, gravity: "face", width: 65, height: 65, :crop=>"thumb", radius: "max" %>
+                            <% else %>
+                              <%= image_tag "http://placehold.it/65x65" %>
+                            <% end %>
                           </div>
-                          <div class="suggestion-card-skills">
-                            <div class="carousel slide" data-ride="carousel" data-interval=<%= rand(3000..5000) %> data-pause="null" >
-                              <div class="carousel-inner" role="listbox">
-                                <div class="item active">
-                                  <div class="inline-icons">
-                                    <% askills = suggestion.host.skills.sample(4) %>
-                                    <% askills.each do |askill| %>
-                                      <%= image_tag(askill.icon) %>
-                                    <% end %>
+                        </div>
+                        <div class="media-body">
+                          <div class="suggestion-card-body">
+                            <div class="suggestion-card-text">
+                              <span>
+                                <%= suggestion.host.first_name %>
+                              </span>
+                              <span>
+                                <%= suggestion.host.status %>
+                              </span>
+                            </div>
+                            <div class="suggestion-card-skills">
+                              <div class="carousel slide" data-ride="carousel" data-interval=<%= rand(3000..5000) %> data-pause="null" >
+                                <div class="carousel-inner" role="listbox">
+                                  <div class="item active">
+                                    <div class="inline-icons">
+                                      <% askills = suggestion.host.skills.sample(4) %>
+                                      <% askills.each do |askill| %>
+                                        <%= image_tag(askill.icon) %>
+                                      <% end %>
+                                    </div>
                                   </div>
-                                </div>
-                                <div class="item">
-                                  <div class="inline-icons">
-                                    <% bskills = suggestion.host.skills.sample(4) %>
-                                    <% bskills.each do |bskill| %>
-                                      <%= image_tag(bskill.icon) %>
-                                    <% end %>
+                                  <div class="item">
+                                    <div class="inline-icons">
+                                      <% bskills = suggestion.host.skills.sample(4) %>
+                                      <% bskills.each do |bskill| %>
+                                        <%= image_tag(bskill.icon) %>
+                                      <% end %>
+                                    </div>
                                   </div>
-                                </div>
-                                <div class="item">
-                                  <div class="inline-icons">
-                                    <% cskills = suggestion.host.skills.sample(4) %>
-                                    <% cskills.each do |cskill| %>
-                                      <%= image_tag(cskill.icon) %>
-                                    <% end %>
+                                  <div class="item">
+                                    <div class="inline-icons">
+                                      <% cskills = suggestion.host.skills.sample(4) %>
+                                      <% cskills.each do |cskill| %>
+                                        <%= image_tag(cskill.icon) %>
+                                      <% end %>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </div> <!--media-->
-                  </div>
-                <% end %>
-              <% end %> <!--else-->
-            <% end %> <!--do-->
-          </div>
-        </div> <!--suggestion content-->
-
+                      </div> <!--media-->
+                    </div>
+                  <% end %>
+                <% end %> <!--else-->
+              <% end %> <!--do-->
+            <!-- </div> -->
+          </div> <!--suggestion content-->
         </div>
 
-      <div class="col-md-6">
+    <div class="col-md-6">
       <div class="row">
         <div class="map-work">
-            <% @hash.each do |marker| %>
-              <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
-            <% end %>
+          <div id="mapSlider" class="map-slider">
+            Map
+          </div>
+          <% @hash.each do |marker| %>
+            <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
+          <% end %>
             <% @hashcontent = raw @hash.to_json %>
-
-            <div id="map">
-              <% content_for(:after_js) do %>
-                <script>
-                  $(document).ready(function() {
-                    var styles = [{"featureType":"all","elementType":"all","stylers":[{"lightness":"42"},{"visibility":"on"},{"hue":"#ff0000"},{"saturation":"-100"},{"gamma":"0.78"},{"weight":"0.37"},{"invert_lightness":true}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#3ec7c9"},{"visibility":"on"}]}];
-
-                    var handler = Gmaps.build('Google');
-                    handler.buildMap({
-                      // provider: {
-                      //   styles: styles
-                      // },
-                      internal: {
-                        id: 'map' }
-                      },
-                      function() {
-                        markers = handler.addMarkers(<%= @hashcontent %>);
-                        handler.bounds.extendWith(markers);
-                        handler.fitMapToBounds();
-                        if (markers.length == 0) {
-                          handler.getMap().setZoom(2);
-                        } else if (markers.length == 1) {
-                          handler.getMap().setZoom(14);
-                        }
-                      }
-                    );
-                  });
-                </script>
-                <!-- <script>
-                  google.maps.event.addListener(Gmaps4Rails.markers[0].google_object, 'click', function(object){ alert("hello"); });
-                </script> -->
-              <% end %>
+            <div id="network">
+              <%= render 'network' %>
+            </div>
+            <div id="mapContainer" class="map-container">
+              <div id="map">
+                <% content_for(:after_js) do %>
+                  <%= render partial: 'gmaps', locals: {hash: @hashcontent} %>
+                  <!-- <script>
+                    google.maps.event.addListener(Gmaps4Rails.markers[0].google_object, 'click', function(object){ alert("hello"); });
+                  </script> -->
+                <% end %>
+              </div>
             </div>
          </div>
       </div>
 
       </div>
+    </div>
       </div>
     </div>
   </div>
@@ -206,5 +177,5 @@
   </div>
 </div>
 
-   <%= render 'network' %>
+
 

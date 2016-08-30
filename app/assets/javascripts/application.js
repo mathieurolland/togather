@@ -19,3 +19,8 @@ $('#signUpModal').on('shown.bs.modal', function () {
 $('#loginModal').on('shown.bs.modal', function () {
   $('#user_email').focus();
 });
+
+$('#mapSlider').click(function () {
+  // alert("hello");
+  $('#mapContainer').toggle('slide', { direction: 'right' }, 1000);
+});

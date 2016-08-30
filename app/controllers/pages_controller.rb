@@ -41,7 +41,13 @@ class PagesController < ApplicationController
     @count_meetings = i
 
     @meetings = Meeting.all
-    @places = Place.all
+    @places = @user.places
+    @url = "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png"
+    @hash = Gmaps4rails.build_markers(@places) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+      marker.infowindow render_to_string(partial: "/places/map_box", locals: { place: place })
+    end
   end
 
   def edit_skills

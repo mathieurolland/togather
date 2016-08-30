@@ -1,90 +1,144 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-          <%= render "shared/navbar" %>
-    <h1 class="text-center">
-      <p><%= @user.first_name %>'s dashboard </p>
-    </h1>
-    <% if @user.status %>
-      <h2 class="text-center">Welcome partner !</h2>
-    <% else %>
-      <p>Oups, you're no partner</p>
-    <% end%>
-  </div>
+    <div class="col-md-3 no-marginlr-col">
+      <div class="row">
+        <%= render "shared/navbar" %>
+        <div class="profil-wrapper">
+          <div class="partner-profile">
 
-  <div class="row">
-        <h2>Booking</h2>
-  </div>
 
-  <div class="row">
-    <% @user.places.each do |place| %>
-      <% if !place.meetings %>
-        <p>No booking to confirm</p>
-      <% else %>
-        <% place.meetings.each do |meeting| %>
-    <ul class="text_inline">
-        <li>
-          <p><strong>Received the </strong><%= meeting.created_at.strftime("%B %d %Y")%> <strong> at </strong> <%= meeting.created_at.strftime("%H %M") %></p>
-          <div class="col-md-3">
-          <p><strong><%= place.name %></strong></p>
-          <p> 2 personnes </p>
-        </div>
-      </li>
-      <li>
-        <div>
-          <p><strong>Booking date</strong> <%= meeting.date.strftime("%B %d %Y")%></p>
-          <p><strong>Booking time</strong> <%= meeting.date.strftime("%H %M")%></p>
-        </div>
-      </li>
-    </ul>
-  </div>
+          <h2>
+            Hello <%= @user.first_name %>
+          </h2>
+          <% @user.places.each do |place| %>
+          <% if !place.meetings %>
+            <p>No booking to confirm</p>
+          <% else %>
+            <ul class="text_inline">
+              <% place.meetings.each do |meeting| %>
+                <li>
+                  <span class="partner-place-name">
+                    <%= place.name %>
+                  </span>
+                  <br>
+                  <span class="partner-resa-details"> 2 clients reservation for the <%= meeting.date.strftime("%d %B %Y") %> at <%= meeting.date.strftime("%H")%>:<%= meeting.date.strftime("%M")%></span>
+                  <div class="meeters">
+                    <div class="host-meeter">
+                      <% host = meeting.connection.host %>
+                      <% if host.photo? %>
+                        <%= cl_image_tag host.photo.path, gravity: "face", width: 65, height: 65, :crop=>"thumb", radius: "max" %>
+                      <% else %>
+                        <%= image_tag "http://placehold.it/65x65" %>
+                      <% end %>
+                      <div class="host-name">
+                        <%= host.first_name %>
+                        <%= host.last_name %>
+                      </div>
+                    </div>
+                    <div class="guest-meeter">
+                      <% guest = meeting.connection.guest %>
+                      <div class="guest-name">
+                        <%= guest.first_name %>
+                        <%= guest.last_name %>
+                      </div>
+                      <% if guest.photo? %>
+                        <%= cl_image_tag guest.photo.path, gravity: "face", width: 65, height: 65, :crop=>"thumb", radius: "max" %>
+                      <% else %>
+                        <%= image_tag "http://placehold.it/65x65" %>
+                      <% end %>
+
+                    </div>
+                  </div>
+                </li>
+                <br>
+              <% end %>
+        </ul>
+        <% end %>
       <% end %>
-    <% end %>
-  <% end %>
+          </div>
+        </div>
+        <!--profil wrapper-->
+      </div> <!--row-->
+    </div> <!--col-->
+    <div class="col-md-9">
+      <div class="row">
+        <div class="dashboard-not-profile">
 
-  <div class="row">
+          <div class="col-md-6 no-marginlr-col">
+            <div class="suggestion-content">
+              <div class="row">
+              <% if @places.nil? %>
+                <p> No place to show </p>
+              <% elsif @count_places == 1 %>
+                <h2>My place (<%= @count_places %>)</h2>
+              <% else %>
+                <h2>My places (<%= @count_places %>)</h2>
+              <% end %>
 
-    <% if @places.nil? %>
-      <p> No place to show </p>
-    <% elsif @count_places == 1 %>
-      <h2>My place (<%= @count_places %>)</h2>
-    <% else %>
-      <h2>My places (<%= @count_places %>)</h2>
-    <% end %>
+              <% if !@places.nil? %>
+                <% @user.places.each do |place| %>
+                  <div class="suggestion-card">
+                    <div class="media">
+                      <div class="media-left">
+                        <h4><%= place.name %><</h4>
+                        <div class="place-picture">
+                          <img src="http://res.cloudinary.com/diqequpgu/image/upload/c_scale,h_285,q_100,w_674/v1472165522/photo_place_segabm.jpg" style="position: relative; width: 100%;" alt=""></img>
+                        </div>
+                        <p><%= link_to "Delete", place_path(place), method: :delete, data: { confirm: "Are you sure you want to delete this product?" } %> &nbsp; <%= link_to "Edit", edit_place_path(place) %></p>
+                      </div>
+                      <div class="media-body">
 
-    <% if !@places.nil? %>
-      <% @user.places.each do |place| %>
-      <h4><strong><%= place.name %></strong></h4>
-
-    <div class="col-md-3">
-      <div class="place-picture">
-        <img src="http://res.cloudinary.com/diqequpgu/image/upload/c_scale,h_285,q_100,w_674/v1472165522/photo_place_segabm.jpg" style="position: relative; width: 100%;" alt=""></img>
+                        <ul class="text_inline">
+                          <div class="col-md-4">
+                            <li>
+                              <p>Address: <%= place.address %></p>
+                              <p>Description: <%= place.description %></p>
+                              <p>Phone number: <%= place.phone_number %></p>
+                              <p>Type: <%= place.type_partner %></p>
+                            </li>
+                          </div>
+                          <div class="col-md-4">
+                            <li>
+                                <p>Total pax: <%= place.pax %></p>
+                                </br>
+                            </li>
+                          </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
-      <p><%= link_to "Delete", place_path(place), method: :delete, data: { confirm: "Are you sure you want to delete this product?" } %> &nbsp; <%= link_to "Edit", edit_place_path(place) %></p>
+
+
+      <div class="col-md-6">
+      <div class="row">
+        <div class="map-work">
+            <% @hash.each do |marker| %>
+              <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
+            <% end %>
+            <% @hashcontent = raw @hash.to_json %>
+
+            <div id="map">
+              <% content_for(:after_js) do %>
+                <%= render partial: 'gmaps', locals: {hash: @hashcontent} %>
+                <!-- <script>
+                  google.maps.event.addListener(Gmaps4Rails.markers[0].google_object, 'click', function(object){ alert("hello"); });
+                </script> -->
+              <% end %>
+            </div>
+         </div>
+      </div>
+
+      </div>
+      </div>
     </div>
-    <ul class="text_inline">
-      <div class="col-md-4">
-        <li>
-          <p><strong>Address: </strong><%= place.address %></p>
-          <p><strong>Description: </strong><%= place.description %></p>
-          <p><strong>Phone number: </strong><%= place.phone_number %></p>
-          <p><strong>Type: </strong> <%= place.type_partner %></p>
-        </li>
-      </div>
-      <div class="col-md-4">
-        <li>
-            <p><strong>Total pax: </strong> <%= place.pax %></p>
-            <p><strong>Available Pax: </strong> </p>
-            </br>
-        </li>
-      </div>
-    </ul>
-  </div>
-      <% end %>
-    <% end %>
-  </br>
-  <div class="text-center">
-    <p><%= link_to "Suggest a new place", new_place_path, class: "btn btn-default" %></p>
   </div>
 </div>
-
-
+</div>
+  </div>
+</div>
