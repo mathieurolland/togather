@@ -21,6 +21,24 @@ class PlacesController < ApplicationController
       @connection = Connection.find(params[:connection_id])
       @meeting = Meeting.find(params[:meeting_id])
     end
+
+    @url = "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png"
+    @hash = Gmaps4rails.build_markers(@place) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+      marker.infowindow render_to_string(partial: "/places/map_box", locals: { place: place })
+      # icon: "#{view_context.image_path("place2.png") }"
+      # marker.picture({
+      #                 :url    => "#{view_context.image_path("place2.png") }",
+      #                 :width  => "64",
+      #                 :height => "64",
+      #                 # :scaledWidth => "15", # Scaled width is half of the retina resolution; optional
+      #                 # :scaledHeight => "11", # Scaled width is half of the retina resolution; optional
+      #               })
+    end
+    # @hash.each do |marker|
+    #   marker[:icon] = "#{view_context.image_path("place2.png") }"
+    # end
   end
 
   def create
