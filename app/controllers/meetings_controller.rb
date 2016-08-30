@@ -1,4 +1,5 @@
 class MeetingsController < ApplicationController
+  before_action :find_connection_meeting, only: [ :show, :change_review, :edit_review, :destroy_review ]
 
   def index
     @meetings = Meeting.all
@@ -11,8 +12,6 @@ class MeetingsController < ApplicationController
   end
 
   def show
-    @meeting = Meeting.find(params[:id])
-    @connection = @meeting.connection
     @messages = @meeting.messages
     @new_message = Message.new
     if @connection.guest == current_user
@@ -27,25 +26,18 @@ class MeetingsController < ApplicationController
   end
 
   def change_review
-    @meeting = Meeting.find(params[:id])
-    @connection = @meeting.connection
-    @meeting.update(review_params)
-    redirect_to connection_meeting_path(@connection, @meeting)
+    if @meeting.update(review_params)
+      redirect_to connection_meeting_path(@connection, @meeting)
+    else
+      render :edit
+    end
   end
 
   def edit_review
-    @meeting = Meeting.find(params[:id])
-    @connection = @meeting.connection
   end
 
   def destroy_review
-    @meeting = Meeting.find(params[:id])
-    @connection = @meeting.connection
-    if @connection.guest == current_user
-      @meeting.guest_review = ""
-    else
-      @meeting.host_review = ""
-    end
+    if @connection.guest == current_user ? @meeting.guest_review = "" : @meeting.host_review = ""
     @meeting.save
     redirect_to connection_meeting_path(@connection, @meeting)
   end
@@ -56,4 +48,8 @@ class MeetingsController < ApplicationController
     params.require(:meeting).permit(:host_review, :guest_review)
   end
 
+  def find_connection_meeting
+    @meeting = Meeting.find(params[:id])
+    @connection = @meeting.connection
+  end
 end
