@@ -146,7 +146,7 @@ class User < ApplicationRecord
         nodesuggested << { id: x.guest_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{User.find(x.guest_id).photo.path}", brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", group: 2, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
       end
     end
-    self.hosted_connections.where(status: "connected").each do |x|
+    self.hosted_con&nections.where(status: "connected").each do |x|
       nodeconnected << { id: x.guest_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{User.find(x.guest_id).photo.path}",  brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", group: 1, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
     end
       nodeconnected.each do |y|
@@ -170,5 +170,11 @@ class User < ApplicationRecord
       end
     end
     node - [{ id: self.id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{self.photo.path}", brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", label: "#{self.first_name} #{self.last_name}", group: 1 }] + [{ id: self.id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{self.photo.path}", label: "#{self.first_name} #{self.last_name}", group: 0 }]
+  end
+
+  def count_meetings
+    count = 0
+    self.places.each { |place| count += place.meetings.count }
+    count
   end
 end

@@ -8,9 +8,9 @@
 
 
           <h2>
-            Hello <%= @user.first_name %>
+            Hello <%= current_user.first_name %>
           </h2>
-          <% @user.places.each do |place| %>
+          <% current_user.places.each do |place| %>
           <% if !place.meetings %>
             <p>No booking to confirm</p>
           <% else %>
@@ -76,7 +76,7 @@
               <% end %>
 
               <% if !@places.nil? %>
-                <% @user.places.each do |place| %>
+                <% current_user.places.each do |place| %>
                   <div class="suggestion-card">
                     <div class="media">
                       <div class="media-left">
