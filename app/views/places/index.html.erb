@@ -27,7 +27,7 @@
 
               <% else %>
 
-                <div class="card monimage" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url('http://res.cloudinary.com/diqequpgu/image/upload/v1472165522/photo_place_segabm.jpg');">
+                <div class="card monimage" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url(<%= cl_image_path(place.photo.public_id) %>);">
                   <div class="card-description">
                     <h2><%= place.name %></h2>
                     <p><%= place.description %></p>
