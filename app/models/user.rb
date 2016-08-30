@@ -94,14 +94,37 @@ class User < ApplicationRecord
   end
 
   def connected_data
-    data_connection = []
+    datas = []
     self.invited_connections.where(status: "connected").each do |x|
-    data_connection << { from: x.host_id,
-                to: self.id}
+      datas << { from: x.host_id,
+                  to: self.id}
+      User.find(x.host_id).invited_connections.where(status: "connected").each do |y|
+        datas << { from: y.host_id,
+                  to: y.guest_id}
+                end
+      User.find(x.host_id).hosted_connections.where(status: "connected").each do |y|
+        datas << { from: y.guest_id,
+                  to: y.host_id}
+                end
     end
     self.hosted_connections.where(status: "connected").each do |x|
-    data_connection << { from: self.id,
+    datas << { from: self.id,
                 to: x.guest_id}
+      User.find(x.guest_id).invited_connections.where(status: "connected").each do |y|
+        datas << { from: y.host_id,
+                  to: y.guest_id}
+                end
+      User.find(x.guest_id).hosted_connections.where(status: "connected").each do |y|
+        datas << { from: y.guest_id,
+                  to: y.host_id}
+            end
+    end
+    data_connection = []
+    datas.each do |x|
+      # y = { from: x[:to], to: x[:from] }
+      unless data_connection.include?({ from: x[:to], to: x[:from] })
+        data_connection << x
+      end
     end
     data_connection
   end
@@ -109,24 +132,40 @@ class User < ApplicationRecord
 
 
   def node_user
-    node = []
-    node << { id: self.id, label: "#{self.first_name} #{self.last_name}" }
+    nodeconnected = []
+    nodesuggested = []
+    nodeconnected << { id: self.id, label: "#{self.first_name} #{self.last_name}" }
     self.invited_connections.where(status: "connected").each do |x|
-      node << { id: x.host_id, label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
+      nodeconnected << { id: x.host_id, label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
     end
-   self.hosted_connections.where(status: "connected").each do |x|
-      node << { id: x.guest_id, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
+        nodeconnected.each do |y|
+        User.find(y[:id]).invited_connections.where(status: "connected").each do |x|
+        nodesuggested << { id: x.host_id, label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
+      end
+        User.find(y[:id]).hosted_connections.where(status: "connected").each do |x|
+        nodesuggested << { id: x.guest_id, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
+      end
+    end
+    self.hosted_connections.where(status: "connected").each do |x|
+      nodeconnected << { id: x.guest_id, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
+    end
+      nodeconnected.each do |y|
+        User.find(y[:id]).invited_connections.where(status: "connected").each do |x|
+        nodesuggested << { id: x.host_id, label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
+      end
+        User.find(y[:id]).hosted_connections.where(status: "connected").each do |x|
+        nodesuggested << { id: x.guest_id, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
+      end
+    end
+    node_us = nodesuggested + nodesuggested
+    b =node_us.map{ |h| h[:id]}.uniq
+    node = []
+    b.each do |x|
+      node << { id: x, label: "#{User.find(x).first_name} #{User.find(x).last_name}" }
     end
     node
   end
 
-  def node_util
-      node_users = []
-      self.node_user.each do |x|
-        node_users << User.find(x[:id])
-      end
-      node_users
-  end
 
 
 
