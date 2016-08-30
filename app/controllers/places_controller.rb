@@ -2,6 +2,7 @@ class PlacesController < ApplicationController
   before_action :find_place, only: [ :show, :edit, :update, :destroy ]
   before_action :find_geocoder, only: [ :show, :update ]
   before_action :find_connection_meeting, only: [ :index, :show, :update ]
+  before_action :find_availabilities, only: [ :show, :update ]
 
   def index
     @types = ["afterwork", "café", "lunch snack", "salad bar", "restaurant"]
@@ -13,12 +14,13 @@ class PlacesController < ApplicationController
   end
 
   def show
-    @availabilities = @place.order_dates_by_days
+  end
+
+  def edit
   end
 
   def create
-    @place = Place.new(place_params)
-    @place.user = current_user
+    @place = current_user.places.new(place_params)
     if @place.save
       redirect_to place_availabilities_path(@place)
     else
@@ -26,14 +28,9 @@ class PlacesController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
-    @availabilities = @place.order_dates_by_days
     if current_user.status
-      @place.update(place_params)
-      if @place.save
+      if @place.update(place_params)
         redirect_to partner_path(@user)
       else
         render :edit
@@ -90,5 +87,9 @@ class PlacesController < ApplicationController
       @connection = Connection.find(params[:connection_id])
       @meeting = Meeting.find(params[:meeting_id])
     end
+  end
+
+  def find_availabilities
+    @availabilities = @place.order_dates_by_days
   end
 end
