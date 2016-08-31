@@ -52,17 +52,16 @@
 .card-link:hover {
   opacity: 0.1;
 }
-.show-place-map {
+.maphotosize {
+  width: 100%;
+}
+.monmap {
   height: 300px;
   width: 100%;
 }
-.maphotosize {
-  width: 100px;
-}
-.mabordure {
-  border-bottom: dotted;
-}
 .monbackground {
+  //height: 100vh;
+  overflow: hidden;
   background: linear-gradient( 45deg, #AFAFAF, #F9F9F9 40%, #919191 );
 }
 .monalign {
@@ -71,6 +70,13 @@
 .monul {
   list-style-type:none;
 }
+// .maposition {
+//   position: absolute;
+// }
+.mabordure {
+  border-bottom: dotted;
+}
+
 
 
 

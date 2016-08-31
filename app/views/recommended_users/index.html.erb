@@ -1,9 +1,9 @@
 <h2> Your first Network </h2>
-<% current_user.recommended_users.each do |x| %>
-  <ul>
-    <il><%= x.email %></il>
-  </ul>
-<%end%>
+<p>
+  <% current_user.recommended_users.each do |x| %>
+    - <%= x.email %>
+  <%end%>
+</p>
 
 <%= render 'shared/recommended_form' %>
 
