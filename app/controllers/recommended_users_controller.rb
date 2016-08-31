@@ -9,7 +9,7 @@ class RecommendedUsersController < ApplicationController
 
     if @recommended_user.save
       #RecommendedMailer.creation_confirmation(@recommended_user).deliver_now
-      redirect_to recommended_users_path
+      redirect_to dashboard_path
     else
       render :index
     end
