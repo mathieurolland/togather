@@ -1,0 +1,10 @@
+class PlaceMailer < ApplicationMailer
+  def creation_confirmation(place)
+    @place = place
+
+    mail(
+      to:       @place.email,
+      subject:  "Place #{@place.name} created!"
+    )
+  end
+end
