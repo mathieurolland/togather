@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   end
   resources :connections, only: [:index, :create, :update, :show] do
     resources :meetings, only: [:create, :show, :update] do
-      resources :places
+      resources :places, only: [:index, :show]
       resources :messages, only: [:create]
     end
   end
