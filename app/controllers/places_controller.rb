@@ -22,7 +22,7 @@ class PlacesController < ApplicationController
   def create
     @place = current_user.places.new(place_params)
     if @place.save
-      PlacesMailer.creation_confirmation(@place).deliver_now
+      PlaceMailer.creation_confirmation(@place).deliver_now
       redirect_to place_availabilities_path(@place)
     else
       render :new
