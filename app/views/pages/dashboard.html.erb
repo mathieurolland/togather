@@ -141,85 +141,6 @@
                   <% end %>
                 <% end %> <!--else-->
               <% end %> <!--do-->
-              <% @suggestions.each do |suggestion| %>
-                <% if suggestion.status == "valid" %>
-                  <% if suggestion.guest == current_user %>
-                    <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
-                      <div class="suggestion-card">
-                        <p>
-                          <%= suggestion.host.first_name %>
-                        </p>
-                      </div>
-                    <% end %>
-                  <% else %>
-                    <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
-                      <div class="suggestion-card">
-                        <p>
-                          <%= suggestion.guest.first_name %>
-                        </p>
-                      </div>
-                    <% end %>
-                  <% end %>
-                <% else %>
-                  <%= link_to suggestion do %>
-                    <div class="suggestion-card">
-                      <div class="media">
-                        <div class="media-left">
-                          <div class="center-picture">
-                            <% if suggestion.host.photo? %>
-                              <%= cl_image_tag suggestion.host.photo.path, gravity: "face", width: 65, height: 65, :crop=>"thumb", radius: "max" %>
-                            <% else %>
-                              <%= image_tag "http://placehold.it/65x65" %>
-                            <% end %>
-                          </div>
-                        </div>
-                        <div class="media-body">
-                          <div class="suggestion-card-body">
-                            <div class="suggestion-card-text">
-                              <span>
-                                <%= suggestion.host.first_name %>
-                              </span>
-                              <span>
-                                <%= suggestion.status %>
-                              </span>
-                            </div>
-                            <div class="suggestion-card-skills">
-                              <div class="carousel slide" data-ride="carousel" data-interval=<%= rand(3000..5000) %> data-pause="null" >
-                                <div class="carousel-inner" role="listbox">
-                                  <div class="item active">
-                                    <div class="inline-icons">
-                                      <% askills = suggestion.host.skills.sample(4) %>
-                                      <% askills.each do |askill| %>
-                                        <%= image_tag(askill.icon) %>
-                                      <% end %>
-                                    </div>
-                                  </div>
-                                  <div class="item">
-                                    <div class="inline-icons">
-                                      <% bskills = suggestion.host.skills.sample(4) %>
-                                      <% bskills.each do |bskill| %>
-                                        <%= image_tag(bskill.icon) %>
-                                      <% end %>
-                                    </div>
-                                  </div>
-                                  <div class="item">
-                                    <div class="inline-icons">
-                                      <% cskills = suggestion.host.skills.sample(4) %>
-                                      <% cskills.each do |cskill| %>
-                                        <%= image_tag(cskill.icon) %>
-                                      <% end %>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div> <!--media-->
-                    </div>
-                  <% end %>
-                <% end %> <!--else-->
-              <% end %> <!--do-->
             </div>
           </div> <!--suggestion content-->
         </div>
@@ -229,10 +150,18 @@
         <input type="checkbox" name="toggle-map" id="toggle-map"/>
         <label for="toggle-map"></label>
         <div class="map-work">
-          <% @hash.each do |marker| %>
-            <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
-          <% end %>
-            <% @hashcontent = raw @hash.to_json %>
+            <% @hashplaces.each do |marker| %>
+              <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
+            <% end %>
+            <% hash = @hashplaces %>
+            <% hash << @hashhome.first %>
+            <% @hashfriends.each do |friend| %>
+              <% hash << friend %>
+            <% end %>
+            <% @hashsuggestions.each do |suggestion| %>
+              <% hash << suggestion %>
+            <% end %>
+            <% @hashcontent = raw hash.to_json %>
             <div id="network">
               <%= render "network" %>
             </div>
