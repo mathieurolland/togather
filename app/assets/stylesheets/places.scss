@@ -1,3 +1,15 @@
+#movefromright {
+  -webkit-animation: moveFromRightFade 2.5s ease both;
+  animation: moveFromRightFade 2.5s ease both;
+}
+@-webkit-keyframes moveFromRightFade {
+  from { opacity: 0.4; -webkit-transform: translateX(100%); }
+}
+@keyframes moveFromRightFade {
+  from { opacity: 0.4; -webkit-transform: translateX(100%); transform: translateX(100%); }
+}
+
+
 .card {
   height: 175px;
   background-size: cover !important;

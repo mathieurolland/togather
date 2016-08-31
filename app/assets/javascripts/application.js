@@ -27,3 +27,20 @@ $('.suggestion-content').scroll(function() {
         $('#hiding-bar').css({opacity: 1});
     }
 });
+
+
+
+var IndexPlaces = React.createClass({
+    render: function () {
+        return (
+            <div className={"page " + this.props.position}>
+                <Header text="PageSlider"/>
+                <div className="content">
+                    <ul  className="table-view">
+                        <li className="table-view-cell media"><a href="#page1">Page 1</a></li>
+                    </ul>
+                </div>
+            </div>
+        );
+    }
+});
