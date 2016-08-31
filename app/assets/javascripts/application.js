@@ -27,3 +27,7 @@ $('.suggestion-content').scroll(function() {
         $('#hiding-bar').css({opacity: 1});
     }
 });
+
+$('#recommendModal').on('shown.bs.modal', function () {
+  $('#recommended_user_email').focus();
+});

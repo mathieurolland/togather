@@ -1,198 +1,172 @@
 <div class="total-wrap">
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-3 no-marginlr-col">
-      <div class="row">
-        <%= render "shared/navbar" %>
-        <div class="profil-wrapper">
-          <div class="profile-bio">
-            <div class="profile-picture">
-              <% if current_user.photo? %>
-                <%= cl_image_tag current_user.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
-              <% else %>
-                <%= image_tag "http://placehold.it/100x100" %>
-              <% end %>
-              <%= link_to "Edit profile", edit_user_registration_path %>
-              <%= link_to "Your recommended meeters", recommended_users_path %>
-            </div>
-            <div class="desc-bio">
-              <span class="bio-title"><%= current_user.first_name %></span>
-              <p>
-                <%= truncate(current_user.bio, length: 105) %>
-              </p>
-            </div>
-          </div>
-          <div class="profile-details">
-            <div class="profile-workplace">
-              <span class="bio-title">Work place</span>
-              <p>
-                <% if current_user.work_place.nil? %>
-                  <%= "-" %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 no-marginlr-col">
+        <div class="row">
+          <%= render "shared/navbar" %>
+          <div class="profil-wrapper">
+            <div class="profile-bio">
+              <div class="profile-picture">
+                <% if current_user.photo? %>
+                  <%= cl_image_tag current_user.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
                 <% else %>
-                  <%= current_user.work_place %>
+                  <%= image_tag "http://placehold.it/100x100" %>
                 <% end %>
-              </p>
-            </div>
-            <div class="profile-interests">
-              <span class="bio-title">Your interests</span>
-              <div class="profile-skills">
-                <div class="skills-icons">
-                  <% s = current_user.skills.shuffle %>
-                  <% skills = s.sample(14) %>
-                  <% skills.each do |skill| %>
-                    <%= image_tag(skill.icon) %>
-                  <% end %>
-                </div>
-                <%= link_to "Edit interests", dashboard_edit_skills_path %>
+                <%= link_to "Edit profile", recommended_users_path %>
+              </div>
+              <div class="desc-bio">
+                <span class="bio-title"><%= current_user.first_name %></span>
+                <p>
+                  <%= truncate(current_user.bio, length: 100) %>
+                </p>
               </div>
             </div>
-          </div>
-          <hr>
-        </div> <!--profil wrapper-->
-      </div> <!--row-->
-    </div> <!--col-->
-    <div class="col-md-9">
-      <div class="row">
-        <div class="dashboard-not-profile">
-          <div class="col-md-6 no-marginlr-col">
-            <div class="suggestion-wrapper">
-
-            <div class="suggestion-content">
-              <h3 id="hiding-bar">
-                Suggestions
-              </h3>
-              <div class="underspace"></div>
-              <% @suggestions.each do |suggestion| %>
-                <% if suggestion.status == "valid" %>
-                  <% if suggestion.guest == current_user %>
-                    <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
-                      <div class="suggestion-card">
-                        <p>
-                          <%= suggestion.host.first_name %>
-                        </p>
-                      </div>
-                    <% end %>
+            <div class="profile-details">
+              <div class="profile-workplace">
+                <span class="bio-title">Work place</span>
+                <p>
+                  <% if current_user.work_place.nil? %>
+                    <%= "-" %>
                   <% else %>
-                    <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
-                      <div class="suggestion-card">
-                        <p>
-                          <%= suggestion.guest.first_name %>
-                        </p>
-                      </div>
+                    <%= current_user.work_place %>
+                  <% end %>
+                </p>
+              </div>
+              <div class="profile-interests">
+                <span class="bio-title">Your interests</span>
+                <div class="profile-skills">
+                  <div class="skills-icons">
+                    <% s = current_user.skills.shuffle %>
+                    <% skills = s.sample(14) %>
+                    <% skills.each do |skill| %>
+                      <%= image_tag(skill.icon) %>
                     <% end %>
-                  <% end %>
-                <% else %>
-                  <%= link_to suggestion do %>
-                    <div class="suggestion-card">
-                      <div class="media">
-                        <div class="media-left">
-                          <div class="center-picture">
-                            <% if suggestion.host.photo? %>
-                              <%= cl_image_tag suggestion.host.photo.path, gravity: "face", width: 65, height: 65, :crop=>"thumb", radius: "max" %>
-                            <% else %>
-                              <%= image_tag "http://placehold.it/65x65" %>
-                            <% end %>
-                          </div>
-                        </div>
-                        <div class="media-body">
-                          <div class="suggestion-card-body">
-                            <div class="suggestion-card-text">
-                              <span>
-                                <%= suggestion.host.first_name %>
-                              </span>
-                              <span>
-                                <%= suggestion.status %>
-                              </span>
-                            </div>
-                            <div class="suggestion-card-skills">
-                              <div class="carousel slide" data-ride="carousel" data-interval=<%= rand(3000..5000) %> data-pause="null" >
-                                <div class="carousel-inner" role="listbox">
-                                  <div class="item active">
-                                    <div class="inline-icons">
-                                      <% askills = suggestion.host.skills.sample(4) %>
-                                      <% askills.each do |askill| %>
-                                        <%= image_tag(askill.icon) %>
-                                      <% end %>
-                                    </div>
-                                  </div>
-                                  <div class="item">
-                                    <div class="inline-icons">
-                                      <% bskills = suggestion.host.skills.sample(4) %>
-                                      <% bskills.each do |bskill| %>
-                                        <%= image_tag(bskill.icon) %>
-                                      <% end %>
-                                    </div>
-                                  </div>
-                                  <div class="item">
-                                    <div class="inline-icons">
-                                      <% cskills = suggestion.host.skills.sample(4) %>
-                                      <% cskills.each do |cskill| %>
-                                        <%= image_tag(cskill.icon) %>
-                                      <% end %>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div> <!--media-->
-                    </div>
-                  <% end %>
-                <% end %> <!--else-->
-              <% end %> <!--do-->
-            </div>
-          </div> <!--suggestion content-->
-        </div>
-
-    <div class="col-md-6">
-      <div class="row">
-        <input type="checkbox" name="toggle-map" id="toggle-map"/>
-        <label for="toggle-map"></label>
-        <div class="map-work">
-            <% @hashplaces.each do |place| %>
-              <% place[:picture] = { "url": "#{image_path("maps_markers/meeting_place.svg") }", "width":  42, "height": 39 } %>
-            <% end %>
-            <% hash = @hashplaces %>
-            <% hash << @hashhome.first %>
-            <% @hashfriends.each do |friend| %>
-              <% friend[:picture] = { "url": "#{image_path("maps_markers/meeter_connected.svg") }", "width":  46, "height": 43 } %>
-              <% hash << friend %>
-            <% end %>
-            <!--  -->
-            <% @hashsuggestions.each do |suggestion| %>
-              <% suggestion[:picture] = { "url": "#{image_path("maps_markers/meeter_suggested.svg") }", "width":  46, "height": 43 } %>
-              <% hash << suggestion %>
-            <% end %>
-            <!--  -->
-            <% @hashcontent = raw hash.to_json %>
-            <div id="network">
-              <%= render "network" %>
-            </div>
-            <div id="mapContainer" class="map-container">
-              <div id="map">
-                <% content_for(:after_js) do %>
-                  <%= render partial: 'gmaps', locals: {hash: @hashcontent} %>
-                  <!-- <script>
-                    google.maps.event.addListener(Gmaps4Rails.markers[0].google_object, 'click', function(object){ alert("hello"); });
-                  </script> -->
-                <% end %>
+                    ...
+                  </div>
+                  <%= link_to "Edit interests", dashboard_edit_skills_path %>
+                </div>
               </div>
             </div>
-         </div>
-      </div>
+            <div class="recommend-wrapper text-center">
+              <a data-toggle="modal" href="#recommendModal">
+                Recommend meeters
+              </a>
+            </div>
+            <hr>
+          </div> <!--profil wrapper-->
+        </div> <!--row-->
+      </div> <!--col-->
+      <div class="col-md-9">
+        <div class="row">
+          <div class="dashboard-not-profile">
+            <div class="col-md-6 no-marginlr-col">
+              <div class="suggestion-wrapper">
+                <div class="suggestion-content">
+                  <h3 id="hiding-bar">
+                    Suggestions
+                  </h3>
+                  <div class="underspace"></div>
+                  <% iteration = 0 %>
+                  <% @suggestions.each do |suggestion| %>
+                    <% if suggestion.status == "valid" %>
+                      <% if suggestion.guest == current_user %>
 
-      </div>
-    </div>
+                        <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
+                          <% iteration += 1 %>
+                          <div class="suggestion-card">
+                            <%= render partial: 'contact_card', locals: {contact_link: connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), contact: suggestion.host, status: suggestion.status, iteration: iteration} %>
+                          </div>
+                        <% end %>
+                      <% else %>
+                        <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
+                          <% iteration += 1 %>
+                          <div class="suggestion-card">
+                            <%= render partial: 'contact_card', locals: {contact_link: connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), contact: suggestion.guest, status: suggestion.status, iteration: iteration} %>
+                          </div>
+                        <% end %>
+                      <% end %>
+                    <% else %>
+                      <% iteration += 1 %>
+                      <%= render partial: 'contact_card', locals: {contact_link: suggestion, contact: suggestion.host, status: suggestion.status, iteration: iteration} %>
+                    <% end %> <!--else-->
+                  <% end %> <!--@suggestions.each do-->
+
+                  <!-- @real-connections.each do -->
+
+                </div>
+              </div> <!--suggestion wrapper-->
+            </div>
+
+            <div class="col-md-6">
+              <div class="row">
+                <input type="checkbox" name="toggle-map" id="toggle-map"/>
+                <label for="toggle-map"></label>
+                <div class="map-work">
+                  <% @hashplaces.each do |place| %>
+                    <% place[:picture] = { "url": "#{image_path("maps_markers/meeting_place.svg") }", "width":  42, "height": 39 } %>
+                  <% end %>
+                  <% hash = @hashplaces %>
+                  <% hash << @hashhome.first %>
+                  <% @hashfriends.each do |friend| %>
+                    <% friend[:picture] = { "url": "#{image_path("maps_markers/meeter_connected.svg") }", "width":  46, "height": 43 } %>
+                    <% hash << friend %>
+                  <% end %>
+                  <% @hashsuggestions.each do |suggestion| %>
+                    <% suggestion[:picture] = { "url": "#{image_path("maps_markers/meeter_suggested.svg") }", "width":  46, "height": 43 } %>
+                    <% hash << suggestion %>
+                  <% end %>
+                  <% @hashcontent = raw hash.to_json %>
+                  <div id="network">
+                    <%= render "network" %>
+                  </div>
+                  <div id="mapContainer" class="map-container">
+                    <div id="map">
+                      <% content_for(:after_js) do %>
+                        <%= render partial: 'gmaps', locals: {hash: @hashcontent} %>
+                        <!-- <script>
+                          google.maps.event.addListener(Gmaps4Rails.markers[0].google_object, 'click', function(object){ alert("hello"); });
+                        </script> -->
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
+
+
+
+<div class="modal fade" id="recommendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Users you recommended</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          <% current_user.recommended_users.each do |x| %>
+            - <%= x.email %>
+          <%end%>
+        </p>
+        <hr>
+        <%= simple_form_for @recommended_user, method: :post do |f| %>
+          <%= f.error_notification %>
+
+          <div class="form-inputs">
+            <%= f.input :email, required: false %>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Send invitation" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
-
-
-
 </div>
