@@ -1,11 +1,18 @@
 class RecommendedUsersController < ApplicationController
   def index
+    @recommended_user = RecommendedUser.new
   end
 
   def create
     @recommended_user = RecommendedUser.new(email: recommended_user_params[:email], user: current_user)
     @recommended_user.save
-    redirect_to edit_user_registration_path
+
+    if @recommended_user.save
+      #RecommendedMailer.creation_confirmation(@recommended_user).deliver_now
+      redirect_to recommended_users_path
+    else
+      render :index
+    end
   end
 
   def update

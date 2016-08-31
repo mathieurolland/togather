@@ -28,28 +28,6 @@
         </div>
       <% end %>
 
-
-      <h2> Recommend people of your Network </h2>
-      <%= simple_form_for :recommended_user, url: recommended_users_path, method: :post do |f| %>
-        <%= f.error_notification %>
-
-        <div class="form-inputs">
-          <%= f.input :email, required: false %>
-        </div>
-
-        <div class="form-actions">
-          <%= f.button :submit, "Create" %>
-        </div>
-      <% end %>
-
-
-      <h2> Your first Network </h2>
-      <% current_user.recommended_users.each do |x| %>
-        <ul>
-          <il><%= x.email %></il>
-        </ul>
-      <%end%>
-
       <h3>Cancel my account</h3>
 
       <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>

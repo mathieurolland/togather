@@ -1,0 +1,12 @@
+<h2> Recommend people of your Network </h2>
+<%= simple_form_for @recommended_user, method: :post do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email, required: false %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Create" %>
+  </div>
+<% end %>
