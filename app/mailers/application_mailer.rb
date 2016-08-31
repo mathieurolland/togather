@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'together.wagon@gmail.com'
 
+  default from: 'togather.wagon@gmail.com'
   layout 'mailer'
 end

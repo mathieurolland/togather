@@ -1,21 +1,20 @@
-
-<% if @current_review == "" %>
-  <h2> Make a review </h2>
-  <%= render "form_review" %>
-<% else %>
+<% if @current_review %>
   <h2> Your review </h2>
   <p><%= @current_review %></p>
   <%= link_to "Edit", edit_review_path(@connection, @meeting) %>
   <%= link_to "Delete", review_path(@connection, @meeting), method: :delete %>
+<% else %>
+  <h2> Make a review </h2>
+  <%= render "form_review" %>
 <% end %>
 
 <hr>
 <br>
 
-<% if @other_review == "" %>
-  <h2><%= "#{@other_meeter.first_name} #{@other_meeter.last_name} n'a pas encore fait de review" %></h2>
-<% else %>
+<% if @other_review %>
   <h2><%= "#{@other_meeter.first_name} #{@other_meeter.last_name} 's Review" %></h2>
   <p><%= @other_review %></p>
+<% else %>
+  <h2><%= "#{@other_meeter.first_name} #{@other_meeter.last_name} n'a pas encore fait de review" %></h2>
 <% end %>
 

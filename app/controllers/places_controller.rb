@@ -5,7 +5,7 @@ class PlacesController < ApplicationController
   before_action :find_availabilities, only: [ :show, :update ]
 
   def index
-    @types = ["Afterwork", "Café", "Lunch snack", "Salad bar", "restaurant"]
+    @types = ["Afterwork", "Café", "Lunch snack", "Salad bar", "Restaurant"]
     @places = Place.all
   end
 
@@ -23,6 +23,7 @@ class PlacesController < ApplicationController
     @place = current_user.places.new(place_params)
     if @place.save
       PlaceMailer.creation_confirmation(@place).deliver_now
+
       redirect_to place_availabilities_path(@place)
     else
       render :new

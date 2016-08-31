@@ -1,5 +1,6 @@
 class ConnectionsController < ApplicationController
-  before_action :find_connection, only: [ :update, :show ]
+  before_action :find_connection, only: [ :update, :show, :cancel, :decline ]
+  before_action :find_inverse_connection, only: [ :cancel, :decline ]
 
   def index
     @connection = Connection.all
@@ -24,13 +25,28 @@ class ConnectionsController < ApplicationController
       @invers_connection.save
       redirect_to connection_path(@connection.id)
     elsif @connection.status == "invited"
-      @connection.destroy
       @invers_connection = Connection.where(guest: @connection.host, host: current_user).first
       @invers_connection.status = "valid"
       @invers_connection.save
+      @connection.destroy
       @meeting = Meeting.create(connection: @invers_connection)
       redirect_to connection_meeting_path(@connection, @meeting)
     end
+  end
+
+  def decline
+    @invers_connection.status = "refused"
+    @invers_connection.save
+    @connection.destroy
+    redirect_to dashboard_path
+  end
+
+  def cancel
+    @connection.status = "suggested"
+    @connection.save
+    @invers_connection.status = "suggested"
+    @invers_connection.save
+    redirect_to dashboard_path
   end
 
   def show
@@ -51,6 +67,10 @@ class ConnectionsController < ApplicationController
 
   def find_connection
     @connection = Connection.find(params[:id])
+  end
+
+  def find_inverse_connection
+    @invers_connection = Connection.where(guest: @connection.host, host: current_user).first
   end
 
   def status_params

@@ -3,6 +3,7 @@ class PlaceMailer < ApplicationMailer
     @place = place
 
     mail(
+
       to:       @place.user.email,
       subject:  "Place #{@place.name} created!"
     )
