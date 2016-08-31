@@ -59,7 +59,7 @@ class PlacesController < ApplicationController
     Gmaps4rails.build_markers(place_model) do |place, marker|
       marker.lat place.latitude
       marker.lng place.longitude
-      marker.infowindow render_to_string(partial: "/places/map_box", locals: { place: place })
+      marker.infowindow render_to_string(partial: "/places/map_box_place", locals: { place: place })
     end
   end
 

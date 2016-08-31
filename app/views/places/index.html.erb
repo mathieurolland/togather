@@ -1,18 +1,21 @@
+<div class="monbackground">
 <div class="container">
+
   <div class="row">
    <%= render "shared/navbar" %>
   </div>
   <div class="row">
     <h1 class="montitre">
-      Places
+      Pick up a place
     </h1>
   </div>
   <% @types.each do |type| %>
     <div class="row">
       <div class="marow">
         <h2><%= type %> :</h2>
+
         <% @places.where(type_partner: type).each do |place| %>
-          <div class="col-xs-4">
+          <div class="col-sm-4">
             <div class="macol">
               <% if current_user.status %>
 
@@ -35,14 +38,16 @@
                 </div>
                 <%= link_to "", connection_meeting_place_path(@connection, @meeting, place), class: "card-link" %>
                 <a href=""></a>
-              </div>
-
               <% end %>
+            </div>
           </div>
-          </div>
+
         <% end %>
-      </div>
-    </div>
-  <% end %>
 </div>
+    </div>
+   <% end %>
+</div>
+
+</div>
+
 

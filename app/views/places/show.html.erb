@@ -1,6 +1,7 @@
-<p><%= link_to "Back", places_path %></p>
-
 <div class="monbackground">
+  <div class="row">
+   <%= render "shared/navbar" %>
+  </div>
   <div class="maphotosize">
     <div class="place-picture">
       <% if @place.photo? %>
@@ -8,102 +9,112 @@
       <% end %>
     </div>
   </div>
-</br>
-
-<div class="row">
-  <div class="text-center">
-    <ul class="list-inline">
-      <div class="col-sm-3">
-        <li>
-          <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
-          </br>
-          </br>
-          <p>Visit our <%= @place.type_partner %></p>
-        </li>
-      </div>
-      <div class="col-sm-3">
-        <li>
-          <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
-          </br>
-          </br>
-          <p> Open 7/7j </p>
-        </li>
-      </div>
-      <div class="col-sm-3">
-        <li>
-          <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-          </br>
-          </br>
-          <p><strong>Find us :</strong></p>
-          <p><%= @place.address %></p>
-        </li>
-      </div>
-        <li>
-          <i class="fa fa-phone fa-2x" aria-hidden="true"></i>
-          </br>
-          </br>
-          <p><strong>Contact us :</strong></p>
-          <p><%= @place.phone_number %></p>
-        </li>
-    </ul>
-  </div>
-</div>
-</br>
-
-<div class="text-center">
-  <h2><%= @place.name %></h2>
   </br>
-  <h3><%= @place.description %></h3>
-  </br>
-</div>
 
-<h1> Availability </h1>
+  <div class="container">
+    <div class="row">
+      <div class="text-center">
+        <ul class="list-inline">
+          <div class="col-sm-3">
+            <li>
+              <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
+              </br>
+              </br>
+              <p> Visit our <%= @place.type_partner.downcase %></p>
+            </li>
+          </div>
+          <div class="col-sm-3">
+            <li>
+              <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
+              </br>
+              </br>
+              <p> Open 7/7j </p>
+            </li>
+          </div>
+          <div class="col-sm-3">
+            <li>
+              <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+              </br>
+              </br>
+              <p><strong> Find us :</strong></p>
+              <p><%= @place.address %></p>
+            </li>
+          </div>
+            <li>
+              <i class="fa fa-phone fa-2x" aria-hidden="true"></i>
+              </br>
+              </br>
+              <p><strong> Contact us :</strong></p>
+              <p><%= @place.phone_number %></p>
+            </li>
+        </ul>
+      </div>
+    </div>
+    </br>
 
-<% if @availabilities.first %>
-  <ul>
-  <% @availabilities.each do |day, array| %>
-    <li>
-      <%= day+" : " %>
-      <% array.each_with_index do |availability, i| %>
-        <%= "#{availability[:min_time].strftime "%Hh%M"} - #{availability[:max_time].strftime "%Hh%M"}" %>
-        <% unless i == array.count - 1 %>
-          <%= ", " %>
+    <div class="row">
+      <div class="text-center">
+        <h2><%= @place.name %></h2>
+        </br>
+        <h3><%= @place.description %></h3>
+        </br>
+      </div>
+
+      <div>
+        <h1> Choose a date </h1>
+        <% if @availabilities.first %>
+          <ul>
+            <div class="monul">
+            <% @availabilities.each do |day, array| %>
+              <li>
+              <%= day+" : " %>
+              <% array.each_with_index do |availability, i| %>
+                <p><%= "#{availability[:min_time].strftime "%Hh%M"} - #{availability[:max_time].strftime "%Hh%M"}" %></p>
+              <% unless i == array.count - 1 %>
+                  <%= ", " %>
+                <% end %>
+              <% end %>
+              </li>
+            <% end %>
+            </div>
+          </ul>
         <% end %>
-      <% end %>
-    </li>
-  <% end %>
-  </ul>
-<% end %>
-
-<div class="row">
-</div>
-</div>
-
-<div class="row">
-  <div class="map-work">
-    <% @hash.each do |marker| %>
-      <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
-    <% end %>
-    <% @hashcontent = raw @hash.to_json %>
-    <div class="show-place-map">
-      <div id="map">
-        <% content_for(:after_js) do %>
-          <%= render partial: 'gmaps', locals: {hash: @hashcontent} %>
+      </div>
+      </br>
+      <div>
+        <% if current_user.status %>
+          <%= link_to "Delete", place_path(@place), method: :delete, data: { confirm: "Are you sure you want to delete this product?" } %>
+          <%= link_to "Edit", edit_place_path(@place) %>
+          <%= link_to "Modify availabilities", place_availabilities_path(@place) %>
+          <%= link_to "Back", partner_path %>
+        <% else %>
+          <%= render "options_meeter" %>
         <% end %>
+      </div>
+
+    </div>  <!-- row -->
+  </div> <!-- container -->
+
+  <div class="row">
+    <div class="monmap">
+      <div class="map-work">
+        <% @hash.each do |marker| %>
+          <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
+        <% end %>
+        <% @hashcontent = raw @hash.to_json %>
+        <div class="show-place-map">
+          <div id="map">
+            <% content_for(:after_js) do %>
+              <%= render partial: 'gmaps', locals: {hash: @hashcontent} %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+
 </div>
-
-
-<% if current_user.status %>
-  <%= link_to "Delete", place_path(@place), method: :delete, data: { confirm: "Are you sure you want to delete this product?" } %>
-  <%= link_to "Edit", edit_place_path(@place) %>
-  <%= link_to "Modify availabilities", place_availabilities_path(@place) %>
-  <%= link_to "Back", partner_path %>
-<% else %>
-  <%= render "options_meeter" %>
-<% end %>
 
 
 
