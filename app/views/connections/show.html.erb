@@ -9,11 +9,14 @@
     <%= @connection.host.first_name %>
     <h2> <%= @connection.status %> </h2>
     <% if @connection.status == "suggested" %>
-      <%= link_to "invit", connection_path, data: { confirm: "Are you sure?" }, method: :patch %>
-
+      <%= link_to "invit", connection_path, method: :patch %>
     <% elsif @connection.status == "invited" %>
       <h2> Wait for your confirmation </h2>
-      <%= link_to "Confirm", connection_path, data: { confirm: "Are you sure?" }, method: :patch %>
+      <%= link_to "Confirm", connection_path, method: :patch %>
+      <%= link_to "Decline", decline_connection_path(@connection), data: { confirm: "Are you sure?" }, method: :patch %>
+    <% elsif @connection.status == "waiting" %>
+      <h2> Wait for your confirmation </h2>
+      <%= link_to "Cancel", cancel_connection_path(@connection), method: :patch %>
     <% else %>
       <h2>
         Wait for <%= @connection.guest.first_name %>'s confirmation
