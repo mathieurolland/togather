@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :places
   has_many :recommended_users
 
+  after_create :send_welcome_email
   geocoded_by :work_place
   after_validation :geocode, if: :work_place_changed?
 
@@ -46,6 +47,10 @@ class User < ApplicationRecord
       user.save
     end
     return user
+  end
+
+   def send_welcome_email
+    UserMailer.welcome(self).deliver_now
   end
 
   def create_suggestions
