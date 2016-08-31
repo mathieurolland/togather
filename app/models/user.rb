@@ -49,9 +49,9 @@ class User < ApplicationRecord
     return user
   end
 
-   def send_welcome_email
-    UserMailer.welcome(self).deliver_now
-  end
+  # def send_welcome_email
+  #   UserMailer.welcome(self).deliver_now
+  # end
 
   def create_suggestions
     array = []
