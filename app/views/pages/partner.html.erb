@@ -31,37 +31,37 @@
           <div class="col-md-6 no-marginlr-col">
             <div class="suggestion-content">
               <div class="row">
-              <% if @places.nil? %>
-                <p> No place to show </p>
-              <% elsif @count_places == 1 %>
-                <h2>My place (<%= @count_places %>)</h2>
-              <% else %>
-                <h2>My places (<%= @count_places %>)</h2>
-              <% end %>
-              <% if !@places.nil? %>
-                <% current_user.places.each do |place| %>
-                  <%= render partial: "card_place", locals: {place: place} %>
+                <% if @places.nil? %>
+                  <p> No place to show </p>
+                <% elsif @count_places == 1 %>
+                  <h2>My place (<%= @count_places %>)</h2>
+                <% else %>
+                  <h2>My places (<%= @count_places %>)</h2>
                 <% end %>
-              <% end %>
+                <% if !@places.nil? %>
+                  <% current_user.places.each do |place| %>
+                    <%= render partial: "card_place", locals: {place: place} %>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-      <div class="row">
-        <div class="map-work">
-            <% @hash.each do |marker| %>
-              <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
-            <% end %>
-            <% @hashcontent = raw @hash.to_json %>
-            <div id="map">
-              <% content_for(:after_js) do %>
-                <%= render partial: 'gmaps', locals: {hash: @hashcontent} %>
-              <% end %>
-            </div>
-         </div>
-      </div>
-      </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="map-work">
+                <% @hash.each do |marker| %>
+                  <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
+                <% end %>
+                <% @hashcontent = raw @hash.to_json %>
+                <div id="map">
+                  <% content_for(:after_js) do %>
+                    <%= render partial: 'gmaps', locals: {hash: @hashcontent} %>
+                  <% end %>
+                </div>
+             </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

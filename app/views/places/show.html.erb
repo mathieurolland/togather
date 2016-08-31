@@ -1,13 +1,13 @@
 <p><%= link_to "Back", places_path %></p>
 
 <div class="monbackground">
-<div class="maphotosize">
-  <div class="place-picture">
-    <% if @place.photo? %>
-      <%= cl_image_tag @place.photo.path, width: 1900, height: 400, crop: :fill %>
-    <% end %>
+  <div class="maphotosize">
+    <div class="place-picture">
+      <% if @place.photo? %>
+        <%= cl_image_tag @place.photo.path, width: 1900, height: 400, crop: :fill %>
+      <% end %>
+    </div>
   </div>
-</div>
 </br>
 
 <div class="row">
@@ -86,13 +86,9 @@
     <% end %>
     <% @hashcontent = raw @hash.to_json %>
     <div class="show-place-map">
-
       <div id="map">
         <% content_for(:after_js) do %>
           <%= render partial: 'gmaps', locals: {hash: @hashcontent} %>
-          <!-- <script>
-            google.maps.event.addListener(Gmaps4Rails.markers[0].google_object, 'click', function(object){ alert("hello"); });
-          </script> -->
         <% end %>
       </div>
     </div>
@@ -101,7 +97,10 @@
 
 
 <% if current_user.status %>
-  <%= link_to "back", partner_path %>
+  <%= link_to "Delete", place_path(@place), method: :delete, data: { confirm: "Are you sure you want to delete this product?" } %>
+  <%= link_to "Edit", edit_place_path(@place) %>
+  <%= link_to "Modify availabilities", place_availabilities_path(@place) %>
+  <%= link_to "Back", partner_path %>
 <% else %>
   <%= render "options_meeter" %>
 <% end %>
