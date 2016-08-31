@@ -25,16 +25,17 @@
 
 <%= render 'shared/message_row' %>
 
-<!-- Reviews -->
-<% if @meeting.date && @meeting.date > DateTime.now %>
+<% if @meeting.date && @meeting.date < DateTime.now %>
+  <!-- Reviews -->
   <%= render 'reviews' %>
+  <!-- Finalize -->
+  <% if @connection.status == "valid" %>
+    <%= render "form_finalize_status", value: "connected" %>
+    <%= render "form_finalize_status", value: "refused" %>
+  <% elsif @connection.status == "connected" %>
+    <%= render "form_finalize_status", value: "refused" %>
+  <% end %>
 <% end %>
 
-<!-- Finalize -->
-<% if @connection.status == "valid" %>
-  <%= render "form_finalize_status", value: "connected" %>
-  <%= render "form_finalize_status", value: "refused" %>
-<% elsif @connection.status == "connected" %>
-  <%= render "form_finalize_status", value: "refused" %>
-<% end %>
+
 

@@ -20,7 +20,10 @@ Rails.application.routes.draw do
   get "/connections/:connection_id/meetings/:id/edit-review", to: "meetings#edit_review", as: "edit_review"
   patch "/connections/:connection_id/meetings/:id/status/", to: "connections#finalize_status", as: "status"
   put "/connections/:id/status/", to: "connections#finalize-status"
-
+  patch "/connections/:id/cancel/" ,to: "connections#cancel", as: "cancel_connection"
+  put "/connections/:id/cancel/" ,to: "connections#cancel"
+  patch "/connections/:id/decline/" ,to: "connections#decline", as: "decline_connection"
+  put "/connections/:id/decline/" ,to: "connections#decline"
   resources :recommended_users, only: [:create, :update, :destroy]
   resources :categories, only: [:index]
   resources :skills, only: [:index]
@@ -30,7 +33,7 @@ Rails.application.routes.draw do
   end
   resources :connections, only: [:index, :create, :update, :show] do
     resources :meetings, only: [:create, :show, :update] do
-      resources :places, only: [:index, :show]
+      resources :places, only: [:index, :show, :update]
       resources :messages, only: [:create]
     end
   end
