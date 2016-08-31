@@ -1,2 +1,11 @@
-<h1>RecommendedUsers#index</h1>
-<p>Find me in app/views/recommended_users/index.html.erb</p>
+<h2> Your first Network </h2>
+<% current_user.recommended_users.each do |x| %>
+  <ul>
+    <il><%= x.email %></il>
+  </ul>
+<%end%>
+
+<%= render 'shared/recommended_form' %>
+
+<%= link_to "Back", dashboard_path %>
+

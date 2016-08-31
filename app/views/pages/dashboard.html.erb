@@ -14,6 +14,7 @@
                 <%= image_tag "http://placehold.it/100x100" %>
               <% end %>
               <%= link_to "Edit profile", edit_user_registration_path %>
+              <%= link_to "Your recommended meeters", recommended_users_path %>
             </div>
             <div class="desc-bio">
               <span class="bio-title"><%= current_user.first_name %></span>
@@ -150,17 +151,21 @@
         <input type="checkbox" name="toggle-map" id="toggle-map"/>
         <label for="toggle-map"></label>
         <div class="map-work">
-            <% @hashplaces.each do |marker| %>
-              <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
+            <% @hashplaces.each do |place| %>
+              <% place[:picture] = { "url": "#{image_path("maps_markers/meeting_place.svg") }", "width":  42, "height": 39 } %>
             <% end %>
             <% hash = @hashplaces %>
             <% hash << @hashhome.first %>
             <% @hashfriends.each do |friend| %>
+              <% friend[:picture] = { "url": "#{image_path("maps_markers/meeter_connected.svg") }", "width":  46, "height": 43 } %>
               <% hash << friend %>
             <% end %>
+            <!--  -->
             <% @hashsuggestions.each do |suggestion| %>
+              <% suggestion[:picture] = { "url": "#{image_path("maps_markers/meeter_suggested.svg") }", "width":  46, "height": 43 } %>
               <% hash << suggestion %>
             <% end %>
+            <!--  -->
             <% @hashcontent = raw hash.to_json %>
             <div id="network">
               <%= render "network" %>

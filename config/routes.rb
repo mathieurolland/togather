@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   put "/connections/:id/cancel/" ,to: "connections#cancel"
   patch "/connections/:id/decline/" ,to: "connections#decline", as: "decline_connection"
   put "/connections/:id/decline/" ,to: "connections#decline"
-  resources :recommended_users, only: [:create, :update, :destroy]
+  resources :recommended_users, only: [:index, :create, :update, :destroy]
   resources :categories, only: [:index]
   resources :skills, only: [:index]
   resources :user_skills, only: [:create, :destroy]
