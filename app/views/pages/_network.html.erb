@@ -34,15 +34,33 @@
                 size: 32
            },
           font:{color:'#5968D9'},
-          shadow:true
+          shadow:true,
+          size: 25,
+          title: "ok",
         },
         edges: {
           color: '#223843',
           width: 2,
-          shadow:true
-        }
-      };
+          shadow:true,
+        },
+        interaction:{
+          dragNodes:true,
+          dragView: true,
+          hoverConnectedEdges: true,
+          multiselect: false,
+          navigationButtons: false,
+          selectable: true,
+          selectConnectedEdges: true,
+          tooltipDelay: 300,
+          zoomView: true
+          }
+       };
+
+
 
 network.setOptions(options);
+network.on( 'click', function(properties) {
+    window.location.href = 'http://localhost:3000/connections/38';
+});
 </script>
 <% end %>
