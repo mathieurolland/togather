@@ -51,8 +51,15 @@
   border-bottom: dotted;
 }
 .monbackground {
-  // background-color: #D8D4D4;
-  background: linear-gradient(to bottom, #3E110B, #F8EACD);
+  background: linear-gradient( 45deg, #AFAFAF, #F9F9F9 40%, #919191 );
 }
+.monalign {
+  text-align: left;
+}
+.monul {
+  list-style-type:none;
+}
+
+
 
 
