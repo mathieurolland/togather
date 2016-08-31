@@ -10,8 +10,23 @@ class PagesController < ApplicationController
     @suggestions = current_user.suggestions#.sample(5)
     @places = Place.where.not(latitude: nil, longitude: nil)
     home = current_user
-    friends = current_user.invited_connections
-    suggestions = current_user.hosted_connections
+    suggestions = []
+    friend_friend_connections = []
+    friends = []
+
+    current_user.invited_connections.where(status: "connected").each do |connection_when_guest|
+      friends << User.find(connection_when_guest.host_id)
+    end
+
+    current_user.hosted_connections.where(status: "connected").each do |connection_when_host|
+      friends << User.find(connection_when_host.guest_id)
+    end
+
+    suggest = current_user.suggestions
+    suggest.each do |s|
+      suggestions << User.find(s.host_id)
+    end
+
     @hashhome = hash_geocoder_home(home)
     @hashfriends = hash_geocoder_friends(friends)
     @hashsuggestions = hash_geocoder_suggestions(suggestions)
@@ -62,16 +77,14 @@ class PagesController < ApplicationController
 
   def hash_geocoder_friends(friends)
     Gmaps4rails.build_markers(friends) do |friend, marker|
-      f = User.find(friend.host_id)
-      marker.lat f.latitude
-      marker.lng f.longitude
-      marker.infowindow render_to_string(partial: "map_box_friend", locals: { friend: f })
+      marker.lat friend.latitude
+      marker.lng friend.longitude
+      marker.infowindow render_to_string(partial: "map_box_friend", locals: { friend: friend })
     end
   end
 
   def hash_geocoder_suggestions(suggestions)
-    Gmaps4rails.build_markers(suggestions) do |suggestion, marker|
-      s = User.find(suggestion.guest_id)
+    Gmaps4rails.build_markers(suggestions) do |s, marker|
       marker.lat s.latitude
       marker.lng s.longitude
       marker.infowindow render_to_string(partial: "map_box_friend", locals: { friend: s })
