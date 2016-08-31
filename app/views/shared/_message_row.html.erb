@@ -1,49 +1,48 @@
-<div class="container">
+
   <div class="row">
+  <div class="chat-container">
     <div class="message">
       <ul class="ChatLog">
         <% @meeting.messages.each do |message| %>
-          <% if message.user == current_user %>
+
+            <li>
+              <div class="col-md-6">
+             <% if message.user == current_user %>
+              <div class="message-card">
+                  <div class="message-orange">
+                     <p><%= message.content%></p>
+                  </div>
+                </div>
+              <div class="message-data">
+                   <span class="message-data-name"><%= message.user.first_name %> </span>
+                   <span class="message-data-time"> <%= message.created_at %> </span> &nbsp; &nbsp;
+                </div>
+              <% end %>
+              </div>
+            </li>
+
+
             <li >
-               <div class="col-sm-6">
+               <div class="col-md-6">
+               <% if message.user != current_user %>
                 <div class="message-data">
                    <span class="message-data-name"><%= message.user.first_name %> </span>
                    <span class="message-data-time"> <%= message.created_at %> </span> &nbsp; &nbsp;
                 </div>
-                <div class="message-card">
-                    <div class="message-orange">
-                      <p><%= message.content%></p>
 
-                    </div>
-                </div>
-              </div>
-            <div class="col-sm-6">
-            </div>
-            </li>
-          <% else %>
-            <li >
-              <div class="col-sm-6"></div>
-
-              <div class="col-sm-6">
               <div class="message-data">
-                 <span class="message-data-name"> <%= message.user.first_name %> </span>
-                  <span class="message-data-time"> <%= message.created_at %> </span>  &nbsp; &nbsp;
-              <div class="message-card">
                 <div class="message-blue">
                   <p><%= message.content%></p>
                 </div>
               </div>
+              <% end %>
             </div>
-          </div>
             </li>
-          <% end %>
         <% end %>
       </ul>
     </div>
   </div>
 </div>
-
-<hr>
 
 
 <%= form_for @new_message, url: connection_meeting_messages_path(@connection, @meeting), method: :post do |f| %>

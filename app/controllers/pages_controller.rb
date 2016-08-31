@@ -7,12 +7,15 @@ class PagesController < ApplicationController
 
   def dashboard
     current_user.create_suggestions
-    @suggestions = current_user.suggestions#.sample(5)
+    @suggestions = current_user.suggestions
     @places = Place.where.not(latitude: nil, longitude: nil)
+    @recommended_user = RecommendedUser.new
     home = current_user
     suggestions = []
     friend_friend_connections = []
     friends = []
+
+    # @real_connections = current_user.total_connection
 
     current_user.invited_connections.where(status: "connected").each do |connection_when_guest|
       friends << User.find(connection_when_guest.host_id)

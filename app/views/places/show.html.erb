@@ -1,18 +1,22 @@
 <div class="monbackground">
+
   <div class="row">
    <%= render "shared/navbar" %>
   </div>
-  <div class="maphotosize">
-    <div class="place-picture">
+
+  <div class="row">
+    <div class="maphotosize">
       <% if @place.photo? %>
-        <%= cl_image_tag @place.photo.path, width: 1900, height: 400, crop: :fill %>
+        <%= cl_image_tag @place.photo.path, width: 1900, height: 500, crop: :fill %>
       <% end %>
     </div>
   </div>
+
   </br>
 
   <div class="container">
     <div class="row">
+    <div class="maposition">
       <div class="text-center">
         <ul class="list-inline">
           <div class="col-sm-3">
@@ -49,9 +53,12 @@
             </li>
         </ul>
       </div>
+      </div>
     </div>
+  </div>
     </br>
 
+  <div class="container">
     <div class="row">
       <div class="text-center">
         <h2><%= @place.name %></h2>
@@ -93,7 +100,8 @@
       </div>
 
     </div>  <!-- row -->
-  </div> <!-- container -->
+    </div>
+
 
   <div class="row">
     <div class="monmap">
@@ -114,8 +122,8 @@
   </div>
 
 
-</div>
 
+</div>
 
 
 
