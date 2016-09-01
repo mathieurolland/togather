@@ -23,7 +23,7 @@ class ConnectionsController < ApplicationController
         @invers_connection = Connection.new(guest: @connection.host, host: current_user, status: "invited")
       end
       @invers_connection.save
-      redirect_to connection_path(@connection.id)
+      redirect_to dashboard_path
     elsif @connection.status == "invited"
       @invers_connection = Connection.where(guest: @connection.host, host: current_user).first
       @invers_connection.status = "valid"

@@ -104,11 +104,11 @@
                 <!-- Reviews -->
                 <%= render 'reviews' %>
                 <!-- Finalize -->
-                <% if @connection.status == "valid" %>
+                <% if @connection.status == "Valid" %>
                   <%= render "form_finalize_status", value: "connected" %>
-                  <%= render "form_finalize_status", value: "refused" %>
+                  <%= render "form_finalize_status", value: "Refused" %>
                 <% elsif @connection.status == "connected" %>
-                  <%= render "form_finalize_status", value: "refused" %>
+                  <%= render "form_finalize_status", value: "Refused" %>
                 <% end %>
               <% end %>
             </div>

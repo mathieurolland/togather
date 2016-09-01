@@ -72,15 +72,15 @@ class User < ApplicationRecord
     end
     contacts.each do |contact|
       invers_connection = Connection.where(guest: contact, host: self).first
-      Connection.create(status: "suggested", guest: self, host: contact) if invers_connection == nil || invers_connection.status != "valid"
+      Connection.create(status: "suggested", guest: self, host: contact) if invers_connection == nil || invers_connection.status != "Valid"
     end
   end
 
   def suggestions
     suggestions = []
-    selec = ["suggested", "invited", "waiting", "valid"]
+    selec = ["suggested", "invited", "waiting", "Valid"]
     self.invited_connections.each { |s| suggestions << s if selec.include?(s.status) }
-    self.hosted_connections.each { |s| suggestions << s if s.status == "valid" }
+    self.hosted_connections.each { |s| suggestions << s if s.status == "Valid" }
     suggestions
   end
 
