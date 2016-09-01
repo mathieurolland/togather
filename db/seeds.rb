@@ -7,88 +7,9 @@ Skill.destroy_all
 Category.destroy_all
 User.destroy_all
 
-# User.create(
-#     email: "john@gmail.com",
-#     password: "blabla",
-#     first_name: "John",
-#     last_name: "Begood",
-#     status: false,
-#     gender: "male",
-#     work_place: fake_address_gironde,
-#     birthday: time_rand,
-#     bio: "plout"
-#   )
-# User.create(
-#     email: "paul@gmail.com",
-#     password: "blabla",
-#     first_name: "Paul",
-#     last_name: "Begood",
-#     status: false,
-#     gender: "male",
-#     work_place: fake_address_gironde,
-#     birthday: time_rand,
-#     bio: "plout"
-#   )
-# User.create(
-#     email: "joe@gmail.com",
-#     password: "blabla",
-#     first_name: "Joe",
-#     last_name: "Begood",
-#     status: false,
-#     gender: "male",
-#     work_place: fake_address_gironde,
-#     birthday: time_rand,
-#     bio: "plout"
-#   )
-# User.create(
-#     email: "Bob@gmail.com",
-#     password: "blabla",
-#     first_name: "Bob",
-#     last_name: "Begood",
-#     status: false,
-#     gender: "male",
-#     work_place: fake_address_gironde,
-#     birthday: time_rand,
-#     bio: "plout"
-#   )
-# User.create(
-#     email: "mona@gmail.com",
-#     password: "blabla",
-#     first_name: "mona",
-#     last_name: "Begood",
-#     status: false,
-#     gender: "male",
-#     work_place: fake_address_gironde,
-#     birthday: time_rand,
-#     bio: "plout"
-#   )
-# User.create(
-#     email: "loan@gmail.com",
-#     password: "blabla",
-#     first_name: "Loan",
-#     last_name: "Begood",
-#     status: false,
-#     gender: "male",
-#     work_place: fake_address_gironde,
-#     birthday: time_rand,
-#     bio: "plout"
-#   )
-# User.create(
-#     email: "popi@gmail.com",
-#     password: "blabla",
-#     first_name: "Popi",
-#     last_name: "Begood",
-#     status: false,
-#     gender: "male",
-#     work_place: fake_address_gironde,
-#     birthday: time_rand,
-#     bio: "plout"
-#   )
-
 def time_rand from = 0.0, to = Time.now
   Time.at(from + rand * (to.to_f - from.to_f))
 end
-
 
 def fake_address_gironde
   city_data = Faker::Address.fr_zip_and_city_in_departement(33)
@@ -97,45 +18,75 @@ def fake_address_gironde
   address = "#{Faker::Address.fr_street_name} #{zip} #{city}"
 end
 
-loan = User.create( email: "loan@gmail.com", password: "blabla", first_name: "Loan", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-alex = User.create( email: "alex@gmail.com", password: "blabla", first_name: "Alex", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-greg = User.create( email: "greg@gmail.com", password: "blabla", first_name: "Greg", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-arthur = User.create( email: "arthur@gmail.com", password: "blabla", first_name: "Arthur", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-louis = User.create( email: "louis@gmail.com", password: "blabla", first_name: "Louis", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-pauline = User.create( email: "pauline@gmail.com", password: "blabla", first_name: "Pauline", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-jacques = User.create( email: "jacques@gmail.com", password: "blabla", first_name: "Jacques", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-marion = User.create( email: "marion@gmail.com", password: "blabla", first_name: "Marion", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-paul = User.create( email: "paul@gmail.com", password: "blabla", first_name: "Paul", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-laurianne = User.create( email: "laurianne@gmail.com", password: "blabla", first_name: "Laurianne", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-elo = User.create( email: "elo@gmail.com", password: "blabla", first_name: "Elo", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-michael = User.create( email: "michael@gmail.com", password: "blabla", first_name: "Michael", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-lea = User.create( email: "lea@gmail.com", password: "blabla", first_name: "Lea", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-popi = User.create( email: "popi@gmail.com", password: "blabla", first_name: "Popi", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-yann = User.create( email: "yann@gmail.com", password: "blabla", first_name: "Yann", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-marie = User.create( email: "marie@gmail.com", password: "blabla", first_name: "Marie", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-jose = User.create( email: "jose@gmail.com", password: "blabla", first_name: "Jose", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-yannick = User.create( email: "yannick@gmail.com", password: "blabla", first_name: "Yannick", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-jeanne = User.create( email: "jeanne@gmail.com", password: "blabla", first_name: "Jeanne", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-thomas = User.create( email: "thomas@gmail.com", password: "blabla", first_name: "Thomas", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-julien = User.create( email: "julien@gmail.com", password: "blabla", first_name: "Julien", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-raph = User.create( email: "raph@gmail.com", password: "blabla", first_name: "Raph", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand,bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-mathilde = User.create( email: "mathilde@gmail.com", password: "blabla", first_name: "Mathilde", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-jonathan = User.create( email: "jonathan@gmail.com", password: "blabla", first_name: "Jonathan", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-mona = User.create( email: "mona@gmail.com", password: "blabla", first_name: "Mona", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
-math = User.create( email: "math@gmail.com", password: "blabla", first_name: "Math", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout", photo_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full//025.png")
+image_users = [
+"https://organicthemes.com/demo/profile/files/2012/12/profile_img.png",
+"http://cdn.business2community.com/wp-content/uploads/2014/04/profile-picture.jpg",
+"https://profile.microsoft.com/regsysprofilecenter/Images/personal_info.jpg",
+"https://dealermesh.com/images/profile/2219225-austin-carr-profile.jpg",
+"https://www.google.com/intl/fr_ALL/+/images/learnmore/hero/hero-profile.jpg",
+"https://justinjackson.ca/wp-content/uploads/2008/08/justin-jackson-profile-smile-selfie.jpg",
+"http://54.165.17.179/assets/images/people/tiles/michael-wilson.jpg",
+"https://www.google.com/+/images/learnmore/getstarted/feat-profile.png",
+"http://www.fine-arts-print.com/wp-content/uploads/2014/10/Martin-Profile.jpg",
+"https://d34jodf30bmh8b.cloudfront.net/pictures/5379/5379/profile-8ece7aa8e2cca9ded000c792905d280a.jpg",
+"https://www.scheller.gatech.edu/thumb/width/600/cropratio/1:1/pix/directory/xmulford_chuck_profile.jpg.pagespeed.ic.BrKpOe4a3L.jpg",
+"http://static6.businessinsider.com/image/52c96f6269beddb8064f26d4-480/woman-profile-photo.png",
+"http://i.dailymail.co.uk/i/pix/2014/03/16/article-0-1C55199D00000578-408_306x423.jpg",
+"http://lovefromabroad.com/wp-content/uploads/avatars/1/f47387602c85e8c9d34c31e15f9b005a-bpthumb.jpg",
+"http://i.dailymail.co.uk/i/pix/2010/05/28/article-1282157-09CB6825000005DC-291_468x392.jpg",
+"https://blog.photofeeler.com/wp-content/uploads/2016/02/tips-that-make-men-women-look-more-attractive-in-dating-profile-photos.jpg",
+"https://c.fastcompany.net/multisite_files/fastcompany/profile/3003174-photo-150923-pratt-portraits-152large-jpeg.jpg",
+"https://urbanasian.files.wordpress.com/2013/04/aa-upload1.jpg",
+"http://67.media.tumblr.com/2b2ca42ec1f3bf18a407feee335d9a59/tumblr_mj8siqRn2N1qd9dz2o1_500.jpg",
+"http://www.littlegatepublishing.com/wp-content/uploads/2013/11/Jack-Slater-Profile.jpg",
+"http://i2.cdscdn.com/pdt2/8/2/6/1/700x700/10icu05d826/rw/roberto-cavalli-costume-homme.jpg",
+"http://i2.cdscdn.com/pdt2/1/1/8/1/700x700/jasonpm2118/rw/pascal-morabito-costume-homme.jpg",
+"http://i2.cdscdn.com/pdt2/1/9/9/1/700x700/1801941199/rw/pierre-cardin-costume-homme.jpg",
+"http://static.bonnesaffairesdunet.com/ecommercio/images/boutique/article/article_1406831518.jpg",
+"http://i2.cdscdn.com/pdt2/3/6/2/1/700x700/mp02024362/rw/2015-nouvelle-robe-tailleur-femme-sans-manches-jup.jpg",
+"http://images.helline.fr/asset/heine/mmo/hv_format_mouseover_zoom/7688359/PATRIZIA-DINI-Veste-de-tailleur-femme-style-basique-2-boutons-ecru.jpg"
+]
 
-Connection.create!(status: "connected", guest: math, host: loan)
+
+loan = User.create( email: "loan@gmail.com", password: "blabla", first_name: "Loan", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[0])
+alex = User.create( email: "alex@gmail.com", password: "blabla", first_name: "Alex", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[1])
+greg = User.create( email: "greg@gmail.com", password: "blabla", first_name: "Greg", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[2])
+arthur = User.create( email: "arthur@gmail.com", password: "blabla", first_name: "Arthur", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[3])
+louis = User.create( email: "louis@gmail.com", password: "blabla", first_name: "Louis", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[4])
+pauline = User.create( email: "pauline@gmail.com", password: "blabla", first_name: "Pauline", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[5])
+jacques = User.create( email: "jacques@gmail.com", password: "blabla", first_name: "Jacques", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[6])
+marion = User.create( email: "marion@gmail.com", password: "blabla", first_name: "Marion", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[7])
+paul = User.create( email: "paul@gmail.com", password: "blabla", first_name: "Paul", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[8])
+laurianne = User.create( email: "laurianne@gmail.com", password: "blabla", first_name: "Laurianne", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[9])
+elo = User.create( email: "elo@gmail.com", password: "blabla", first_name: "Elo", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[10])
+michael = User.create( email: "michael@gmail.com", password: "blabla", first_name: "Michael", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[11])
+lea = User.create( email: "lea@gmail.com", password: "blabla", first_name: "Lea", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[12])
+popi = User.create( email: "popi@gmail.com", password: "blabla", first_name: "Popi", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[13])
+yann = User.create( email: "yann@gmail.com", password: "blabla", first_name: "Yann", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[14])
+marie = User.create( email: "marie@gmail.com", password: "blabla", first_name: "Marie", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[15])
+jose = User.create( email: "jose@gmail.com", password: "blabla", first_name: "Jose", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[16])
+yannick = User.create( email: "yannick@gmail.com", password: "blabla", first_name: "Yannick", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[17])
+jeanne = User.create( email: "jeanne@gmail.com", password: "blabla", first_name: "Jeanne", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[18])
+thomas = User.create( email: "thomas@gmail.com", password: "blabla", first_name: "Thomas", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[19])
+julien = User.create( email: "julien@gmail.com", password: "blabla", first_name: "Julien", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[20])
+raph = User.create( email: "raph@gmail.com", password: "blabla", first_name: "Raph", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand,bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[21])
+mathilde = User.create( email: "mathilde@gmail.com", password: "blabla", first_name: "Mathilde", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[22])
+jonathan = User.create( email: "jonathan@gmail.com", password: "blabla", first_name: "Jonathan", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[23])
+mona = User.create( email: "mona@gmail.com", password: "blabla", first_name: "Mona", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[24])
+math = User.create( email: "math@gmail.com", password: "blabla", first_name: "Math", last_name: Faker::Name.last_name, status: false, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "#{Faker::Educator.university}: #{Faker::Educator.course}", photo_url: image_users[25])
+
+c1 = Connection.create!(status: "connected", guest: math, host: loan)
 Connection.create!(status: "connected", guest: math, host: mona)
 Connection.create!(status: "connected", guest: math, host: jonathan)
 Connection.create!(status: "connected", guest: math, host: julien)
 Connection.create!(status: "connected", guest: math, host: louis)
-Connection.create!(status: "connected", guest: loan, host: thomas)
-Connection.create!(status: "connected", guest: loan, host: jeanne)
+c2 = Connection.create!(status: "connected", guest: loan, host: thomas)
+c3 = Connection.create!(status: "connected", guest: loan, host: jeanne)
 Connection.create!(status: "connected", guest: loan, host: jose)
 Connection.create!(status: "connected", guest: loan, host: yannick)
 Connection.create!(status: "connected", guest: loan, host: arthur)
 Connection.create!(status: "connected", guest: loan, host: mona)
-Connection.create!(status: "connected", guest: louis, host: arthur)
+c4 = Connection.create!(status: "connected", guest: louis, host: arthur)
 Connection.create!(status: "connected", guest: louis, host: raph)
 Connection.create!(status: "connected", guest: louis, host: mathilde)
 Connection.create!(status: "connected", guest: louis, host: greg)
@@ -147,13 +98,13 @@ Connection.create!(status: "connected", guest: julien, host: marion)
 Connection.create!(status: "connected", guest: jonathan, host: paul)
 Connection.create!(status: "connected", guest: jonathan, host: laurianne)
 Connection.create!(status: "connected", guest: jonathan, host: elo)
-Connection.create!(status: "connected", guest: jonathan, host: arthur)
+c5 = Connection.create!(status: "connected", guest: jonathan, host: arthur)
 Connection.create!(status: "connected", guest: jonathan, host: michael)
 Connection.create!(status: "connected", guest: mona, host: lea)
 Connection.create!(status: "connected", guest: mona, host: popi)
 Connection.create!(status: "connected", guest: mona, host: yann)
 Connection.create!(status: "connected", guest: mona, host: marie)
-Connection.create!(status: "connected", guest: greg, host: arthur)
+c6 = Connection.create!(status: "connected", guest: greg, host: arthur)
 Connection.create!(status: "connected", guest: greg, host: alex)
 Connection.create!(status: "connected", guest: greg, host: pauline)
 Connection.create!(status: "connected", guest: greg, host: raph)
@@ -161,15 +112,6 @@ Connection.create!(status: "connected", guest: mathilde, host: raph)
 Connection.create!(status: "connected", guest: mathilde, host: pauline)
 Connection.create!(status: "connected", guest: mathilde, host: jacques)
 Connection.create!(status: "connected", guest: mathilde, host: marion)
-
-# Connection.create!(status: "connected", guest_id: 1, host_id: 2)
-# Connection.create!(status: "connected", guest_id: 1, host_id: 3)
-# Connection.create!(status: "connected", guest_id: 4, host_id: 1)
-# Connection.create!(status: "connected", guest_id: 1, host_id: 5)
-# Connection.create!(status: "connected", guest_id: 2, host_id: 7)
-# Connection.create!(status: "connected", guest_id: 7, host_id: 5)
-# Connection.create!(status: "connected", guest_id: 6, host_id: 7)
-
 
 # Categories and skills
 cat_skills = [
@@ -189,55 +131,31 @@ cat_skills = [
     name: "Management",
     skills:
     [
-      {name: 'skill_manag1'},
-      {name: 'skill_manag2'},
-      {name: 'skill_manag3'}
+      {name: 'Planning'},
+      {name: 'Organising'},
+      {name: 'Reporting'},
     ],
     photo_url: "http://www.projectmanagers.net/i/wp-content/uploads/2013/05/bigstock-Business-Team-Meeting-at-Sunse-62229413.jpg"
-  },
-  {
-    name: "Database",
-    skills:
-    [
-      {name: 'skill_data1'},
-      {name: 'skill_data2'},
-      {name: 'skill_data3'},
-      {name: 'skill_data4'}
-    ],
-    photo_url: "http://bigdata.socuumcas.net/images/daat.jpg"
-  },
-  {
-    name: "Digital",
-    skills:
-    [
-      {name: 'skill_digi1'},
-      {name: 'skill_digi2'},
-      {name: 'skill_digi3'}
-    ],
-    photo_url: "http://i.huffpost.com/gen/2050946/images/o-DIGITAL-MARKETING-facebook.jpg"
   },
   {
     name: "Graphism",
     skills:
     [
-      {name: 'skill_graph1'},
-      {name: 'skill_graph2'},
-      {name: 'skill_graph3'},
-      {name: 'skill_graph4'},
-      {name: 'skill_graph5'},
-      {name: 'skill_graph6'},
-      {name: 'skill_graph7'}
+      {name: 'Creativity'},
+      {name: 'Typography'},
+      {name: 'Design Software'},
+      {name: 'Color Theory'},
     ],
     photo_url: "http://www.lasalopette.net/wordpress/wp-content/uploads/2014/11/1517407_10154944120615601_2145974816554658412_n.jpg"
   },
   {
-    name: "Industry",
+    name: "Architecture",
     skills:
     [
-      {name: 'skill_indus1'},
-      {name: 'skill_indus2'},
-      {name: 'skill_indus3'},
-      {name: 'skill_indus4'}
+      {name: 'Design Talent'},
+      {name: 'Engineering Ability'},
+      {name: 'Business Aptitude'},
+      {name: 'Social Awareness'}
     ],
     photo_url: "https://data.motor-talk.de/data/galleries/0/188/5281/57789828/rueckrufe-usa-5076501119952349315.jpg"
   },
@@ -245,9 +163,9 @@ cat_skills = [
     name: "Photography",
     skills:
     [
-      {name: 'skill_photo1'},
-      {name: 'skill_photo2'},
-      {name: 'skill_photo3'}
+      {name: 'Equipment'},
+      {name: 'Editing'},
+      {name: 'Marketing'}
     ],
     photo_url: "http://www.mon-savoir.fr/wp-content/uploads/2015/04/histoire-photographie-apprendre-expose-1024x678.jpg"
   },
@@ -255,51 +173,33 @@ cat_skills = [
     name: "Finance",
     skills:
     [
-      {name: 'skill_finance1'},
-      {name: 'skill_finance2'},
-      {name: 'skill_finance3'},
-      {name: 'skill_finance4'},
-      {name: 'skill_finance5'}
+      {name: 'Ability to Communicate'},
+      {name: 'Capacity for Innovation'},
+      {name: 'Commercial Acumen'},
+      {name: 'Analytical Ability'},
     ],
     photo_url: "http://static.memrise.com/uploads/course_photos/3146044000150629230223.jpg"
-  },
-  {
-    name: "Conseil",
-    skills:
-    [
-      {name: 'skill_cons1'},
-      {name: 'skill_cons2'},
-      {name: 'skill_cons3'}
-    ],
-    photo_url: "http://www.fca-conseils.com/wp-content/uploads/2015/11/audit-conseil.jpg?quality=100.3016013118360"
-  },
-  {
-    name: "Architecture",
-    skills:
-    [
-      {name: 'skill_arch1'},
-      {name: 'skill_arch2'},
-      {name: 'skill_arch3'},
-      {name: 'skill_arch4'}
-    ],
-    photo_url: "http://designmag.fr/wp-content/uploads/2015/12/architecture-contemporaine-maison-design.jpg"
-  },
+  }
 ]
 
 def seed_icon(file_name)
-  "skill_icons/#{file_name}.svg"
+  "skill_icons/#{file_name}.svg".gsub(" ", "")
 end
 
 cat_skills.each do |category_data|
   category = Category.create(name: category_data[:name], photo_url: category_data[:photo_url])
   category_data[:skills].each do |attributes|
-    attributes[:icon] = seed_icon(attributes[:name].downcase + '_icon')
+    attributes[:icon] = seed_icon(attributes[:name] + '_icon')
     attributes[:category] = category
     Skill.create(attributes)
   end
 end
 
-
+User.all.each do |user|
+  Skill.all.shuffle[0..9].each do |skill|
+    UserSkill.create(skill: skill, user: user)
+  end
+end
 
 # connection_status
 connection_types = [
@@ -319,65 +219,79 @@ connection_types = [
   )
 end
 
-# places
-# 10.times do
-#   partner = User.create(
-#     email: Faker::Internet.email,
-#     password: Faker::Internet.password(8),
-#     first_name: Faker::Name.first_name,
-#     last_name: Faker::Name.last_name,
-#     status: true,
-#     gender: ["male", "female"].sample,
-#     work_place: fake_address_gironde,
-#     birthday: Faker::Date.backward(60),
-#     bio: Faker::Lorem.paragraph
-#   )
-
-#   Place.create(
-#     name: Faker::Company.name,
-#     address: fake_address_gironde,
-#     description: Faker::Company.catch_phrase,
-#     phone_number: Faker::PhoneNumber.phone_number,
-#     type_partner: ["Afterwork", "Café", "Lunch snack", "Salad bar", "restaurant"].sample,
-#     pax: Faker::Number.number(2), # balance 2 digits
-#     user: partner
-#   )
-# end
-
-
-
 #test
 partner = User.create(
-  email: "parv@gmail.com",
+  email: "pv@gmail.com",
   password: "123123",
-  first_name: "toto",
+  first_name: "Pierre-incent",
   last_name: "junior",
   status: true,
   gender: "male",
   work_place: fake_address_gironde,
   birthday: Faker::Date.backward(60),
-  bio: "mysterieux toto"
+  bio: "mysterieux guy"
   )
 p = Place.create(
-  name: "Chez toto",
-  address: fake_address_gironde,
-  description: "totoland",
-  phone_number: "060305",
-  type_partner: "Café",
+  name: "La Tupina",
+  address: "6 Rue Porte de la Monnaie, 33800 Bordeaux",
+  description: "La Rue Gourmande : une autre façon de déambuler",
+  phone_number: "05 56 91 56 37",
+  type_partner: "Restaurant",
   pax: 1,
-  photo_url: "http://lesmondaines.com/wp-content/uploads/2012/12/french-coffee-shop-grenoble-1.png",
+  photo_url: "https://u.tfstatic.com/restaurant_photos/184/184/169/612/la-tupina-maison-fredon-b85d7.jpg",
   user: partner
 )
-Meeting.create(
-  guest_review: Faker::Superhero.power,
-  host_review: Faker::Superhero.power,
+
+
+c1.meetings.create(
   date: Faker::Date.between(300.days.ago, time_rand),
   connection: Connection.all.sample,
-  place: p
+  place: p,
+  guest_review: "Soirée très sympathique, au plaisir !"
 )
 
+c2.meetings.create(
+  date: Faker::Date.between(300.days.ago, time_rand),
+  connection: Connection.all.sample,
+  place: p,
+  host_review: "Je te rappelle pour te filer le contact de Wilhelm."
+)
 
-User.last.places.first.availabilities.create(min_day: "Monday", max_day: "Sunday", min_time: Time.now, max_time: Time.now)
+c3.meetings.create(
+  date: Faker::Date.between(300.days.ago, time_rand),
+  connection: Connection.all.sample,
+  place: p,
+  host_review: "Conversation intéressante!"
+)
+
+c4.meetings.create(
+  date: Faker::Date.between(300.days.ago, time_rand),
+  connection: Connection.all.sample,
+  place: p,
+  guest_review: "On se revoie au cluster."
+)
+
+c5.meetings.create(
+  date: Faker::Date.between(300.days.ago, time_rand),
+  connection: Connection.all.sample,
+  place: p,
+  guest_review: "Possibiités de projets communs"
+)
+
+c6.meetings.create(
+  date: Faker::Date.between(300.days.ago, time_rand),
+  connection: Connection.all.sample,
+  place: p,
+  guest_review: "C'est ok pour nos réunions hebdomadaires !"
+)
+
+min_time = DateTime.httpdate("Mon, 01 Jan 2001 12:00:00 GMT")
+max_time = DateTime.httpdate("Sat, 06 Jan 2001 14:00:00 GMT")
+User.last.places.first.availabilities.create(min_day: "Monday", max_day: "Saturday", min_time: min_time, max_time: max_time)
+
+min_time = DateTime.httpdate("Mon, 01 Jan 2001 19:00:00 GMT")
+max_time = DateTime.httpdate("Sat, 06 Jan 2001 23:00:00 GMT")
+User.last.places.first.availabilities.create(min_day: "Monday", max_day: "Saturday", min_time: min_time, max_time: max_time)
 
 # partners
 philipe = User.create( email: "philipe@gmail.com", password: "blabla", first_name: "Philipe", last_name: Faker::Name.last_name, status: true, gender: "male", work_place: fake_address_gironde, birthday: time_rand, bio: "plout")
@@ -415,7 +329,7 @@ Place.create(
 Place.create(
     name: Faker::Company.name,
     address: fake_address_gironde,
-    description: "Take a break",
+    description: "Take a break after work",
     phone_number: Faker::PhoneNumber.phone_number,
     type_partner: "Afterwork",
     pax: 12,
