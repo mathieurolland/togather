@@ -82,7 +82,7 @@
                     <% end %> <!--else-->
                   <% end %> <!--@suggestions.each do-->
 
-                  <% @real_connections.each do |real| %>
+                  <% @real_connections.reverse.each do |real| %>
                     <%= render partial: 'contact_card', locals: {connection: (Connection.find_by(guest: current_user, host: real[:user]) || Connection.find_by(host: current_user, guest: real[:user])), contact: real[:user], status: "connected", score: (Connection.find_by(guest: current_user, host: real[:user]) || Connection.find_by(host: current_user, guest: real[:user])).score} %>
                   <% end %>
 
