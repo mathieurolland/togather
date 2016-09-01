@@ -137,24 +137,6 @@ class User < ApplicationRecord
     end
   end
 
-  def retrieve_reviews
-    reviews = []
-    c = Connection.all
-    c.select {|con| con.host_id == self.id || con.guest_id == self.id}
-    c.each do |connection|
-      if connection.guest_id == self.id
-        if connection.meetings
-          reviews << [connection.meetings.first.host_review, connection.host_id] if connection.meetings.first
-        end
-      else
-        if connection.meetings
-          reviews << [connection.meetings.first.guest_review, connection.guest_id] if connection.meetings.first
-        end
-      end
-    end
-    reviews.compact
-  end
-
   def node_user
     nodes = [self.node(0)]
     self.total_connected.each do |connected|
