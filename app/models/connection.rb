@@ -8,7 +8,7 @@ class Connection < ApplicationRecord
 
   def score
     sum = self.guest.skills.count + self.host.skills.count
-    sum ? ((self.guest.skills & self.host.skills).count * 1.0 / sum * 20).to_i : 0
+    sum != 0 ? ((self.guest.skills & self.host.skills).count * 1.0 / sum * 20).to_i : 0
   end
 end
 

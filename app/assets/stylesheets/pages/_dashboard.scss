@@ -178,6 +178,22 @@
   }
 }
 
+.skills-icons-listing {
+  width: 100%;
+  display: flex;
+  .skill-icon {
+    font-size: 14px;
+    img {
+      height: 17px;
+    }
+  }
+}
+
+.supp-info {
+  display: flex;
+  justify-content: space-between;
+}
+
 .suggestion-card:hover {
   background-color: rgba(255,224,181,0.2);
 }
@@ -294,11 +310,7 @@
 // }
 
 .graph {
-    max-width: 400px;
-    height: 400px;
-    margin: auto;
-  }
-
-.modal-bio-picture {
-  display: flex;
+  max-width: 400px;
+  height: 400px;
+  margin: auto;
 }
