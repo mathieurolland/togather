@@ -26,7 +26,6 @@
                     <p><%= place.description %></p>
                   </div>
                   <%= link_to "", place_path(place), class: "card-link" %>
-                  <a href=""></a>
                 </div>
 
               <% else %>
@@ -36,9 +35,8 @@
                     <h2><%= place.name %></h2>
                     <p><%= place.description %></p>
                   </div>
+                  <%= link_to "", connection_meeting_place_path(@connection, @meeting, place), class: "card-link" %>
                 </div>
-                <%= link_to "", connection_meeting_place_path(@connection, @meeting, place), class: "card-link" %>
-                <a href=""></a>
               <% end %>
             </div>
           </div>

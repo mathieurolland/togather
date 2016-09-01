@@ -1,101 +1,117 @@
 
-      <div class="container-fluid">
-    <div class="wrapper">
-        <div class="row">
-          <div class="col-md-3">
-            <%= render "shared/navbar" %>
-              <div class="profil-wrapper">
-                <div class="profile-bio">
-                   <% if @meeting.connection.guest != current_user%>
-                        <% if @meeting.connection.guest.photo? %>
-                        <%= cl_image_tag @meeting.connection.guest.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
-                        <% else %>
-                          <%= image_tag "http://placehold.it/100x100" %>
-                        <% end %>
+<div class="container-fluid">
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-md-3 wrapper-col-3">
+        <%= render "shared/navbar" %>
 
-                        <h3> <%= @meeting.connection.guest.first_name%> <%=@meeting.connection.guest.last_name %> </h3>
+        <div class="profil-wrapper">
+          <div class="profile-bio">
+            <% if @meeting.connection.guest != current_user%>
+              <% if @meeting.connection.guest.photo? %>
+                <%= cl_image_tag @meeting.connection.guest.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
+              <% else %>
+                <%= image_tag "http://placehold.it/100x100" %>
+              <% end %>
 
-                      <% elsif @meeting.connection.host != current_user %>
-                       <% if @meeting.connection.host.photo? %>
-                        <%= cl_image_tag @meeting.connection.host.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
-                        <% else %>
-                          <%= image_tag "http://placehold.it/100x100" %>
-                        <% end %>
+              <h3> <%= @meeting.connection.guest.first_name%> <%=@meeting.connection.guest.last_name %> </h3>
 
-                        <h3> <%= @meeting.connection.host.first_name%> <%=@meeting.connection.host.last_name %> </h3>
-                <% end %>
-            </div>
-            <div class="profile-interests">
-              <% if @meeting.connection.guest != current_user %>
-                <span class="bio-title"> <%= @meeting.connection.guest.first_name%>'s bio </span>
-                <div class="profile-skills">
-                  <div class="skills-icons">
+            <% elsif @meeting.connection.host != current_user %>
+              <% if @meeting.connection.host.photo? %>
+                <%= cl_image_tag @meeting.connection.host.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
+              <% else %>
+                <%= image_tag "http://placehold.it/100x100" %>
+              <% end %>
+
+              <h3> <%= @meeting.connection.host.first_name%> <%=@meeting.connection.host.last_name %> </h3>
+            <% end %>
+          </div>
+          <div class="profile-interests">
+            <% if @meeting.connection.guest != current_user %>
+              <span class="bio-title"> <%= @meeting.connection.guest.first_name%>'s bio </span>
+              <div class="profile-skills">
+                <div class="skills-icons">
                   <%= truncate(@meeting.connection.guest.bio, length: 105) %>
-                  </div>
                 </div>
-                  <% elsif @meeting.connection.host != current_user %>
-                <span class="bio-title"> <%= @meeting.connection.host.first_name%>'s bio </span>
-                <div class="profile-skills">
-                  <div class="skills-icons">
-                  <%= truncate(@meeting.connection.host.bio, length: 105) %>
-                <% end %>
               </div>
-            </div>
+            <% elsif @meeting.connection.host != current_user %>
+              <span class="bio-title"> <%= @meeting.connection.host.first_name%>'s bio </span>
+              <div class="profile-skills">
+                <div class="skills-icons">
+                  <%= truncate(@meeting.connection.host.bio, length: 105) %>
+                </div>
+              </div>
+            <% end %>
           </div>
           <div class="profile-details">
             <div class="profile-interests">
-                <div class="skills-icons">
-                  <% if @meeting.connection.guest != current_user%>
-                     <span class="bio-title"> <%= @meeting.connection.guest.first_name%>'s interests</span>
-                      <div class="profile-skills">
+              <div class="skills-icons">
+                <% if @meeting.connection.guest != current_user%>
+                  <span class="bio-title"><%= @meeting.connection.guest.first_name%>'s interests</span>
+                  <div class="profile-skills">
                     <% s =  @meeting.connection.guest.skills.shuffle %>
                     <% skills = s.sample(14) %>
                     <div class="skills-icons">
-                    <% skills.each do |skill| %>
-
-                      <%= image_tag(skill.icon) %>
-
-                    <% end %>
+                      <% skills.each do |skill| %>
+                        <%= image_tag(skill.icon) %>
+                      <% end %>
                     </div>
-                 <% elsif @meeting.connection.host != current_user%>
-                    <% s =  @meeting.connection.host.skills.shuffle %>
-                    <span class="bio-title"> <%= @meeting.connection.host.first_name%>'s interests</span>
-                    <div class="profile-skills">
+                  </div>
+                <% elsif @meeting.connection.host != current_user%>
+                  <% s =  @meeting.connection.host.skills.shuffle %>
+                  <span class="bio-title"> <%= @meeting.connection.host.first_name%>'s interests</span>
+                  <div class="profile-skills">
                     <% skills = s.sample(14) %>
-                     <div class="skills-icons">
-                    <% skills.each do |skill| %>
-
-                      <%= image_tag(skill.icon) %>
-
-                    <% end %>
+                    <div class="skills-icons">
+                      <% skills.each do |skill| %>
+                        <%= image_tag(skill.icon) %>
+                      <% end %>
+                    </div>
                   </div>
-                  <% end%>
-                  </div>
-                </div>
+                <% end %>
+              </div>
+              <hr>
             </div>
-            <hr>
           </div>
 
-            <% if @connection.status == "valid" %>
-                  <%= render "form_finalize_status", value: "connected" %>
-                  <%= render "form_finalize_status", value: "Refused" %>
-                <% elsif @connection.status == "connected" %>
-                  <%= render "form_finalize_status", value: "Refused" %>
-                <% end %>
-
+          <div class="choice-review">
+            <% if @meeting.date && @meeting.date < DateTime.now %>
+              <% if @meeting.connection.host != current_user %>
+                <h5> Do you want to share your network with <%=@meeting.connection.host.first_name%> ? </h5>
+              <% else %>
+                <h5> Do you want to share your network with <%= @meeting.connection.guest.first_name%> ? </h5>
+              <% end %>
+              <hr>
+              <% if @connection.status == "valid" %>
+                <%= render "form_finalize_status", value: "Connect our Networks" %><%= render "form_finalize_status", value: "Refuse it" %>
+              <% elsif @connection.status == "connected" %>
+                <%= render "form_finalize_status", value: "Refuse it" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
-    </div>
 
+      <div class="col-md-9 wrapper-col-9">
 
-          <div class="col-md-9">
-            <div class="wrapping-case" style=" background: #F7F9F9 ;
-    padding: 30px;">
-            <div class="row">
-              <div class="col-md-7">
+        <div class="page-header">
+          <h1>Our Meeting</h1>
+          <p class="text-muted">
+            <% if @meeting.place %>
+              <%= @meeting.place.name %> - <%= @meeting.date.strftime('%m/%d/%Y %I:%M %p') %>
+              <%= link_to "Choise an other places", connection_meeting_places_path(@connection, @meeting), class: "btn btn-xs btn-primary" %>
+            <% else %>
+              <%= link_to "Choise places", connection_meeting_places_path(@connection, @meeting), class: "btn btn-xs btn-primary" %>
+            <% end %>
+          </p>
+        </div>
+
+        <div class="wrapping-case" style="padding: 0 30px;">
+          <div class="row">
+            <div class="col-md-7">
               <div class="messagerie">
                 <div class="suggestion-wrapper">
-                  <div class="suggestion-content messagerie" style= "height:88vh; border: 1px solid rgba(0, 0, 0, 0.07);
-  background-color: #86BBD8; padding: 30px" >
+                  <div class="suggestion-content messagerie" >
                     <h3 id="hiding-bar">
                       MESSAGES
                     </h3>
@@ -103,44 +119,21 @@
                     <%= render 'shared/message_row' %>
 
                   </div>
-            </div>
-            </div>
-
-          <div class="col-md-5">
-             <h1>Our Meeting</h1>
-          <div class="profile-workplace">
-              <span class="bio-title">Let's Organize it</span>
-                  <% if @meeting.place %>
-                    <p>Place : <%= @meeting.place.name %></p>
-                    <br>
-                    <p>Place : <%= @meeting.date.strftime('%m/%d/%Y %I:%M %p') %></p>
-
-                    <div class="btn btn-primary place-choice"> <%= link_to "Choise a other places", connection_meeting_places_path(@connection, @meeting) %> </div>
-                        <br>
-
-                    <% else %>
-                    <%= link_to "Choise places", connection_meeting_places_path(@connection, @meeting) %>
-                    <% end %>
+                </div>
               </div>
-
-              <hr>
-
-                <h1> REVIEW </h1>
+            </div>
+            <div class="col-md-5">
+              <h3> Add a Review to your meeting </h3>
               <% if @meeting.date && @meeting.date < DateTime.now %>
-                <!-- Reviews -->
                 <%= render 'reviews' %>
-                <!-- Finalize -->
-
               <% end %>
-          </div>
-
-
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
+</div>
 
 
 

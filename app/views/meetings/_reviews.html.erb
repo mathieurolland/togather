@@ -1,5 +1,5 @@
 <% if @current_review %>
-  <h2> Your review </h2>
+  <h4> Your review </h4>
   <p><%= @current_review %></p>
   <%= link_to "Edit", edit_review_path(@connection, @meeting) %>
   <%= link_to "Delete", review_path(@connection, @meeting), method: :delete %>
@@ -8,13 +8,11 @@
   <%= render "form_review" %>
 <% end %>
 
-<hr>
-<br>
 
 <% if @other_review %>
-  <h2><%= "#{@other_meeter.first_name} #{@other_meeter.last_name} 's Review" %></h2>
-  <p><%= @other_review %></p>
+  <h4><%= "#{@other_meeter.first_name} #{@other_meeter.last_name} 's Review" %></h4>
+  <p style="font-size: 14px"><%= @other_review %></p>
 <% else %>
-  <h2><%= "#{@other_meeter.first_name} #{@other_meeter.last_name} n'a pas encore fait de review" %></h2>
+  <h4><%= "#{@other_meeter.first_name} #{@other_meeter.last_name} n'a pas encore fait de review" %></h4>
 <% end %>
 
