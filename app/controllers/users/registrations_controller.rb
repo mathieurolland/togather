@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         categories_path
       else
         current_user.destroy
-        root
+        root_path
       end
     end
   end
