@@ -1,56 +1,65 @@
-<div class="chat-container">
+
+
+
   <div class="row">
+
+
     <div class="message">
       <ul class="ChatLog">
+        <div class="col-md-6">
         <% @meeting.messages.each do |message| %>
-
             <li>
-              <div class="col-md-6">
              <% if message.user == current_user %>
+              <div class="message-data">
+                   <span class="message-data-name"><%= message.user.first_name %> </span>
+                   <span class="message-data-time"> <%= message.created_at %> </span> &nbsp; &nbsp;
+                </div>
+
               <div class="message-card">
                   <div class="message-orange">
                      <p><%= message.content%></p>
                   </div>
                 </div>
-              <div class="message-data">
-                   <span class="message-data-name"><%= message.user.first_name %> </span>
-                   <span class="message-data-time"> <%= message.created_at %> </span> &nbsp; &nbsp;
-                </div>
               <% end %>
-              </div>
-            </li>
+              </li>
+            <%end %>
+            </div>
 
 
+           <div class="col-md-6">
+           <div class="message-data-blue">
+        <% @meeting.messages.each do |message| %>
             <li >
-               <div class="col-md-offset-6">
                <% if message.user != current_user %>
-                <div class="message-data">
+                <div >
                    <span class="message-data-name"><%= message.user.first_name %> </span>
                    <span class="message-data-time"> <%= message.created_at %> </span> &nbsp; &nbsp;
                 </div>
 
-              <div class="message-data">
+              <div class="message-card">
                 <div class="message-blue">
                   <p><%= message.content%></p>
                 </div>
               </div>
               <% end %>
-            </div>
             </li>
         <% end %>
-      </ul>
-    </div>
-
-
-
-    <div class="chatbar">
-      <div class="box">
-    <%= form_for @new_message, url: connection_meeting_messages_path(@connection, @meeting), method: :post do |f| %>
-        <%= f.text_field :content %>
       </div>
-    <% end %>
+      </div>
+      </ul>
     </div>
   </div>
 </div>
+
+   <div class = "text-center">
+    <div class="chatbar">
+      <div class="box">
+        <%= form_for @new_message, url: connection_meeting_messages_path(@connection, @meeting), method: :post do |f| %>
+        <%= f.text_field :content, class:'new-message'%>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="message-chat-container ">
 
 

@@ -10,7 +10,6 @@ div {
 
 
 .message-card {
-  height: 100px;
   text-shadow: 0 1px 3px rgba(0,0,0,0.6);
   color: white;
   position: relative;
@@ -36,6 +35,7 @@ div {
   max-width: 70%;
   position: relative;
   border-radius: 5px;
+  margin-bottom : 15px;
 }
   // :after {
   //   content: '';
@@ -60,6 +60,7 @@ div {
   max-width: 70%;
   position: relative;
   border-radius: 5px;
+  margin-bottom : 15px;
 }
 
 .chat-container li {
@@ -92,6 +93,9 @@ span {
     vertical-align: baseline;
 }
 
+.message-data-blue {
+  margin-top: 55px;
+}
 
 .message-data-time {
     color: #a8aab1;
@@ -106,11 +110,24 @@ span {
  border-radius:7px;
 }
 
+.message-chat-container {
+  position: relative;
+  padding: 0px 40px 40px 40px;
+  border-radius:7px;
+}
+
+
+
 .chatbar {
-  border-top: 2px solid grey;
-  padding: 15px;
-  position: absolute;
+  padding: 10px;
   width: 100%;
-  bottom: 0px;
-  left: 0px
+}
+
+.box {
+
+}
+
+.new-message {
+  width: 100%;
+  height: 35px;
 }
