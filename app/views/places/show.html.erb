@@ -2,74 +2,72 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-3">
-        <%= render "shared/navbar" %>
-        </br>
-        </br>
-
-
-          <div class="row">
-            <div class="col-md-12 no-marginlr-col">
-              <div class="cardshow">
-                <div class="card monimage" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url(<%= cl_image_path(@place.photo.public_id) %>);">
-                </div>
+        <div class="row">
+          <%= render "shared/navbar" %>
+          </br>
+          </br>
+          <div class="col-md-12 no-marginlr-col">
+            <div class="cardshow">
+              <div class="card monimage" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url(<%= cl_image_path(@place.photo.public_id) %>);">
               </div>
             </div>
+          </div>
 
-            <div class="col-md-12 no-marginlr-col">
-              <ul class="myul myulcentre">
-                <div class="col-sm-12">
-                  </br>
-                  </br>
-                  </br>
-                  </br>
-                  <li>
-                    <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
-                    <p> Visit our <%= @place.type_partner.downcase %></p>
-                  </li>
+          <div class="col-md-12 no-marginlr-col">
+            <ul class="myul myulcentre">
+              <div class="col-sm-12">
                 </br>
                 </br>
-
+                </br>
+                </br>
                 <li>
-                  <i class="fa fa-phone fa-2x" aria-hidden="true"></i>
-                  </br>
-                  </br>
-                  <p><strong> Contact us :</strong></p>
-                  <p><%= @place.phone_number %></p>
+                  <i class="fa fa-thumbs-up fa-2x" aria-hidden="true"></i>
+                  <p> Visit our <%= @place.type_partner.downcase %></p>
                 </li>
-                </br>
-                </br>
+              </br>
+              </br>
 
-                <li>
-                  <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
-                  </br>
-                  </br>
-                  <p><strong> Find us :</strong></p>
-                  <p><%= @place.address %></p>
-                </li>
+              <li>
+                <i class="fa fa-phone fa-2x" aria-hidden="true"></i>
                 </br>
                 </br>
-              </div>
-            </ul>
-          </div> <!-- row fa -->
-        </div> <!-- row card -->
+                <p><strong> Contact us :</strong></p>
+                <p><%= @place.phone_number %></p>
+              </li>
+              </br>
+              </br>
+
+              <li>
+                <i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>
+                </br>
+                </br>
+                <p><strong> Find us :</strong></p>
+                <p><%= @place.address %></p>
+              </li>
+              </br>
+              </br>
+            </div>
+          </ul>
+        </div> <!-- row fa -->
+      </div> <!-- row card -->
       </div> <!-- col 1 (row1)-->
 
       <div class="col-md-9">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="monplacemendate">
-                <div class="text-center">
-                  </br>
-                  </br>
-                  </br>
-                  </br>
-                  <h1><%= @place.name %></h1>
-                  <h2><%= @place.description %></h2>
-                  </br>
-                  </br>
-                  <h3> Choose a date : </h3>
-                  </br>
-                  </br>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="monplacemendate">
+              <div class="text-center">
+                </br>
+                </br>
+                </br>
+                </br>
+                <h1><%= @place.name %></h1>
+                <h2><%= @place.description %></h2>
+                </br>
+                </br>
+                <h3> Choose a date : </h3>
+                </br>
+                </br>
                 <% if @availabilities.first %>
                   <ul>
                     <div class="myul">
@@ -80,8 +78,8 @@
                         </strong>
                       <% array.each_with_index do |availability, i| %>
                         <p><%= "#{availability[:min_time].strftime "%Hh%M"} - #{availability[:max_time].strftime "%Hh%M"}" %></p>
-                      <% unless i == array.count - 1 %>
-                        <%= ", " %>
+                        <% unless i == array.count - 1 %>
+                          <%= ", " %>
                         <% end %>
                       <% end %>
                       </li>
@@ -89,35 +87,34 @@
                     </div>
                   </ul>
                 <% end %>
-                </div>
-
                 <% if current_user.status %>
-                    <%= link_to "Delete place", place_path(@place), method: :delete, data: { confirm: "Are you sure you want to delete this product?" } %>
-                    <%= link_to "Edit place", edit_place_path(@place) %>
-                    <%= link_to "Modify availabilities", place_availabilities_path(@place) %>
-                    <%= link_to "Back", partner_path %>
+                  <%= link_to "Delete place", place_path(@place), method: :delete, data: { confirm: "Are you sure you want to delete this product?" } %>
+                  <%= link_to "Edit place", edit_place_path(@place) %>
+                  <%= link_to "Modify availabilities", place_availabilities_path(@place) %>
+                  <%= link_to "Back", partner_path %>
                 <% else %>
                   <%= render "options_meeter" %>
                 <% end %>
-          </div>
-        </div>
-      <div class="col-md-6 no-marginlr-col">
-        <div class="map-work">
-          <% @hash.each do |marker| %>
-            <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
-          <% end %>
-          <% @hashcontent = raw @hash.to_json %>
-          <div class="show-place-map">
-            <div id="map">
-              <% content_for(:after_js) do %>
-                <%= render partial: 'gmaps', locals: {hash: @hashcontent} %>
-              <% end %>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-
-
+          <div class="col-md-6 no-marginlr-col">
+            <div class="row">
+              <div class="map-work">
+                <% @hash.each do |marker| %>
+                  <% marker[:picture] = { "url": "#{image_path("place2.png") }", "width":  32, "height": 32 } %>
+                <% end %>
+                <% @hashcontent = raw @hash.to_json %>
+                <div class="show-place-map">
+                  <div id="map">
+                    <% content_for(:after_js) do %>
+                      <%= render partial: 'gmaps', locals: {hash: @hashcontent} %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div> <!--  row 1 -->
