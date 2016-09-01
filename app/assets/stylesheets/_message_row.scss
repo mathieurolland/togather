@@ -26,7 +26,7 @@ div {
 }
 
 .message-orange {
-  background: #FF5E5B;
+  background: $red;
   position: relative;
   padding: 8px 8px 8px 8px;
   font-size: 0.9em;
@@ -51,7 +51,7 @@ div {
   // }
 
 .message-blue {
-  background: #2274A5;
+  background: $blue;
   position: relative;
   padding: 8px 8px 8px 8px;
   font-size: 0.9em;
@@ -61,6 +61,7 @@ div {
   position: relative;
   border-radius: 5px;
   margin-left: 120px;
+  margin-bottom : 15px;
 }
 
 .chat-container li {
@@ -97,10 +98,9 @@ span {
   margin-left: 70%;
 }
 
-
 .message-data-time {
-    color: black;
-    padding-left: 6px;
+  color: black;
+  padding-left: 6px;
 }
 
 .chat-container {

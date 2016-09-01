@@ -14,9 +14,7 @@
 }
 
 .messagerie {
-  height: 88vh;
-  border: 1px solid rgba(0, 0, 0, 0.07);
-  background-color: #fff;
+  height: 70vh;
 }
 
 
@@ -24,14 +22,25 @@
   background: grey;
 }
 
-
-
-.wrapping-case {
-  background-color: #2274A5;
+.choice-review {
+  margin-top: 80px;
 }
+
+
 
 .btn-primary .place-choice {
   color: white;
 }
+
+.wrapper-col-9 {
+  background-color: #F6F7F1;
+  height: 100vh;
+}
+
+.wrapper-col-3 {
+  background-color: #DCDCDD;
+  height: 100vh;
+}
+
 
 
