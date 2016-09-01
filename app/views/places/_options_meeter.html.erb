@@ -15,11 +15,14 @@
         <% end %>
       </div>
     </div>
-    <script type="text/javascript">
-      $(function () {
-        $('#datetimepicker1').datetimepicker();
-        });
-    </script>
   </div>
 </div>
 <%= link_to "back", connection_meeting_places_path(@connection, @meeting) %>
+
+<% content_for :after_js do %>
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker1').datetimepicker();
+    });
+</script>
+<% end %>

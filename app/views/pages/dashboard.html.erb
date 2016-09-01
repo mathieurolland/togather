@@ -67,27 +67,27 @@
                   </h3>
                   <div class="underspace"></div>
                   <% iteration = 0 %>
-                  <% @suggestions.each do |suggestion| %>
+                  <% @suggestions.sort_by{ |s| s.score }.reverse.each do |suggestion| %>
                     <% if suggestion.status == "valid" %>
                       <% if suggestion.guest == current_user %>
 
                         <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
                           <% iteration += 1 %>
                           <div class="suggestion-card">
-                            <%= render partial: 'contact_card', locals: {contact_link: connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), contact: suggestion.host, status: suggestion.status, iteration: iteration} %>
+                            <%= render partial: 'contact_card', locals: {contact_link: connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), contact: suggestion.host, status: suggestion.status, iteration: iteration, score: suggestion.score} %>
                           </div>
                         <% end %>
                       <% else %>
                         <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
                           <% iteration += 1 %>
                           <div class="suggestion-card">
-                            <%= render partial: 'contact_card', locals: {contact_link: connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), contact: suggestion.guest, status: suggestion.status, iteration: iteration} %>
+                            <%= render partial: 'contact_card', locals: {contact_link: connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), contact: suggestion.guest, status: suggestion.status, iteration: iteration, score: suggestion.score} %>
                           </div>
                         <% end %>
                       <% end %>
                     <% else %>
                       <% iteration += 1 %>
-                      <%= render partial: 'contact_card', locals: {contact_link: suggestion, contact: suggestion.host, status: suggestion.status, iteration: iteration} %>
+                      <%= render partial: 'contact_card', locals: {contact_link: suggestion, contact: suggestion.host, status: suggestion.status, iteration: iteration, score: suggestion.score} %>
                     <% end %> <!--else-->
                   <% end %> <!--@suggestions.each do-->
 

@@ -57,30 +57,14 @@ class User < ApplicationRecord
     array = []
     self.invited_connections.each do |x|
       if x.status == "connected"
-        x.host.invited_connections.each do |y|
-          if y.status == "connected"
-            array << y.host
-          end
-        end
-        x.host.hosted_connections.each do |y|
-          if y.guest != self && y.status == "connected"
-            array << y.guest
-          end
-        end
+        x.host.invited_connections.each { |y| array << y.host if y.status == "connected" }
+        x.host.hosted_connections.each { |y| array << y.guest if y.guest != self && y.status == "connected" }
       end
     end
     self.hosted_connections.each do |x|
       if x.status == "connected"
-        x.guest.invited_connections.each do |y|
-          if  y.host != self && y.status == "connected" &&  array.include?(y.host) == false
-            array << y.host
-          end
-        end
-        x.guest.hosted_connections.each do |y|
-          if  y.status == "connected" &&  array.include?(y.guest) == false
-            array << y.guest
-          end
-        end
+        x.guest.invited_connections.each { |y| array << y.host if y.host != self && y.status == "connected" &&  array.include?(y.host) == false }
+        x.guest.hosted_connections.each { |y| array << y.guest if y.status == "connected" &&  array.include?(y.guest) == false }
       end
     end
     contacts = array.select do |value|
@@ -88,9 +72,7 @@ class User < ApplicationRecord
     end
     contacts.each do |contact|
       invers_connection = Connection.where(guest: contact, host: self).first
-      if invers_connection == nil || invers_connection.status != "valid"
-        Connection.create(status: "suggested", guest: self, host: contact)
-      end
+      Connection.create(status: "suggested", guest: self, host: contact) if invers_connection == nil || invers_connection.status != "valid"
     end
   end
 
@@ -104,81 +86,61 @@ class User < ApplicationRecord
 
   def connected_data
     datas = []
-    self.invited_connections.where(status: "connected").each do |x|
-      datas << { from: x.host_id,
-                  to: self.id}
-      User.find(x.host_id).invited_connections.where(status: "connected").each do |y|
-        datas << { from: y.host_id,
-                  to: y.guest_id}
-                end
-      User.find(x.host_id).hosted_connections.where(status: "connected").each do |y|
-        datas << { from: y.guest_id,
-                  to: y.host_id}
-                end
-    end
-    self.hosted_connections.where(status: "connected").each do |x|
-    datas << { from: self.id,
-                to: x.guest_id}
-      User.find(x.guest_id).invited_connections.where(status: "connected").each do |y|
-        datas << { from: y.host_id,
-                  to: y.guest_id}
-                end
-      User.find(x.guest_id).hosted_connections.where(status: "connected").each do |y|
-        datas << { from: y.guest_id,
-                  to: y.host_id}
-            end
+    self.total_connections.each do |x|
+      total_suggestions = User.find(x.host_id).total_connections + User.find(x.guest_id).total_connections
+      total_suggestions.each { |y| datas << { from: y.guest_id, to: y.host_id} }
     end
     data_connection = []
-    datas.each do |x|
-      # y = { from: x[:to], to: x[:from] }
-      unless data_connection.include?({ from: x[:to], to: x[:from] })
-        data_connection << x
-      end
-    end
+    datas.each { |x| data_connection << x unless double_connection?(data_connection, x) }
     data_connection
   end
 
+  def double_connection?(array, lien)
+    array.include?({ from: lien[:to], to: lien[:from] }) || array.include?({ from: lien[:from], to: lien[:to] })
+  end
 
+  def total_connections
+    self.invited_connections.where(status: "connected") + self.hosted_connections.where(status: "connected")
+  end
+
+  def total_suggested
+    selec = ["suggested", "invited", "waiting", "valid"]
+    self.suggestions.map do |c|
+      {
+      user: [c.host, c.guest].select{ |user| user != self }.first,
+      group: selec.index(c.status) + 2,
+      }
+    end
+  end
+
+  def total_connected
+    self.total_connections.map do |c|
+      {
+      user: [c.host, c.guest].select{ |user| user != self }.first,
+      group: 1,
+      }
+    end
+  end
 
   def node_user
-    nodeconnected = []
-    nodesuggested = []
-    nodeconnected << { id: self.id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{self.photo.path}",  brokenImage: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{self.photo.path}", label: "#{self.first_name} #{self.last_name}" }
-    self.invited_connections.where(status: "connected").each do |x|
-      nodeconnected << { id: x.host_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x.host_id).photo.path}",  brokenImage: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x.host_id).photo.path}", group: 1, label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
+    nodes = [self.node(0)]
+    self.total_connected.each do |connected|
+      nodes << connected[:user].node(connected[:group])
     end
-        nodeconnected.each do |y|
-        User.find(y[:id]).invited_connections.where(status: "connected").each do |x|
-        nodesuggested << { id: x.host_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x.host_id).photo.path}", brokenImage: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x.host_id).photo.path}", group: 2, label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
-      end
-        User.find(y[:id]).hosted_connections.where(status: "connected").each do |x|
-        nodesuggested << { id: x.guest_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x.guest_id).photo.path}", brokenImage: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x.host_id).photo.path}", group: 2, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
-      end
+    self.total_suggested.each do |suggested|
+      nodes << suggested[:user].node(suggested[:group])
     end
-    self.hosted_connections.where(status: "connected").each do |x|
-      nodeconnected << { id: x.guest_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x.guest_id).photo.path}",  brokenImage: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x.guest_id).photo.path}", group: 1, label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
-    end
-      nodeconnected.each do |y|
-        User.find(y[:id]).invited_connections.where(status: "connected").each do |x|
-        nodesuggested << { id: x.host_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x.host_id).photo.path}", group: 2, brokenImage: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x.guest_id).photo.path}", label: "#{User.find(x.host_id).first_name} #{User.find(x.host_id).last_name}" }
-      end
-        User.find(y[:id]).hosted_connections.where(status: "connected").each do |x|
-        nodesuggested << { id: x.guest_id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x.guest_id).photo.path}", group: 2, brokenImage: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x.guest_id).photo.path}", label: "#{User.find(x.guest_id).first_name} #{User.find(x.guest_id).last_name}" }
-      end
-    end
-    node_us = nodesuggested + nodeconnected
-    b =nodeconnected.map{ |h| h[:id]}.uniq
-    c = nodesuggested.map{ |h| h[:id]}.uniq
-    node = []
-    b.each do |x|
-      node << { id: x, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x).photo.path}", brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", label: "#{User.find(x).first_name} #{User.find(x).last_name}", group: 1 }
-    end
-     c.each do |x|
-      unless node.include?({ id: x, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x).photo.path}", brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", label: "#{User.find(x).first_name} #{User.find(x).last_name}", group: 1 })
-      node << { id: x, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{User.find(x).photo.path}", brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", label: "#{User.find(x).first_name} #{User.find(x).last_name}", group: 2 }
-      end
-    end
-    node - [{ id: self.id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{self.photo.path}", brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png", label: "#{self.first_name} #{self.last_name}", group: 1 }] + [{ id: self.id, shape:'circularImage', image: "http://res.cloudinary.com/dxiikz0qq/image/upload/#{self.photo.path}", label: "#{self.first_name} #{self.last_name}", group: 0 }]
+    nodes
+  end
+
+  def node(group)
+    { id: self.id,
+      shape:'circularImage',
+      image: "http://res.cloudinary.com/dxiikz0qq/image/upload/t_media_lib_thumb/#{self.photo.path}",
+      brokenImage: "https://res.cloudinary.com/dxiikz0qq/image/upload/v1472566834/bdxotyef6ah4ym2qcjzz.png",
+      label: "#{self.first_name} #{self.last_name}",
+      group: group
+    }
   end
 
   def count_meetings
