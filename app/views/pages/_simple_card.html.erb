@@ -1,0 +1,58 @@
+<div class="suggestion-card">
+  <div class="media">
+    <div class="media-left">
+      <div class="center-picture">
+        <% if contact.photo? %>
+          <%= cl_image_tag contact.photo.path, gravity: "face", width: 65, height: 65, :crop=>"thumb", radius: "max" %>
+        <% else %>
+          <%= image_tag "http://placehold.it/65x65" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="media-body">
+      <div class="suggestion-card-body">
+        <div class="suggestion-card-text">
+          <span>
+            <%= contact.first_name %>
+          </span>
+          <span>
+            <%= status %>
+          </span>
+        </div>
+        <div class="suggestion-card-skills">
+          <div class="carousel slide" data-ride="carousel" data-interval=<%= rand(3000..5000) %> data-pause="null" >
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <div class="inline-icons">
+                  <% askills = contact.skills.sample(4) %>
+                  <% askills.each do |askill| %>
+                    <%= image_tag(askill.icon) %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="item">
+                <div class="inline-icons">
+                  <% bskills = contact.skills.sample(4) %>
+                  <% bskills.each do |bskill| %>
+                    <%= image_tag(bskill.icon) %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="item">
+                <div class="inline-icons">
+                  <% cskills = contact.skills.sample(4) %>
+                  <% cskills.each do |cskill| %>
+                    <%= image_tag(cskill.icon) %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <%= score %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!--media-->
+</div>

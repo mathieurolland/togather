@@ -70,9 +70,7 @@
                     <% if suggestion.status == "valid" %>
                       <% if suggestion.guest == current_user %>
                         <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
-                          <div class="suggestion-card">
-                            <%= render partial: 'contact_card', locals: {connection: suggestion, contact: suggestion.host, status: suggestion.status, score: suggestion.score} %>
-                          </div>
+                            <%= render partial: 'simple_card', locals: {connection: suggestion, contact: suggestion.host, status: suggestion.status, score: suggestion.score} %>
                         <% end %>
                       <% else %>
                         <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
