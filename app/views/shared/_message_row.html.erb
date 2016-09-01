@@ -1,51 +1,37 @@
 
-
-
   <div class="row">
-
-
     <div class="message">
       <ul class="ChatLog">
-        <div class="col-md-6">
-        <% @meeting.messages.each do |message| %>
+        <div class="col-md-12">
+          <% @meeting.messages.each do |message| %>
             <li>
-             <% if message.user == current_user %>
-              <div class="message-data">
-                   <span class="message-data-name"><%= message.user.first_name %> </span>
-                   <span class="message-data-time"> <%= message.created_at %> </span> &nbsp; &nbsp;
-                </div>
 
-              <div class="message-card">
+                <% if message.user == current_user %>
+                <div class="message-data-orange">
+                   <span class="message-data-name"><bold><%= message.user.first_name %></bold></span>
+                   <span class="message-data-time"> à <%= message.created_at.to_a[2]%>h<%= message.created_at.to_a[1]%> le <%= message.created_at.to_a[3]%> <% months = %w(janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre)%> <%= months[message.created_at.to_a[4] - 1 ]%> </span> &nbsp; &nbsp;
+              </div>
+                <div class="message-card">
                   <div class="message-orange">
                      <p><%= message.content%></p>
                   </div>
                 </div>
-              <% end %>
-              </li>
-            <%end %>
-            </div>
 
-
-           <div class="col-md-6">
-           <div class="message-data-blue">
-        <% @meeting.messages.each do |message| %>
-            <li >
-               <% if message.user != current_user %>
-                <div >
-                   <span class="message-data-name"><%= message.user.first_name %> </span>
-                   <span class="message-data-time"> <%= message.created_at %> </span> &nbsp; &nbsp;
-                </div>
-
+                <% elsif message.user != current_user %>
+                <div class="message-data-blue">
+                   <span class="message-data-name"><bold><%= message.user.first_name %></bold></span>
+                   <span class="message-data-time"> à <%= message.created_at.to_a[2]%>h<%= message.created_at.to_a[1]%> le <%= message.created_at.to_a[3]%> <% months = %w(janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre)%> <%= months[message.created_at.to_a[4] - 1 ]%> </span> &nbsp; &nbsp;
+              </div>
               <div class="message-card">
                 <div class="message-blue">
                   <p><%= message.content%></p>
                 </div>
               </div>
+
               <% end %>
             </li>
-        <% end %>
-      </div>
-      </div>
+          <% end %>
+        </div>
       </ul>
     </div>
   </div>
@@ -60,6 +46,4 @@
     <% end %>
   </div>
 </div>
-<div class="message-chat-container ">
-
 
