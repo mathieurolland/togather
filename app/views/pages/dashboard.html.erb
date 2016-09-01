@@ -66,28 +66,28 @@
                     Suggestions
                   </h3>
                   <div class="underspace"></div>
-                  <% @suggestions.each do |suggestion| %>
-                    <% if suggestion.status == "Valid" %>
+                  <% @suggestions.sort_by{ |s| s.score }.reverse.each do |suggestion| %>
+                    <% if suggestion.status == "valid" %>
                       <% if suggestion.guest == current_user %>
                         <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
                           <div class="suggestion-card">
-                            <%= render partial: 'contact_card', locals: {contact_link: connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), contact: suggestion.host, status: suggestion.status} %>
+                            <%= render partial: 'contact_card', locals: {connection: suggestion, contact: suggestion.host, status: suggestion.status, score: suggestion.score} %>
                           </div>
                         <% end %>
                       <% else %>
                         <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
                           <div class="suggestion-card">
-                            <%= render partial: 'contact_card', locals: {contact_link: connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), contact: suggestion.guest, status: suggestion.status} %>
+                            <%= render partial: 'contact_card', locals: {connection: suggestion, contact: suggestion.guest, status: suggestion.status, score: suggestion.score} %>
                           </div>
                         <% end %>
                       <% end %>
                     <% else %>
-                      <%= render partial: 'contact_card', locals: {contact_link: suggestion, contact: suggestion.host, status: suggestion.status} %>
+                      <%= render partial: 'contact_card', locals: {connection: suggestion, contact: suggestion.host, status: suggestion.status, score: suggestion.score} %>
                     <% end %> <!--else-->
                   <% end %> <!--@suggestions.each do-->
 
                   <% @real_connections.each do |real| %>
-                    <%= render partial: 'contact_card', locals: {contact_link: '#', contact: real, status: "connected"} %>
+                    <%= render partial: 'contact_card', locals: {connection: (Connection.find_by(guest: current_user, host: real[:user]) || Connection.find_by(host: current_user, guest: real[:user])), contact: real[:user], status: "connected", score: (Connection.find_by(guest: current_user, host: real[:user]) || Connection.find_by(host: current_user, guest: real[:user])).score} %>
                   <% end %>
 
                 </div>

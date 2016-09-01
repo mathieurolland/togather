@@ -6,4 +6,9 @@ class Connection < ApplicationRecord
   validates :status, presence: true
   validates :guest, uniqueness: { scope: :host }
 
+  def score
+    sum = self.guest.skills.count + self.host.skills.count
+    sum != 0 ? ((self.guest.skills & self.host.skills).count * 1.0 / sum * 20).to_i : 0
+  end
 end
+

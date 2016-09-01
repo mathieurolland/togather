@@ -23,10 +23,10 @@ class ConnectionsController < ApplicationController
         @invers_connection = Connection.new(guest: @connection.host, host: current_user, status: "invited")
       end
       @invers_connection.save
-      redirect_to connection_path(@connection.id)
+      redirect_to dashboard_path
     elsif @connection.status == "invited"
       @invers_connection = Connection.where(guest: @connection.host, host: current_user).first
-      @invers_connection.status = "Valid"
+      @invers_connection.status = "valid"
       @invers_connection.save
       @connection.destroy
       @meeting = Meeting.create(connection: @invers_connection)
@@ -35,7 +35,7 @@ class ConnectionsController < ApplicationController
   end
 
   def decline
-    @invers_connection.status = "Refused"
+    @invers_connection.status = "refused"
     @invers_connection.save
     @connection.destroy
     redirect_to dashboard_path

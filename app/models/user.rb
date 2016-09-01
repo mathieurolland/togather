@@ -86,9 +86,9 @@ class User < ApplicationRecord
 
   def connected_data
     datas = []
-    self.total_connection.each do |x|
-      total_suggestion = User.find(x.host_id).total_connection + User.find(x.guest_id).total_connection
-      total_suggestion.each { |y| datas << { from: y.guest_id, to: y.host_id} }
+    self.total_connections.each do |x|
+      total_suggestions = User.find(x.host_id).total_connections + User.find(x.guest_id).total_connections
+      total_suggestions.each { |y| datas << { from: y.guest_id, to: y.host_id} }
     end
     data_connection = []
     datas.each { |x| data_connection << x unless double_connection?(data_connection, x) }
@@ -99,25 +99,36 @@ class User < ApplicationRecord
     array.include?({ from: lien[:to], to: lien[:from] }) || array.include?({ from: lien[:from], to: lien[:to] })
   end
 
-  def total_connection
+  def total_connections
     self.invited_connections.where(status: "connected") + self.hosted_connections.where(status: "connected")
   end
 
-  def total_connected
-    self.total_connection.map { |c| [c.host, c.guest].select{ |user| user != self }.first}
+  def total_suggested
+    selec = ["suggested", "invited", "waiting", "valid"]
+    self.suggestions.map do |c|
+      {
+      user: [c.host, c.guest].select{ |user| user != self }.first,
+      group: selec.index(c.status) + 2,
+      }
+    end
   end
 
-  def total_suggested
-    self.suggestions.map { |c| [c.host, c.guest].select{ |user| user != self }.first}
+  def total_connected
+    self.total_connections.map do |c|
+      {
+      user: [c.host, c.guest].select{ |user| user != self }.first,
+      group: 1,
+      }
+    end
   end
 
   def node_user
     nodes = [self.node(0)]
     self.total_connected.each do |connected|
-      nodes << connected.node(1)
+      nodes << connected[:user].node(connected[:group])
     end
     self.total_suggested.each do |suggested|
-      nodes << suggested.node(2)
+      nodes << suggested[:user].node(suggested[:group])
     end
     nodes
   end
