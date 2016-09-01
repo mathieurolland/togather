@@ -111,7 +111,6 @@
 
 .suggestion-wrapper {
   overflow-x: hidden;
-
 }
 
 .suggestion-content {
@@ -140,13 +139,34 @@
     transition: opacity 1s ease;
     // box-shadow: -100px 1px 5px rgba(0, 0, 0, 0.07);
   }
+  a {
+    color: #777;
+  }
+  a:hover {
+    text-decoration: none;
+    color: #444;
+  }
 }
+
+.user-reviews {
+  padding: 15px;
+  .review-carousel-content {
+    height: 100px;
+}
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none !important
+}
+
+
 
 .suggestion-card {
   margin: 15px 0 15px 0;
   padding: 15px;
   border: 1px solid rgba(0, 0, 0, 0.07);
   background-color: #fff;
+  transition: all 0.4s ease;
   .center-picture {
     margin-right: 15px;
     display: flex;
@@ -196,13 +216,27 @@
   }
 }
 
+.map-box-friend {
+  .map-box-friend-content {
+    display: flex;
+    .map-box-friend-details {
+      display: flex;
+      flex-direction: column;
+      width: 100px;
+    }
+    .skills {
+      height: 17px;
+    }
+  }
+}
+
 .supp-info {
   display: flex;
   justify-content: space-between;
 }
 
 .suggestion-card:hover {
-  background-color: rgba(255,224,181,0.2);
+  background-color: rgba(255,224,181,0.9);
 }
 
 // #network {

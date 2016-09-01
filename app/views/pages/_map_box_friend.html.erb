@@ -1,8 +1,25 @@
-<a data-toggle="modal" href="#contactModal<%= friend.id %>">
-  <h4>
-    <%= friend.first_name %> <%= friend.last_name %>
-  </h4>
-</a>
-<%= cl_image_tag friend.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
+<div class="map-box-friend">
+  <a data-toggle="modal" href="#contactModal<%= friend.id %>">
+    <h4>
+      <%= friend.first_name %> <%= friend.last_name %>
+    </h4>
+  </a>
+  <div class="map-box-friend-content">
+    <%= cl_image_tag friend.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
+    <div class="map-box-friend-details">
+      <div class="mb-txt">
+        <%= truncate(friend.bio, length: 100) %>
+      </div>
+      <div class="mb-skl">
+        <% s = friend.skills.shuffle %>
+        <% skills = s.sample(5) %>
+        <% skills.each do |skill| %>
+          <%= image_tag(skill.icon, class: "skills") %>
+        <% end %>
+        ...
+      </div>
+    </div>
+  </div>
+</div>
 
 
