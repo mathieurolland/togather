@@ -1,7 +1,16 @@
-<h1>Places#edit</h1>
-<p>Find me in app/views/places/edit.html.erb</p>
+<div class="editbackground">
+  <div class="container">
 
-<h1>Edit place</h1>
+    <div class="text-center">
+      <h1>Edit place</h1>
+    </div>
 
-<%= render 'shared/placeform' %>
-<p><%= link_to "Return on show place", place_path(@place) %></p>
+      <%= render 'shared/placeform' %>
+        <button type="button" class="monbtn">
+          <p><%= link_to "Return on show place", place_path(@place) %></p>
+        </button>
+        </br>
+
+
+</div>
+</div>

@@ -10,14 +10,22 @@
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
             </div>
-            <%= f.button :submit, value: "Booked" %>
+            <%= f.button :submit, value: "Book" %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
-<%= link_to "back", connection_meeting_places_path(@connection, @meeting) %>
+
+<div class="monbtnplace">
+  <button type="button" class="monbtn">
+    <%= link_to "Back", connection_meeting_places_path(@connection, @meeting) %>
+  </button>
+</div>
+
+
+
 
 <% content_for :after_js do %>
 <script type="text/javascript">

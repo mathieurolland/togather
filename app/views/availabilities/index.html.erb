@@ -1,21 +1,27 @@
-<h1> Choose dates </h1>
+<div class="container">
 
-<% if @place.availabilities.first %>
-  <ul>
-  <% @place.availabilities.each do |availability| %>
-    <% if availability.id %>
-      <li>
-        <%= "#{availability.min_day} - #{availability.max_day} : " %>
-        <%= "#{availability.min_time.strftime "%Hh%M"} - #{availability.max_time.strftime "%Hh%M"}" %>
-        <%= link_to "Edit", edit_place_availability_path(@place, availability) %>
-        <%= link_to "Destroy", place_availability_path(@place, availability), method: :delete %>
-      </li>
+  <div class="text-center">
+    <h1> Choose dates </h1>
+  </div>
+
+  <% if @place.availabilities.first %>
+    <ul>
+    <% @place.availabilities.each do |availability| %>
+      <% if availability.id %>
+        <li>
+          <%= "#{availability.min_day} - #{availability.max_day} : " %>
+          <%= "#{availability.min_time.strftime "%Hh%M"} - #{availability.max_time.strftime "%Hh%M"}" %>
+          <%= link_to "Edit", edit_place_availability_path(@place, availability) %>
+          <%= link_to "Destroy", place_availability_path(@place, availability), method: :delete %>
+        </li>
+      <% end %>
     <% end %>
+    </ul>
   <% end %>
-  </ul>
-<% end %>
 
-<%= render "form" %>
+  <%= render "form" %>
+  <p><%= link_to "Return on show place", place_path(@place) %></p>
 
-<p><%= link_to "Return on show place", place_path(@place) %></p>
+
+</div>
 
