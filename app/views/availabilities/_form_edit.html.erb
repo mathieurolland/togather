@@ -1,12 +1,14 @@
-<div>
-  <%= simple_form_for :new_date, url: place_availabilities_path(@place), method: :post do |f| %>
-    <%= f.error_notification %>
-    <%= f.input :min_day, collection: @days, selected: @availability.min_day %>
-    <%= f.input :max_day, collection: @days, selected: @availability.max_day %>
-    <%= f.input :min_hour, collection: @hours, selected: "#{@availability.min_time.strftime "%H"}" %>
-    <%= f.input :min_minute, collection: @minutes, selected: "#{@availability.min_time.strftime "%M"}" %>
-    <%= f.input :max_hour, collection: @hours, selected: "#{@availability.max_time.strftime "%H"}" %>
-    <%= f.input :max_minute, collection: @minutes, selected: "#{@availability.max_time.strftime "%M"}" %>
-    <%= f.button :submit, value: "submit" %>
-  <% end %>
+<div class="container">
+  <div>
+    <%= simple_form_for :new_date, url: place_availabilities_path(@place), method: :post do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :min_day, collection: @days, selected: @availability.min_day %>
+      <%= f.input :max_day, collection: @days, selected: @availability.max_day %>
+      <%= f.input :min_hour, collection: @hours, selected: "#{@availability.min_time.strftime "%H"}" %>
+      <%= f.input :min_minute, collection: @minutes, selected: "#{@availability.min_time.strftime "%M"}" %>
+      <%= f.input :max_hour, collection: @hours, selected: "#{@availability.max_time.strftime "%H"}" %>
+      <%= f.input :max_minute, collection: @minutes, selected: "#{@availability.max_time.strftime "%M"}" %>
+      <%= f.button :submit, value: "submit" %>
+    <% end %>
+  </div>
 </div>
