@@ -1,21 +1,15 @@
-<div class="container">
-  <div class="row">
-    <div class='col-sm-6'>
-      <div class="form-date-resa">
-        <%= simple_form_for :resa, url: connection_meeting_place_path(@connection, @meeting, @place), method: :patch do |f| %>
-          <div class="form-group">
-            <div class='input-group date' id='datetimepicker1'>
-              <input type='text' name="date" class="form-control" />
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-            </div>
-            <%= f.button :submit, value: "Book" %>
-          </div>
-        <% end %>
+<div class="form-date-resa">
+  <%= simple_form_for :resa, url: connection_meeting_place_path(@connection, @meeting, @place), method: :patch do |f| %>
+    <div class="form-group">
+      <div class='input-group date' id='datetimepicker1'>
+        <input type='text' name="date" class="form-control" />
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
       </div>
+      <%= f.button :submit, value: "Book" %>
     </div>
-  </div>
+  <% end %>
 </div>
 
 <div class="monbtnplace">
