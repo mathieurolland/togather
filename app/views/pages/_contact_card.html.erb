@@ -69,7 +69,7 @@
 
         <div class="profil-wrapper">
           <div class="row">
-            <div class="col-xs-2">
+            <div class="col-xs-3">
               <div class="picture-and-link-in-modal">
                 <div class="picture-in-modal">
                   <% if contact.photo? %>
@@ -78,7 +78,7 @@
                     <%= image_tag "http://placehold.it/65x65" %>
                   <% end %>
                 </div>
-                <div class="link-in-modal">
+                <div class="link-in-modal text-center">
                   <p>
                     <%= status %>
                   </p>
@@ -86,22 +86,22 @@
                     <% if status == "suggested" %>
                       <%= link_to "Invite", connection_path(connection), method: :patch %>
                     <% elsif status == "invited" %>
-                      <h2> Wait for your confirmation </h2>
+                      <p> Waiting for your confirmation </p>
                       <%= link_to "Confirm", connection_path(connection), method: :patch %>
                       <%= link_to "Decline", decline_connection_path(connection), data: { confirm: "Are you sure?" }, method: :patch %>
                     <% elsif status == "waiting" %>
-                      <h2> Wait for your confirmation </h2>
+                      <p>
+                        Waiting for <%= connection.host.first_name %>'s confirmation
+                      </p>
                       <%= link_to "Cancel", cancel_connection_path(connection), method: :patch %>
                     <% else %>
-                      <h2>
-                        Wait for <%= connection.guest.first_name %>'s confirmation
-                      </h2>
+                      <%= link_to "Invite", connection_path(connection), method: :patch %>
                     <% end %>
                   </p>
                 </div>
               </div>
             </div>
-            <div class="col-xs-10">
+            <div class="col-xs-9">
               <div class="desc-bio">
                 <p>
                   <%= contact.bio %>
