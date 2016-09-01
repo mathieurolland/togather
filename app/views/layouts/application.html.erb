@@ -24,15 +24,6 @@
     <%= yield %>
 
 
- <!-- <div class="footer">
-      <div>
-        <a href=""><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
-        <a href=""><i class="fa fa-github" aria-hidden="true"></i></a>
-        <a href=""><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
-        <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
-      </div>
-        <p>This is ToGather Website designed @LeWagon</p>
-      </div> -->
     <%= javascript_include_tag "https://maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_BROWSER_KEY']}", "data-turbolinks-eval" => false %>
     <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/markerclusterer/src/markerclusterer_compiled.js" %>
     <%= javascript_include_tag "https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" %>

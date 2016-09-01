@@ -91,6 +91,7 @@
       }
     }
   }
+
   .partner-profile {
     h2 {
       margin-top: 0;
@@ -126,16 +127,18 @@
   }
 }
 
+
 .suggestion-wrapper {
   overflow-x: hidden;
-
+  border: 3px solid grey;
 }
 
-.suggestion-content {
+
+.messagerie {
   padding-right: 15px;
   width: calc(100% + 30px);
-  height: 100vh;
-  overflow-y: auto;
+  height: 88vh;
+  overflow-y: scroll;
   .underspace {
     height: 50px;
   }
@@ -146,21 +149,14 @@
     position: fixed;
     width: 300px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-    background:
-      linear-gradient(
-        to right,
-        rgba(250,250,250,0),
-        rgba(250,250,250,0.5) 10%,
-        rgba(250,250,250,0.5) 75%,
-        rgba(250,250,250,0)
-      );
     transition: opacity 1s ease;
     // box-shadow: -100px 1px 5px rgba(0, 0, 0, 0.07);
   }
 }
 
+
 .suggestion-card {
-  margin: 15px 0 15px 0;
+  margin: 15px 0 15px 0px;
   padding: 15px;
   border: 1px solid rgba(0, 0, 0, 0.07);
   background-color: #fff;
