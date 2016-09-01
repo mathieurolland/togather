@@ -99,7 +99,18 @@ span {
 }
 
 .chat-container {
-  border : 1px solid black;
+ width: 300px;
+
+ position: relative;
+ padding: 40px;
+ border-radius:7px;
+}
+
+.chatbar {
+  border-top: 2px solid grey;
+  padding: 15px;
   position: absolute;
-  padding: 10px;
+  width: 100%;
+  bottom: 0px;
+  left: 0px
 }
