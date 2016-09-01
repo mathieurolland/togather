@@ -19,8 +19,7 @@
   margin: 20px;
   border-radius: 3px;
   position: relative;
-  overflow-y: scroll;
-  height: 88vh;
+  overflow: hidden;
   transition: filter 0.4s ease, box-shadow 0.4s ease;
   background-color: white;
   .category-img {
