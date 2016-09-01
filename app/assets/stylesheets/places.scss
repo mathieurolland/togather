@@ -16,6 +16,12 @@
   color: #32357F;
   position: relative;
 }
+.cardshow {
+  height: 175px;
+  background-size: cover !important;
+  color: #32357F;
+  position: relative;
+}
 .card-user {
   position: absolute;
   right: 10px;
@@ -68,32 +74,12 @@
   background: linear-gradient( 45deg, #AFAFAF, #F9F9F9 40%, #919191 );
   box-sizing: border-box;
 }
-.monalign {
-  text-align: left;
-}
-.monul {
+.myul {
   list-style-type:none;
+  // text-align: center;
 }
-.monbtn {
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: normal;
-    text-align: center;
-    vertical-align: middle;
-
-    border: 1px solid transparent;
-    white-space: nowrap;
-    padding: 6px 12px;
-    font-size: 16px;
-    line-height: 1.4;
-    border-radius: 2px;
-    -webkit-user-select: none;
-    }
-.monbtnplace {
-  padding-left: 15px;
+.myulcentre {
+  text-align: center;
 }
 .maposition {
   position: relative;
@@ -103,17 +89,14 @@
   margin-left: auto;
   margin-right: auto
 }
-.row-centered {
-  text-align:center;
+// .monplacementdate {
+//   padding-top: 30px;
+// }
+.monimageshow {
+  width: 100%;
 }
-.col-centered {
-  display:inline-block;
-    float:none;
-    /* reset the text-align */
-    text-align:left;
-    /* inline-block space fix */
-    margin-right:-4px;
-
+.monradius {
+border-radius:7px;
 }
 
 
