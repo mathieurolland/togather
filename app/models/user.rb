@@ -67,12 +67,21 @@ class User < ApplicationRecord
         x.guest.hosted_connections.each { |y| array << y.guest if y.status == "connected" &&  array.include?(y.guest) == false }
       end
     end
-    contacts = array.select do |value|
-      (Connection.where(guest: self, host: value).first == nil || Connection.where(guest: self, host: value).first.status != "connected") && (Connection.where(guest: value, host: self).first == nil || Connection.where(guest: value, host: self).first.status != "connected")
-    end
+    contacts = select_connections(array)
     contacts.each do |contact|
       invers_connection = Connection.where(guest: contact, host: self).first
-      Connection.create(status: "suggested", guest: self, host: contact) if invers_connection == nil || invers_connection.status != "Valid"
+      Connection.create(status: "suggested", guest: self, host: contact) if invers_connection == nil || invers_connection.status != "valid"
+    end
+  end
+
+  def select_connections(array)
+    array.select do |value|
+      ( Connection.where(guest: self, host: value).first == nil ||
+        Connection.where(guest: self, host: value).first.status != "connected"
+      ) &&
+      ( Connection.where(guest: value, host: self).first == nil ||
+        Connection.where(guest: value, host: self).first.status != "connected"
+      )
     end
   end
 
@@ -90,17 +99,23 @@ class User < ApplicationRecord
       total_suggestions = User.find(x.host_id).total_connections + User.find(x.guest_id).total_connections
       total_suggestions.each { |y| datas << { from: y.guest_id, to: y.host_id} }
     end
+    self.total_validations.each { |x| datas << { from: x.guest_id, to: x.host_id} }
     data_connection = []
     datas.each { |x| data_connection << x unless double_connection?(data_connection, x) }
     data_connection
   end
 
   def double_connection?(array, lien)
-    array.include?({ from: lien[:to], to: lien[:from] }) || array.include?({ from: lien[:from], to: lien[:to] })
+    array.include?({ from: lien[:to], to: lien[:from] }) ||
+    array.include?({ from: lien[:from], to: lien[:to] })
   end
 
   def total_connections
     self.invited_connections.where(status: "connected") + self.hosted_connections.where(status: "connected")
+  end
+
+  def total_validations
+    self.invited_connections.where(status: "valid") + self.hosted_connections.where(status: "valid")
   end
 
   def total_suggested
