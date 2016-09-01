@@ -26,7 +26,7 @@ div {
 }
 
 .message-orange {
-  background: #FFA076;
+  background: #FF5E5B;
   position: relative;
   padding: 8px 8px 8px 8px;
   font-size: 0.9em;
@@ -51,7 +51,7 @@ div {
   // }
 
 .message-blue {
-  background: #32B796;
+  background: #2274A5;
   position: relative;
   padding: 8px 8px 8px 8px;
   font-size: 0.9em;
@@ -60,7 +60,7 @@ div {
   max-width: 70%;
   position: relative;
   border-radius: 5px;
-  margin-bottom : 15px;
+  margin-left: 120px;
 }
 
 .chat-container li {
@@ -94,11 +94,12 @@ span {
 }
 
 .message-data-blue {
-  margin-top: 55px;
+  margin-left: 70%;
 }
 
+
 .message-data-time {
-    color: #a8aab1;
+    color: black;
     padding-left: 6px;
 }
 
@@ -116,6 +117,13 @@ span {
   border-radius:7px;
 }
 
+.message-data-time {
+  font-size: 8px;
+}
+
+.message-data-name {
+ font-size: 12px bold;
+}
 
 
 .chatbar {
