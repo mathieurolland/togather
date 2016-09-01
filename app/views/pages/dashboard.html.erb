@@ -12,7 +12,7 @@
                 <% else %>
                   <%= image_tag "http://placehold.it/100x100" %>
                 <% end %>
-                <%= link_to "Edit profile", recommended_users_path %>
+                <%= link_to "Edit profile", edit_user_registration_path %>
               </div>
               <div class="desc-bio">
                 <span class="bio-title"><%= current_user.first_name %></span>
@@ -66,32 +66,29 @@
                     Suggestions
                   </h3>
                   <div class="underspace"></div>
-                  <% iteration = 0 %>
                   <% @suggestions.each do |suggestion| %>
-                    <% if suggestion.status == "valid" %>
+                    <% if suggestion.status == "Valid" %>
                       <% if suggestion.guest == current_user %>
-
                         <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
-                          <% iteration += 1 %>
                           <div class="suggestion-card">
-                            <%= render partial: 'contact_card', locals: {contact_link: connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), contact: suggestion.host, status: suggestion.status, iteration: iteration} %>
+                            <%= render partial: 'contact_card', locals: {contact_link: connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), contact: suggestion.host, status: suggestion.status} %>
                           </div>
                         <% end %>
                       <% else %>
                         <%= link_to connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last) do %>
-                          <% iteration += 1 %>
                           <div class="suggestion-card">
-                            <%= render partial: 'contact_card', locals: {contact_link: connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), contact: suggestion.guest, status: suggestion.status, iteration: iteration} %>
+                            <%= render partial: 'contact_card', locals: {contact_link: connection_meeting_path(suggestion, Meeting.where(connection: suggestion).last), contact: suggestion.guest, status: suggestion.status} %>
                           </div>
                         <% end %>
                       <% end %>
                     <% else %>
-                      <% iteration += 1 %>
-                      <%= render partial: 'contact_card', locals: {contact_link: suggestion, contact: suggestion.host, status: suggestion.status, iteration: iteration} %>
+                      <%= render partial: 'contact_card', locals: {contact_link: suggestion, contact: suggestion.host, status: suggestion.status} %>
                     <% end %> <!--else-->
                   <% end %> <!--@suggestions.each do-->
 
-                  <!-- @real-connections.each do -->
+                  <% @real_connections.each do |real| %>
+                    <%= render partial: 'contact_card', locals: {contact_link: '#', contact: real, status: "connected"} %>
+                  <% end %>
 
                 </div>
               </div> <!--suggestion wrapper-->

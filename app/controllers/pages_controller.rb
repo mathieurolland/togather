@@ -15,7 +15,7 @@ class PagesController < ApplicationController
     friend_friend_connections = []
     friends = []
 
-    # @real_connections = current_user.total_connection
+    @real_connections = current_user.total_connected
 
     current_user.invited_connections.where(status: "connected").each do |connection_when_guest|
       friends << User.find(connection_when_guest.host_id)

@@ -1,4 +1,4 @@
-<a data-toggle="modal" href="#contactModal<%= iteration %>">
+<a data-toggle="modal" href="#contactModal<%= contact.id %>">
   <div class="suggestion-card">
     <div class="media">
       <div class="media-left">
@@ -55,22 +55,102 @@
     </div> <!--media-->
   </div>
 </a>
-<div class="modal fade" id="contactModal<%= iteration %>" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="contactModal<%= contact.id %>" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel"><%= contact.first_name %> <%= contact.last_name%></h4>
-        <div class="modal-bio-picture">
-          <% if contact.photo? %>
-            <%= cl_image_tag contact.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
-          <% else %>
-            <%= image_tag "http://placehold.it/65x65" %>
-          <% end %>
-            <%= contact.bio %>
+      </div>
+      <div class="modal-body">
+
+        <div class="profil-wrapper">
+          <div class="row">
+            <div class="col-xs-2">
+              <div class="picture-and-link-in-modal">
+                <div class="picture-in-modal">
+                  <% if contact.photo? %>
+                    <%= cl_image_tag contact.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
+                  <% else %>
+                    <%= image_tag "http://placehold.it/65x65" %>
+                  <% end %>
+                </div>
+                <div class="link-in-modal">
+                  <p>
+                    <%= status %>
+                  </p>
+                  <p>
+                    <% if status == "suggested" %>
+                      <%= link_to "Invite", connection_path, method: :patch %>
+                    <% elsif status == "invited" %>
+                      <h2> Wait for your confirmation </h2>
+                      <%= link_to "Confirm", connection_path, method: :patch %>
+                      <%= link_to "Decline", decline_connection_path(@connection), data: { confirm: "Are you sure?" }, method: :patch %>
+                    <% elsif status == "waiting" %>
+                      <h2> Wait for your confirmation </h2>
+                      <%= link_to "Cancel", cancel_connection_path(@connection), method: :patch %>
+                    <% else %>
+                      <h2>
+                        Wait for <%= @connection.guest.first_name %>'s confirmation
+                      </h2>
+                    <% end %>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-10">
+              <div class="desc-bio">
+                <p>
+                  <%= contact.bio %>
+                </p>
+                <div class="skills-icons-listing">
+                  <% contact.skills.each do |skill| %>
+                    <div class="skill-icon">
+                        <%= image_tag(skill.icon) %> <%= skill.name %> -&nbsp
+                    </div>
+                  <% end %>
+                </div>
+                <br>
+                <div class="bio-title">
+                  Work place
+                </div>
+                <p>
+                  <%= contact.work_place %>
+                </p>
+                <% if status == "connected" %>
+                  <br>
+                  <div class="supp-info">
+                    <div class="birthday">
+                      <div class="bio-title">
+                        Birthday
+                      </div>
+                      <p>
+                        <%= contact.birthday %>
+                      </p>
+                    </div>
+                    <div class="mail">
+                      <div class="bio-title">
+                        Email
+                      </div>
+                      <p>
+                        <%= contact.email %>
+                      </p>
+                    </div>
+                    <div class="network">
+                      <div class="bio-title">
+                        Network
+                      </div>
+                      <p>
+                        <%= contact.total_connected.count + contact.total_suggested.count %>
+                      </p>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
