@@ -11,7 +11,7 @@
 .dashboard-not-profile {
   width: 100%;
   height: 100vh;
-  background-color: #f4f4f9;
+  background-color: $togather-yellow-background;
 }
 
 .profil-wrapper hr {
@@ -122,6 +122,8 @@
     height: 50px;
   }
   h3 {
+    font-family: 'Open sans', sans-serif;
+    font-weight: 100;
     height: 51px;
     margin: 0;
     padding: 10px 0 0 0;
@@ -131,10 +133,10 @@
     background:
       linear-gradient(
         to right,
-        rgba(250,250,250,0),
-        rgba(250,250,250,0.5) 10%,
-        rgba(250,250,250,0.5) 75%,
-        rgba(250,250,250,0)
+        rgba(222,228,233,0),
+        rgba(222,228,233,0.5) 10%,
+        rgba(222,228,233,0.5) 75%,
+        rgba(222,228,233,0)
       );
     transition: opacity 1s ease;
     // box-shadow: -100px 1px 5px rgba(0, 0, 0, 0.07);
@@ -152,11 +154,15 @@
   padding: 15px;
   .review-carousel-content {
     height: 100px;
-}
+    display: flex;
+    p {
+      padding: 15px;
+    }
+  }
 }
 
 .carousel-control.left, .carousel-control.right {
-    background-image: none !important
+    background-image: none !important;
 }
 
 
@@ -166,6 +172,7 @@
   padding: 15px;
   border: 1px solid rgba(0, 0, 0, 0.07);
   background-color: #fff;
+  filter: grayscale(0.5);
   transition: all 0.4s ease;
   .center-picture {
     margin-right: 15px;
@@ -208,7 +215,9 @@
 .skills-icons-listing {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   .skill-icon {
+    display: flex;
     font-size: 14px;
     img {
       height: 17px;
@@ -220,6 +229,7 @@
   .map-box-friend-content {
     display: flex;
     .map-box-friend-details {
+      padding-left: 15px;
       display: flex;
       flex-direction: column;
       width: 100px;
@@ -236,7 +246,13 @@
 }
 
 .suggestion-card:hover {
-  background-color: rgba(255,224,181,0.9);
+  padding: 15px 20px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  filter: grayscale(0);
+}
+
+.suggestion-card:focus {
+  outline: none !important;
 }
 
 // #network {
@@ -286,7 +302,7 @@
   height: 50px;
   cursor: pointer;
   padding: 10px;
-  background: #26ae90;
+  background: $togather-blue-light;
   width: 100px;
   padding: 14px 10px;
   color: #FFF;

@@ -54,6 +54,8 @@
   z-index:2;
   background: black;
   opacity: 0;
+  transition: all 0.4s ease;
+
 }
 .card-link:hover {
   opacity: 0.1;
@@ -68,10 +70,10 @@
 .monbackground {
   //height: 100vh;
   overflow: hidden;
-  background: linear-gradient( 45deg, #AFAFAF, #F9F9F9 40%, #919191 );
+  // background: linear-gradient( 45deg, #AFAFAF, #F9F9F9 40%, #919191 );
 }
 .editbackground {
-  background: linear-gradient( 45deg, #AFAFAF, #F9F9F9 40%, #919191 );
+  // background: linear-gradient( 45deg, #AFAFAF, #F9F9F9 40%, #919191 );
   box-sizing: border-box;
 }
 .myul {
@@ -96,7 +98,7 @@
   width: 100%;
 }
 .monradius {
-border-radius:7px;
+border-radius:3px;
 }
 
 

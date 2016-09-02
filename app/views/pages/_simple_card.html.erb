@@ -3,7 +3,7 @@
     <div class="media-left">
       <div class="center-picture">
         <% if contact.photo? %>
-          <%= cl_image_tag contact.photo.path, gravity: "face", width: 65, height: 65, :crop=>"thumb", radius: "max" %>
+          <%= cl_image_tag contact.photo.path, gravity: "face", width: 65, height: 65, :crop=>"fill", radius: "max", class: "avatar" %>
         <% else %>
           <%= image_tag "http://placehold.it/65x65" %>
         <% end %>
@@ -13,7 +13,9 @@
       <div class="suggestion-card-body">
         <div class="suggestion-card-text">
           <span>
-            <%= contact.first_name %>
+            <strong>
+              <%= contact.first_name %>
+            </strong>
           </span>
           <span>
             <%= status %>
