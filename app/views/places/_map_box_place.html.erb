@@ -1,7 +1,7 @@
 <h4>
-  <%= link_to place.name, place %>
+  <%= place.name %>
 </h4>
-<img src="" alt="">
+<%= cl_image_tag place.photo.path, width: 200, height: 100, :crop=>"thumb" %>
 
 <p>
   <%= place.type_partner %>

@@ -14,7 +14,7 @@
 }
 
 .messagerie {
-  height: 70vh;
+  height: 100vh;
 }
 
 
@@ -26,19 +26,23 @@
   margin-top: 80px;
 }
 
-
+.meeting-header {
+  display: flex;
+  p {
+    align-self: flex-end;
+  }
+}
 
 .btn-primary .place-choice {
   color: white;
 }
 
 .wrapper-col-9 {
-  background-color: #F1F8FD;
+  background-color: $togather-yellow-background;
   height: 100vh;
 }
 
 .wrapper-col-3 {
- background: linear-gradient( to left top, #74CCF8 , #23A7E8 );
   height: 100vh;
 }
 

@@ -2,7 +2,7 @@
  * Fonts
  * ------------------------------------- */
 // Google fonts
-@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700|Roboto:100,300,400,500,700|Open+Sans:400,400,600,600,700");
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700|Open+Sans:100,400,600,700");
 $base-font: 'Open sans', serif;
 $header-font: 'Roboto', sans-serif;
 
@@ -26,6 +26,10 @@ $base-height: 1.4;
 // Scheme
 $brand-color: #D23333;
 
+$togather-blue-dark: #005689;
+$togather-blue-light: #007CB9;
+$togather-yellow: #F6C667;
+$togather-yellow-background: #FDF3E0;
 $red: #A30000;
 $blue: #007CB9;
 $yellow: #F6C667;

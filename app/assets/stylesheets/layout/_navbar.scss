@@ -7,14 +7,14 @@
   padding: 0px 30px;
   align-items: center;
   justify-content: space-between;
-  background-color: transparent;
-  background: transparent;
-  border-color: transparent;
+  background-color: $togather-blue-light;
+  background: $togather-blue-light;
+  border-color: $togather-blue-light;
   .navbar-home-logo a {
     height: 35px;
     display: flex;
     align-items: center;
-    color: #888;
+    color: white;
     text-decoration: none;
     transition: color 0.4s ease;
     p {
@@ -24,17 +24,17 @@
     }
   }
   .navbar-home-logo a:hover {
-    color: #454545;
+    color: $yellow;
     text-decoration: none;
   }
   .navbar-logout a {
     padding: 10px;
-    color: #888;
+    color: white;
     text-decoration: none;
     transition: color 0.4s ease;
   }
   .navbar-logout a:hover {
-    color: #454545;
+    color: $yellow;
     text-decoration: none;
   }
 }

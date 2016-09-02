@@ -8,7 +8,7 @@
             <div class="profile-bio">
               <div class="profile-picture">
                 <% if current_user.photo? %>
-                  <%= cl_image_tag current_user.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
+                  <%= cl_image_tag current_user.photo.path, gravity: "face", width: 100, height: 100, :crop=>"fill", radius: "max", class: "avatar" %>
                 <% else %>
                   <%= image_tag "http://placehold.it/100x100" %>
                 <% end %>
@@ -54,6 +54,47 @@
             </div>
             <hr>
           </div> <!--profil wrapper-->
+          <div class="user-reviews">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                  <div class="review-carousel-content">
+                    <% r = current_user.retrieve_reviews.sample %>
+                    <%= cl_image_tag User.find(r[1]).photo.path, gravity: "face", width: 100, height: 100, :crop=>"fill", radius: "max", class: "avatar" %>
+                    <p>
+                      <%= r[0] %>
+                    </p>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="review-carousel-content">
+                    <% r = current_user.retrieve_reviews.sample %>
+                    <%= cl_image_tag User.find(r[1]).photo.path, gravity: "face", width: 100, height: 100, :crop=>"fill", radius: "max", class: "avatar" %>
+                    <p>
+                      <%= r[0] %>
+                    </p>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="review-carousel-content">
+                    <% r = current_user.retrieve_reviews.sample %>
+                    <%= cl_image_tag User.find(r[1]).photo.path, gravity: "face", width: 100, height: 100, :crop=>"fill", radius: "max", class: "avatar" %>
+                    <p>
+                      <%= r[0] %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <a class="left carousel-control no-background" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="icon-prev" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control no-background" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="icon-next" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
         </div> <!--row-->
       </div> <!--col-->
       <div class="col-md-9">

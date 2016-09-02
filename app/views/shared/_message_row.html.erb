@@ -20,7 +20,7 @@
             <% elsif message.user != current_user %>
               <div class="message-data-blue">
                 <span class="message-data-name"><bold><%= message.user.first_name %></bold></span>
-                <span class="message-data-time"> à <%= message.created_at.to_a[2]%>h<%= message.created_at.to_a[1]%> le <%= message.created_at.to_a[3]%> <% months = %w(janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre)%> <%= months[message.created_at.to_a[4] - 1 ]%> </span> &nbsp; &nbsp;
+                <span class="message-data-time"> à <%= message.created_at.to_a[2]%>h<%= message.created_at.to_a[1]%> le <%= message.created_at.to_a[3]%> <% months = %w(janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre)%> <%= months[message.created_at.to_a[4] - 1 ]%> </span>
               </div>
               <div class="message-card">
                 <div class="message-blue">
