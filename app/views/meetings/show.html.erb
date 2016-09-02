@@ -10,7 +10,7 @@
             <% if @meeting.connection.guest != current_user %>
               <div class="profile-picture">
                 <% if @meeting.connection.guest.photo? %>
-                  <%= cl_image_tag @meeting.connection.guest.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
+                  <%= cl_image_tag @meeting.connection.guest.photo.path, gravity: "face", width: 100, height: 100, :crop=>"fill", radius: "max", class: "avatar" %>
                 <% else %>
                   <%= image_tag "http://placehold.it/100x100" %>
                 <% end %>
@@ -25,7 +25,7 @@
             <% elsif @meeting.connection.host != current_user %>
               <div class="profile-picture">
                 <% if @meeting.connection.host.photo? %>
-                  <%= cl_image_tag @meeting.connection.host.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
+                  <%= cl_image_tag @meeting.connection.host.photo.path, gravity: "face", width: 100, height: 100, :crop=>"fill", radius: "max", class: "avatar" %>
                 <% else %>
                   <%= image_tag "http://placehold.it/100x100" %>
                 <% end %>
@@ -112,26 +112,16 @@
 
       <div class="col-md-9 wrapper-col-9">
 
-        <div class="page-header">
-          <h1>Our Meeting</h1>
-          <p class="text-muted">
-            <% if @meeting.place %>
-              <%= @meeting.place.name %> - <%= @meeting.date.strftime('%m/%d/%Y %I:%M %p') %>
-              <%= link_to "Choose another place", connection_meeting_places_path(@connection, @meeting), class: "btn btn-xs btn-primary" %>
-            <% else %>
-              <%= link_to "Choose a place", connection_meeting_places_path(@connection, @meeting), class: "btn btn-xs btn-primary" %>
-            <% end %>
-          </p>
-        </div>
+
 
         <div class="wrapping-case" style="padding: 0 30px;">
           <div class="row">
             <div class="col-md-7">
               <div class="messagerie">
                 <div class="suggestion-wrapper">
-                  <div class="suggestion-content messagerie" >
+                  <div class="suggestion-content" >
                     <h3 id="hiding-bar">
-                      MESSAGES
+                      Messages
                     </h3>
                     <div class="underspace"></div>
                     <%= render 'shared/message_row' %>
@@ -141,6 +131,15 @@
               </div>
             </div>
             <div class="col-md-5">
+              <h1>Our Meeting</h1>
+              <p class="text-muted">
+                <% if @meeting.place %>
+                  <%= @meeting.place.name %> - <%= @meeting.date.strftime('%m/%d/%Y %I:%M %p') %>
+                  <%= link_to "Choose another place", connection_meeting_places_path(@connection, @meeting), class: "btn btn-xs btn-primary" %>
+                <% else %>
+                  <%= link_to "Choose a place", connection_meeting_places_path(@connection, @meeting), class: "btn btn-xs btn-primary" %>
+                <% end %>
+              </p>
               <% if @meeting.date && @meeting.date < DateTime.now %>
                 <h3> Add a review to your meeting</h3>
                 <%= render 'reviews' %>

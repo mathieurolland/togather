@@ -261,7 +261,7 @@ c3.meetings.create(
   date: Faker::Date.between(300.days.ago, time_rand),
   connection: Connection.all.sample,
   place: p,
-  host_review: "Conversation intéressante!"
+  host_review: "Conversation intéressante !"
 )
 
 c4.meetings.create(
@@ -275,7 +275,7 @@ c5.meetings.create(
   date: Faker::Date.between(300.days.ago, time_rand),
   connection: Connection.all.sample,
   place: p,
-  guest_review: "Possibiités de projets communs"
+  guest_review: "Possibilités de projets communs"
 )
 
 c6.meetings.create(

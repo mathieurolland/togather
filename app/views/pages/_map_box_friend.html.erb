@@ -5,10 +5,10 @@
     </h4>
   </a>
   <div class="map-box-friend-content">
-    <%= cl_image_tag friend.photo.path, gravity: "face", width: 100, height: 100, :crop=>"thumb", radius: "max" %>
+    <%= cl_image_tag friend.photo.path, gravity: "face", width: 100, height: 100, :crop=>"fill", radius: "max", class: "avatar" %>
     <div class="map-box-friend-details">
       <div class="mb-txt">
-        <%= truncate(friend.bio, length: 100) %>
+        <%= truncate(friend.bio, length: 30) %>
       </div>
       <div class="mb-skl">
         <% s = friend.skills.shuffle %>
