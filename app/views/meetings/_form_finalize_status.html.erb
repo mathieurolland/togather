@@ -1,6 +1,6 @@
 <div>
   <%= simple_form_for @connection, url: status_path(@connection, @meeting), method: :patch do |f| %>
     <%= f.input :status, as: :hidden, input_html: { value: local_assigns[:value] } %>
-    <%= f.button :submit, value: local_assigns[:value] %>
+    <%= f.button :submit, value: local_assigns[:text] %>
   <% end %>
 </div>

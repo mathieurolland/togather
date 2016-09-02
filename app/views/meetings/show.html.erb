@@ -94,15 +94,21 @@
 
           <div class="choice-review">
             <% if @meeting.date && @meeting.date < DateTime.now %>
-              <% if @meeting.connection.host != current_user %>
-                <h5> Do you want to share your network with <%=@meeting.connection.host.first_name%> ? </h5>
+              <% if @meeting.connection.status != "connected" %>
+                <% if @meeting.connection.host != current_user %>
+                  <h5> Do you want to share your network with <%=@meeting.connection.host.first_name%> ? </h5>
+                <% else %>
+                  <h5> Do you want to share your network with <%= @meeting.connection.guest.first_name%> ? </h5>
+                <% end %>
+                <%= render "form_finalize_status", text: "Connect our Networks", value: "connected" %>
+                <%= render "form_finalize_status", text: "Refuse it", value: "refused" %>
               <% else %>
-                <h5> Do you want to share your network with <%= @meeting.connection.guest.first_name%> ? </h5>
-              <% end %>
-              <% if @connection.status == "valid" %>
-                <%= render "form_finalize_status", value: "Connect our Networks" %><%= render "form_finalize_status", value: "Refuse it" %>
-              <% elsif @connection.status == "connected" %>
-                <%= render "form_finalize_status", value: "Refuse it" %>
+                <% if @meeting.connection.host != current_user %>
+                  <h5> You are connected with <%=@meeting.connection.host.first_name%> </h5>
+                <% else %>
+                  <h5> You are connected with <%= @meeting.connection.guest.first_name%> </h5>
+                <% end %>
+                <%= render "form_finalize_status", text: "Refuse it", value: "refused" %>
               <% end %>
             <% end %>
           </div>
