@@ -92,6 +92,7 @@
                     <% elsif status == "invited" %>
                       <p> Waiting for your confirmation </p>
                       <%= link_to "Confirm", connection_path(connection), method: :patch, class: "togather-button btn-yellow" %>
+                      <br><br>
                       <%= link_to "Decline", decline_connection_path(connection), data: { confirm: "Are you sure?" }, method: :patch, class: "togather-button btn-yellow" %>
                     <% elsif status == "waiting" %>
                       <p>
