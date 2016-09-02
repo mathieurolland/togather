@@ -1,0 +1,19 @@
+// padding/margin à revoir
+.newbutton {
+  box-sizing: border-box;
+  border-width:1px;
+  border-style:solid;
+  margin: 20px 40px !important;
+  border-radius: 2px;
+  border-color: white;
+  background-color: transparent;
+  cursor: auto;
+  font-color: white;
+  border-spacing: 10px 50px;
+  width: 182px;
+}
+.newbutton:hover {
+  border-color: #005689;
+  background-color: white;
+  cursor: auto;
+}

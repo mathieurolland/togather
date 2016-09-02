@@ -1,4 +1,6 @@
 <div class="form-date-resa">
+
+  <div class="taillebarre">
   <%= simple_form_for :resa, url: connection_meeting_place_path(@connection, @meeting, @place), method: :patch do |f| %>
     <div class="form-group">
       <div class='input-group date' id='datetimepicker1'>
@@ -10,10 +12,12 @@
       <%= f.button :submit, value: "Book" %>
     </div>
   <% end %>
+
+  </div>
 </div>
 
 <div class="monbtnplace">
-  <button type="button" class="monbtn">
+  <button type="button" class="newbutton">
     <%= link_to "Back", connection_meeting_places_path(@connection, @meeting) %>
   </button>
 </div>

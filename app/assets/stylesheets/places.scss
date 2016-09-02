@@ -89,14 +89,44 @@
   margin-left: auto;
   margin-right: auto
 }
-// .monplacementdate {
-//   padding-top: 30px;
-// }
 .monimageshow {
   width: 100%;
 }
 .monradius {
 border-radius:7px;
+}
+.backgroundmiddle {
+  background-color: #005689;
+}
+.backgroundleft {
+  background-color: purple;
+
+}
+.newbutton {
+  box-sizing: border-box;
+  border-width:1px;
+  border-style:solid;
+  padding: 2px;
+  margin: 2px;
+  border-radius: 2px;
+  border-color: white;
+  background-color: transparent;
+  cursor: auto;
+  text-decoration: none;
+
+}
+.newbutton:hover {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border-radius: 2px;
+  border-color: #005689;
+  background-color: white;
+  cursor: auto;
+}
+.taillebarre {
+  margin-left: 200px;
+  margin-right: 200px;
 }
 
 
