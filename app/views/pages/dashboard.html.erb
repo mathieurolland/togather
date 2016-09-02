@@ -12,7 +12,7 @@
                 <% else %>
                   <%= image_tag "http://placehold.it/100x100" %>
                 <% end %>
-                <%= link_to "Edit profile", edit_user_registration_path %>
+                <%= link_to "Edit profile", edit_user_registration_path, class: "togather-button btn-blue" %>
               </div>
               <div class="desc-bio">
                 <span class="bio-title"><%= current_user.first_name %></span>
@@ -43,12 +43,12 @@
                     <% end %>
                     ...
                   </div>
-                  <%= link_to "Edit interests", dashboard_edit_skills_path %>
+                  <%= link_to "Edit interests", dashboard_edit_skills_path, class: "togather-button btn-blue" %>
                 </div>
               </div>
             </div>
             <div class="recommend-wrapper text-center">
-              <a data-toggle="modal" href="#recommendModal">
+              <a data-toggle="modal" href="#recommendModal" class="togather-button btn-blue">
                 Recommend meeters
               </a>
             </div>
