@@ -1,8 +1,8 @@
 <% if @current_review %>
   <h4> Your review </h4>
   <p><%= @current_review %></p>
-  <%= link_to "Edit", edit_review_path(@connection, @meeting) %>
-  <%= link_to "Delete", review_path(@connection, @meeting), method: :delete %>
+  <%= link_to "Edit", edit_review_path(@connection, @meeting), class: "togather-button btn-yellow" %>
+  <%= link_to "Delete", review_path(@connection, @meeting), method: :delete, class: "togather-button btn-yellow" %>
 <% else %>
   <h2> Make a review </h2>
   <%= render "form_review" %>

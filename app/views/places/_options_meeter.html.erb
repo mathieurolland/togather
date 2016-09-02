@@ -8,16 +8,14 @@
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
         </div>
-        <%= f.button :submit, value: "Book" %>
+        <%= f.button :submit, value: "Book", class: "togather-button btn-yellow" %>
       </div>
     </div>
   <% end %>
 </div>
-
+<br>
 <div class="monbtnplace">
-  <button type="button" class="monbtn">
-    <%= link_to "Back", connection_meeting_places_path(@connection, @meeting) %>
-  </button>
+  <%= link_to "Back", connection_meeting_places_path(@connection, @meeting), class: "togather-button btn-yellow" %>
 </div>
 
 
