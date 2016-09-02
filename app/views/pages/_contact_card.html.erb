@@ -88,18 +88,18 @@
                   </p>
                   <p>
                     <% if status == "suggested" %>
-                      <%= link_to "Invite", connection_path(connection), method: :patch %>
+                      <%= link_to "Invite", connection_path(connection), method: :patch, class: "togather-button btn-yellow" %>
                     <% elsif status == "invited" %>
                       <p> Waiting for your confirmation </p>
-                      <%= link_to "Confirm", connection_path(connection), method: :patch %>
-                      <%= link_to "Decline", decline_connection_path(connection), data: { confirm: "Are you sure?" }, method: :patch %>
+                      <%= link_to "Confirm", connection_path(connection), method: :patch, class: "togather-button btn-yellow" %>
+                      <%= link_to "Decline", decline_connection_path(connection), data: { confirm: "Are you sure?" }, method: :patch, class: "togather-button btn-yellow" %>
                     <% elsif status == "waiting" %>
                       <p>
                         Waiting for <%= connection.host.first_name %>'s confirmation
                       </p>
-                      <%= link_to "Cancel", cancel_connection_path(connection), method: :patch %>
+                      <%= link_to "Cancel", cancel_connection_path(connection), method: :patch, class: "togather-button btn-yellow" %>
                     <% else %>
-                      <%= link_to "Invite", connection_path(connection), method: :patch %>
+                      <%= link_to "Invite", connection_path(connection), method: :patch, class: "togather-button btn-yellow" %>
                     <% end %>
                   </p>
                 </div>

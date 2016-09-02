@@ -16,3 +16,15 @@
   background-color: white !important;
   color: $togather-blue-light !important;
 }
+
+.btn-yellow {
+  border-color: $togather-blue-light !important;
+  color: $togather-blue-light !important;
+}
+
+.btn-yellow:hover {
+  text-decoration: none !important;
+  border-color: transparent !important;
+  background-color: $togather-blue-light !important;
+  color: $togather-yellow !important;
+}

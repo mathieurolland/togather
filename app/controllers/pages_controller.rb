@@ -6,34 +6,41 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    current_user.create_suggestions
-    @suggestions = current_user.suggestions
-    @places = Place.where.not(latitude: nil, longitude: nil)
-    @recommended_user = RecommendedUser.new
-    home = current_user
-    suggestions = []
-    friend_friend_connections = []
-    friends = []
+    if current_user.photo
+      current_user.create_suggestions
+      @suggestions = current_user.suggestions
+      @places = Place.where.not(latitude: nil, longitude: nil)
+      @recommended_user = RecommendedUser.new
+      home = current_user
+      suggestions = []
+      friend_friend_connections = []
+      friends = []
 
-    @real_connections = current_user.total_connected
+      @real_connections = current_user.total_connected
 
-    current_user.invited_connections.where(status: "connected").each do |connection_when_guest|
-      friends << User.find(connection_when_guest.host_id)
+      current_user.invited_connections.where(status: "connected").each do |connection_when_guest|
+        friends << User.find(connection_when_guest.host_id)
+      end
+
+      current_user.hosted_connections.where(status: "connected").each do |connection_when_host|
+        friends << User.find(connection_when_host.guest_id)
+      end
+
+      suggest = current_user.suggestions
+      suggest.each do |s|
+        suggestions << User.find(s.host_id)
+      end
+
+      @hashhome = hash_geocoder_home(home)
+      @hashfriends = hash_geocoder_friends(friends)
+      @hashsuggestions = hash_geocoder_suggestions(suggestions)
+      @hashplaces = hash_geocoder_places(@places)
+    else
+      current_user.update(photo_url: "https://t3.ftcdn.net/jpg/00/53/51/66/160_F_53516657_zFxg5J7wKRaRmjn00ez578LuO8WuSOOH.jpg")
+      godfather = RecommendedUser.find_by_email(current_user.email).user
+      Connection.create!(status: "connected", guest: godfather, host: current_user)
+      redirect_to categories_path
     end
-
-    current_user.hosted_connections.where(status: "connected").each do |connection_when_host|
-      friends << User.find(connection_when_host.guest_id)
-    end
-
-    suggest = current_user.suggestions
-    suggest.each do |s|
-      suggestions << User.find(s.host_id)
-    end
-
-    @hashhome = hash_geocoder_home(home)
-    @hashfriends = hash_geocoder_friends(friends)
-    @hashsuggestions = hash_geocoder_suggestions(suggestions)
-    @hashplaces = hash_geocoder_places(@places)
   end
 
   def partner
